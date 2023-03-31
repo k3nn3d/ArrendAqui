@@ -18,6 +18,7 @@
     <meta name="author" content="Phoenixcoded" />
     <!-- Favicon icon -->
     <link rel="icon" href="tamplate/images/person11.jpg" type="image/x-icon">
+    
 
     <!-- vendor css -->
     <link rel="stylesheet" href="tmp/dist/assets/css/style.css">
@@ -38,6 +39,9 @@
     @include('layouts.admin.nav')
     @include('layouts.admin.header')
     @yield('conteudo')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js" integrity="sha512-v3ygConQmvH0QehvQa6gSvTE2VdBZ6wkLOlmK7Mcy2mZ0ZF9saNbbk19QeaoTHdWIEiTlWmrwAL4hS8ElnGFbA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+      
+    </script>
 
 
 
