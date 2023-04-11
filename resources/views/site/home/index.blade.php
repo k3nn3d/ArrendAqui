@@ -427,7 +427,7 @@
           <h2 class="mb-4">Junte-se à nós e ganhe dinheiro!</h2>
           <p>
             <a
-              href="{{ route('site.register.motorista') }}"
+              href="{{ route('motorista.create') }}"
               target="_blank"
               class="btn btn-primary text-white py-3 px-4"
               >Tornar-se motorista</a

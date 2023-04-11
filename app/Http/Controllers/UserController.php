@@ -254,7 +254,9 @@ class UserController extends Controller
     }
 
 
-
+    public function index3( User $id){
+        return view('auth.register-convite', compact('id'));
+    }
 
 
 
@@ -316,5 +318,8 @@ class UserController extends Controller
     
 
 
+    }
+    public function motoristaCreate(){
+        return view('auth.register-motorista');
     }
 }

@@ -52,7 +52,7 @@ class ChatController extends Controller
             $dados['mensagem']=chat::where('chats.user_1',$id2)
             ->join('users','users.id','chats.user_2')
             ->select('chats.*','users.name as user_name','users.vc_path as user_foto','users.id as user_id')
-            ->orderBy('id','asc')->simplePaginate(10);
+            ->orderBy('id','desc')->simplePaginate(10);
              
         return view('site.chat.list', $dados);
             
@@ -60,7 +60,7 @@ class ChatController extends Controller
             $dados['mensagem']=chat::where('chats.user_2',$id2)
             ->join('users','users.id','chats.user_1')
             ->select('chats.*','users.name as user_name','users.vc_path as user_foto','users.id as user_id')
-            ->orderBy('id','asc')->simplePaginate(10);
+            ->orderBy('id','desc')->simplePaginate(10);
          
         return view('site.chat.list', $dados);
         

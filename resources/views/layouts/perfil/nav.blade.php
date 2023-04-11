@@ -53,35 +53,35 @@
           <label>Menu</label>
         </li>
         <li class="nav-item">
-            <a href="{{ route('admin.painel') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+            <a href="{{ route('user.perfil') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('admin.user') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">Seus dados</span></a>
+          <a href="{{ route('user.user.index') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">Seus dados</span></a>
       </li>
       <li class="nav-item">
-        <a href="{{ route('admin.categoria') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></i></span><span class="pcoded-mtext">Seus carros</span></a>
+        <a href="{{ route('user.carro') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></i></span><span class="pcoded-mtext">Seus carros</span></a>
     </li>
     <li class="nav-item">
-      <a href="{{ route('admin.sub_categoria') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-sidebar"></i></i></span><span class="pcoded-mtext">Suas casas</span></a>
+      <a href="{{ route('user.casa') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-sidebar"></i></i></span><span class="pcoded-mtext">Suas casas</span></a>
   </li>
   <li class="nav-item">
     <a href="{{ route('site.chat.list') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></i></span><span class="pcoded-mtext">Chat</span></a>
   </li>
   <li class="nav-item">
-    <a href="{{ route('site.chat.list') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></i></span><span class="pcoded-mtext">Pagamentos</span></a>
+    <a href="{{ route('user.casa') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></i></span><span class="pcoded-mtext">Pagamentos</span></a>
   </li>
 
       <li class="nav-item">
         <a href="{{ route('admin.casa') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Pagamentos</span></a>
     </li>
     <li class="nav-item">
-      <a href="{{ route('admin.carro') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></i></span><span class="pcoded-mtext">Carros</span></a>
+      <a href="{{ route('user.carro') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></i></span><span class="pcoded-mtext">Carros</span></a>
   </li>
   <li class="nav-item">
-    <a href="{{ route('admin.aluguel') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></i></span><span class="pcoded-mtext">Seus aluguéis</span></a>
+    <a href="{{ route('user.aluguel') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></i></span><span class="pcoded-mtext">Seus aluguéis</span></a>
 </li>
 <li class="nav-item">
-  <a href="{{ route('admin.aluguel') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></i></span><span class="pcoded-mtext">Seus aluguéis</span></a>
+  <a href="{{ route('user.aluguel') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></i></span><span class="pcoded-mtext">Seus aluguéis</span></a>
 </li>
  
       </ul>

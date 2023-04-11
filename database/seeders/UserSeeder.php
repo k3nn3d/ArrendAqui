@@ -50,6 +50,7 @@ class UserSeeder extends Seeder
             'vc_tipo_utilizador' => 2,
             'vc_path' =>"imagens/user.png",
             
+            
             'password' => Hash::make("12345678")
         ]);
 
@@ -61,6 +62,7 @@ class UserSeeder extends Seeder
             'email' => "catia@gmail.com",
             'vc_tipo_utilizador' => 3,
             'vc_path' => "imagens/user.png",
+            
             
             'password' => Hash::make("12345678")
         ]);

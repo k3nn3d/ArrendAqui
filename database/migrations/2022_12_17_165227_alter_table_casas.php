@@ -15,7 +15,7 @@ class AlterTableCasas extends Migration
     {
         //
         Schema::table('casas', function (Blueprint $table) {
-           
+        
             $table->unsignedBigInteger('id_categoria')->references('id')->on('categorias')->onDelete('CASCADE')->onUpdate('CASCADE')->nullable();
             $table->unsignedBigInteger('id_sub_categoria')->references('id')->on('sub_categorias')->onDelete('CASCADE')->onUpdate('CASCADE')->nullable();
             $table->unsignedBigInteger('id_provincia')->references('id')->on('provincias')->onDelete('CASCADE')->onUpdate('CASCADE')->nullable();

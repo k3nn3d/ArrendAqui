@@ -57,16 +57,26 @@ class RegisteredUserController extends Controller
             'vc_tipo_utilizador'=>$request->vc_tipo_utilizador,
             'password' => Hash::make($request->password),
             'vc_path' => "imagens/user.png",
+            
           
         ]);
 
 
+        $id=$user->id;
 
+        if($user->vc_tipo_utilizador == 6){
+            User::where('id',$id)->update([
+                'link'=>'/convite'+$id
+
+         ]);
+        }
         if($request->iban){
-            $id=$user->id;
+           
             User::where('id',$id)->update([
                 'iban'=>$request->iban
          ]);
+
+        
 
         }
       

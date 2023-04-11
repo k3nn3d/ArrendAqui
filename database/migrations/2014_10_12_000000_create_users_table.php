@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->integer('vc_tipo_utilizador')->default(6);
             $table->string('vc_path');
+            $table->string('link');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

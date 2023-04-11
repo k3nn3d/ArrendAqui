@@ -29,6 +29,7 @@ class CasaSeeder extends Seeder
             'quartos'=> 4,
             'cozinha'=>1,
             'casa_de_banho'=>1,
+            'id_categoria'=>1,
             'id_unidade'=>1,
             'plano'=>3
           
@@ -44,6 +45,7 @@ class CasaSeeder extends Seeder
             'id_provincia'=> 1402, //Bengo
             'id_municipio'=>4, //Nambuangongo
             'quartos'=> 7,
+            'id_categoria'=>1,
             'cozinha'=>1,
             'id_unidade'=>1,
             'casa_de_banho'=>1,
@@ -55,6 +57,7 @@ class CasaSeeder extends Seeder
             "id" => 3,
             'name' => "Casa bonita",
             'id_user'=>5,
+            'id_categoria'=>1,
             'preco'=>16000,
             'descricao' => "5 quartos, uma casa de banho, uma sala, uma cozinha",
             'vc_path' => "imagens/casa2.jpg",
@@ -72,6 +75,7 @@ class CasaSeeder extends Seeder
             "id" => 4,
             'name' => "Casa bonita",
             'id_user'=>6,
+            'id_categoria'=>2,
             'preco'=>10000,
             'descricao' => "1 quarto, uma casa de banho, uma sala, uma cozinha",
             'vc_path' => "imagens/casa3.jpg",
@@ -95,6 +99,7 @@ class CasaSeeder extends Seeder
             'id_provincia'=>1394, //Luanda
             'id_municipio'=>85, //Luanda
             'quartos'=> 3,
+            'id_categoria'=>2,
             'cozinha'=>1,
             'casa_de_banho'=>1,
             'id_unidade'=>2,
@@ -107,6 +112,7 @@ class CasaSeeder extends Seeder
             'name' => "Casa média",
             'id_user'=>5,
             'preco'=>14000,
+            'id_categoria'=>2,
             'descricao' => "2 quartos, uma casa de banho, uma sala, uma cozinha",
             'vc_path' => "imagens/casa2.jpg",
             'id_provincia'=> 1402, //Bengo
@@ -123,6 +129,7 @@ class CasaSeeder extends Seeder
             'name' => "Casa para alugar",
             'id_user'=>5,
             'preco'=>15000,
+            'id_categoria'=>2,
             'descricao' => "4 quartos, uma casa de banho, uma sala, uma cozinha",
             'vc_path' => "imagens/casa3.jpg",
             'id_provincia'=>1394, //Luanda
@@ -139,6 +146,7 @@ class CasaSeeder extends Seeder
             'name' => "Casa no Camama",
             'id_user'=>5,
             'preco'=>12000,
+            'id_categoria'=>1,
             'descricao' => "4 quartos, uma casa de banho, uma sala, uma cozinha",
             'vc_path' => "imagens/casa3.jpg",
             'id_provincia'=> 1402, //Bengo

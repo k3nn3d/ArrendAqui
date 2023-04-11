@@ -42,6 +42,14 @@ Route::get('/chat_index{id}', [App\Http\Controllers\ChatController::class, 'inde
 Route::get('/chat_index2{id}', [App\Http\Controllers\ChatController::class, 'list'])->name('site.chat2.index')->middleware('acesso_site');
 Route::post('/chat{id}', [App\Http\Controllers\ChatController::class, 'store'])->name('site.chat.store')->middleware('acesso_site');
 
+//CONVITE
+Route::get('/convite{id}', [App\Http\Controllers\UserController::class, 'index3'])->name('convite.create');
+Route::post('/convite_store{id}', [App\Http\Controllers\UserController::class, 'store2'])->name('convite.store');
+
+//CRUD DOS MOTORISTAS
+Route::get('/motorista-create', [App\Http\Controllers\UserController::class, 'motoristaCreate'])->name('motorista.create');
+Route::post('/motorista_store', [App\Http\Controllers\UserController::class, 'motoristaStore'])->name('motorista.store');
+
 
  //CRUD CASAS
  Route::get('/casa', [App\Http\Controllers\casaController::class, 'index2'])->name('user.casa');

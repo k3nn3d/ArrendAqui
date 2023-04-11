@@ -9,11 +9,11 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h5 class="m-b-10">Dashboard Analytics</h5>
+                            <h5 class="m-b-10" style="color:#fff">Dashboard Analytics</h5>
                         </div>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="#!">Dashboard Analytics</a></li>
+                            <li class="breadcrumb-item" style="color:#fff"><a href="index.html"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item" style="color:#fff"><a href="#!">Dashboard Analytics</a></li>
                         </ul>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                     <div class="row align-items-center">
                         <div class="col-6">
                             <h3>{{$total}}</h3>
-                            <h6 class="text-muted m-b-0">Utilizador(es)</h6>
+                            <h6 class="text-muted m-b-0">@if($total>1 || $total==0)Utilizadores @else Utilizador @endif</h6>
                         </div>
                         <div class="col-6">
                             <div id="#" class="d-flex align-items-end"></div>
@@ -44,7 +44,7 @@
                     <div class="row align-items-center">
                         <div class="col-6">
                             <h3>{{$aluguel}}</h3>
-                            <h6 class="text-muted m-b-0">Alugueis</h6>
+                            <h6 class="text-muted m-b-0">@if($aluguel>1 || $aluguel==0)Arrendamentos @else Arrendamento @endif</h6>
                         </div>
                         <div class="col-6">
                             <div id="#" class="d-flex align-items-end"></div>
@@ -59,7 +59,7 @@
                     <div class="row align-items-center">
                         <div class="col-6">
                             <h3>{{ $casa }}</h3>
-                            <h6 class="text-muted m-b-0">Casa(s)</h6>
+                            <h6 class="text-muted m-b-0">@if($casa>1 || $casa==0)Casas @else Casa @endif</h6>
                         </div>
                         <div class="col-6">
                             <div id="#" class="d-flex align-items-end"></div>
@@ -76,7 +76,7 @@
                         <div class="row align-items-center">
                             <div class="col-6">
                                 <h3>{{$clientes}}</h3>
-                                <h6 class="text-muted m-b-0">Cliente(s)</h6>
+                                <h6 class="text-muted m-b-0">@if($clientes>1 || $clientes==0)Clientes @else Cliente @endif</h6>
                             </div>
                             <div class="col-6">
                                 <div id="#" class="d-flex align-items-end"></div>
@@ -91,7 +91,7 @@
                         <div class="row align-items-center">
                             <div class="col-6">
                                 <h3>{{$motoristas}}</h3>
-                                <h6 class="text-muted m-b-0">Motorista(s)</h6>
+                                <h6 class="text-muted m-b-0"> @if($motoristas>1 || $motoristas==0)Motoristas @else Motorista @endif</h6>
                             </div>
                             <div class="col-6">
                                 <div id="#" class="d-flex align-items-end"></div>
@@ -106,7 +106,7 @@
                         <div class="row align-items-center">
                             <div class="col-6">
                                 <h3>{{$alugadores}}</h3>
-                                <h6 class="text-muted m-b-0">Senhorio(s)</h6>
+                                <h6 class="text-muted m-b-0">@if($alugadores>1 || $alugadores==0)Senhorios @else Senhorio @endif</h6>
                             </div>
                             <div class="col-6">
                                 <div id="#" class="d-flex align-items-end"></div>
@@ -122,8 +122,13 @@
         </div>
 
 
-<div style="background-color:#fff; padding: 1rem">
-<canvas id="myChart"></canvas>
+<div class="row">
+  <div class="col-6" style="background-color:#fff; padding: 1rem; margin:1rem">
+    <canvas id="myChart"></canvas>
+  </div>
+  <div class="col-5" style="background-color:#fff; padding: 1rem; margin:1rem; margin-right:0">
+    <canvas id="myChart2"></canvas>
+  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -136,8 +141,47 @@
     data: {
       labels: [{{ $userAno }}],
       datasets: [{
-        label: [{!! $userLabel !!}],
+        label: [{!! $userLabel !!},],
         data: [{{ $userTotal }}],
+        backgroundColor: [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(255, 159, 64, 0.2)',
+      'rgba(255, 205, 86, 0.2)',
+      'rgba(75, 192, 192, 0.2)',
+      'rgba(54, 162, 235, 0.2)',
+      'rgba(153, 102, 255, 0.2)',
+      'rgba(201, 203, 207, 0.2)'
+    ],
+    borderColor: [
+      'rgb(255, 99, 132)',
+      'rgb(255, 159, 64)',
+      'rgb(255, 205, 86)',
+      'rgb(75, 192, 192)',
+      'rgb(54, 162, 235)',
+      'rgb(153, 102, 255)',
+      'rgb(201, 203, 207)'
+    ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+  const ctx2 = document.getElementById('myChart');
+
+  new Chart(ctx2, {
+    type: 'pie',
+    data: {
+      labels: [{{ !! $cat_name !! }}],
+      datasets: [{
+        label: [{!! $casaLabel !!},],
+        data: [{{ $casa_total }}],
         backgroundColor: [
       'rgba(255, 99, 132, 0.2)',
       'rgba(255, 159, 64, 0.2)',
@@ -169,10 +213,15 @@
   });
 </script>
 
-
         <!-- [ Main Content ] end -->
     </div>
+    
 </div>
+
+
+
+
+
 <!-- [ Main Content ] end -->
     <!-- Warning Section start -->
     <!-- Older IE warning message -->
