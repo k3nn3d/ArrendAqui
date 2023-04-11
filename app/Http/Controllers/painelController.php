@@ -61,7 +61,8 @@ class painelController extends Controller
          $casaLabel="'Comparativo de casas mais arrendadas consoante a categoria'";
          $cat_name=implode(',',$cat_name);
          $casa_total=implode(',',$casa_total);
-         dd($casaData);
+         
+       
 
        return view('admin.painel.index', compact('userLabel','userAno', 'userTotal','cat_name','casa_total','casaLabel'), $data);
         }

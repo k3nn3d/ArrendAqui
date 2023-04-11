@@ -173,12 +173,12 @@
     }
   });
 
-  const ctx2 = document.getElementById('myChart');
+  const ctx2 = document.getElementById('myChart2');
 
   new Chart(ctx2, {
     type: 'pie',
     data: {
-      labels: [{{ !! $cat_name !! }}],
+      labels: ['{{   $cat_name  }}'],
       datasets: [{
         label: [{!! $casaLabel !!},],
         data: [{{ $casa_total }}],
