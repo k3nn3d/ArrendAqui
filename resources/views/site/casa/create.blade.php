@@ -237,8 +237,19 @@ Detalhes
                </div>
              </div>
          </div>
-                </form>
+        </form>
                 
-            
+@if(session('igualdade'))
+
+<script type="text/javascript">
+  
+  Swal.fire(
+  'ERRO',
+  'Você está tentando cadastrar uma casa já existente no sitema',
+  'error'
+)
+</script>
+@endif
+                   
 
 @endsection

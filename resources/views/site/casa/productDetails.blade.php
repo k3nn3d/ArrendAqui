@@ -3,13 +3,13 @@
  <!--================Single Product Area =================-->
  <div
       class="hero page-inner overlay"
-      style="background-image: url('{{ $casa->vc_path }}')"
+      style="background-image: url('{{ $casa1->vc_path }}')"
     >
       <div class="container">
         <div class="row justify-content-center align-items-center">
           <div class="col-lg-9 text-center mt-5">
             <h1 class="heading" data-aos="fade-up">
-				{{$casa->name}}
+				{{$casa1->name}}
             </h1>
 
             <nav
@@ -26,7 +26,7 @@
                   class="breadcrumb-item active text-white-50"
                   aria-current="page"
                 >
-                  {{$casa->name}}
+                  {{$casa1->name}}
                 </li>
               </ol>
             </nav>
@@ -41,68 +41,75 @@
           <div class="col-lg-7">
             <div class="img-property-slide-wrap">
               <div class="img-property-slide" >
-                <img style="height: 600px;" src="{{$casa->vc_path}}" alt="Image" class="img-fluid" />
-                <img style="height: 600px;" src="{{$casa->vc_path}}" alt="Image" class="img-fluid" />
-                <img style="height: 600px;" src="{{$casa->vc_path}}" alt="Image" class="img-fluid" />
+                <img style="height: 600px;" src="{{$casa1->vc_path}}" alt="Image" class="img-fluid" />
+                <img style="height: 600px;" src="{{$casa1->vc_path}}" alt="Image" class="img-fluid" />
+                <img style="height: 600px;" src="{{$casa1->vc_path}}" alt="Image" class="img-fluid" />
               </div>
             </div>
+<!--Google maps-->
+<div style="width: 100%; height:600px">
+  <div id="map"></div>
+</div>
+<!--Google maps end-->
           </div>
+          
           <div class="col-lg-4">
-            <h2 class="heading text-primary">{{$casa->name}}</h2>
-            <p class="meta"> {{$casa->municipio}}, {{$casa->provincia}} </p>
+            <h2 class="heading text-primary">{{$casa1->name}}</h2>
+            <p class="meta"> {{$casa1->municipio}}, {{$casa1->provincia}} </p>
             <hr style="color:green">
             <h5>Preço</h5>
             
             <p class="text-black-50">
-              {{$casa->preco}}kz/{{$casa->unidade_name}}
+              {{$casa1->preco}}kz/{{$casa1->unidade_name}}
                   </p>
                   <hr>
            
             <h5>Quartos</h5>
             
             <p class="text-black-50">
-              {{$casa->quartos}}
+              {{$casa1->quartos}}
             </p>
             <hr>
             <h5>Casa de banho</h5>
             
             <p class="text-black-50">
-              {{$casa->casa_de_banho}}
+              {{$casa1->casa_de_banho}}
             </p>
             <hr>
             <h5>Cozinha</h5>
             
             <p class="text-black-50">
-              {{$casa->cozinha}}
+              {{$casa1->cozinha}}
             </p>
             <hr>
             <h5>Sala</h5>
             
             <p class="text-black-50">
-              {{$casa->sala}}
+              {{$casa1->sala}}
             </p>
             <hr>
             <h5>Descrição</h5>
             
             <p class="text-black-50">
-				      {{$casa->descricao}}
+				      {{$casa1->descricao}}
             </p>
             
            
-             @if($casa->plano==0)
+             @if($casa1->plano==0)
+
 
              @else
              
             <div class="d-block agent-box p-5">
               <div class="img mb-4">
                 <img
-                  src="{{ $casa->foto_user }}"
+                  src="{{ $casa1->foto_user }}"
                   alt="Image"
                   class="img-fluid"
                 />
               </div>
               <div class="text">
-                <h3 class="mb-0"> {{$casa->name_user}} {{$casa->lastname_user}}</h3>
+                <h3 class="mb-0"> {{$casa1->name_user}} {{$casa1->lastname_user}}</h3>
                 <div class="meta mb-3">Senhorio(a)</div>
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -111,7 +118,7 @@
                 <ul class="list-unstyled  dark-hover d-flex">
                  
 				 <li>
-					<a href="{{ route('site.chat.index',$casa->user_id) }}" class="btn btn-primary text-white py-3 px-4"><i class="icon-massage"></i>Alugar</a>
+					<a href="{{ route('site.chat.index',$casa1->user_id) }}" class="btn btn-primary text-white py-3 px-4"><i class="icon-massage"></i>Alugar</a>
 				 </li>
 
                 </ul>
@@ -212,5 +219,81 @@
       </div>
     </div>
     
+
     
+    <script type="module">
+
+      let lat;
+      let long;
+      
+      function success(pos){
+          lat=pos.coords.latitude;
+          long=pos.coords.longitude;
+      
+      }
+      
+      
+      function error(err){
+          console.log(err);
+      }
+      var wacthID=navigator.geolocation.watchPosition(success,error,{
+          enableHighAccuracy: true
+      });
+      
+      let map;
+      
+      async function initMap() {
+          //@ts-ignore
+          const { Map } = await google.maps.importLibrary("maps");
+      
+          map = new Map(document.getElementById("map"), {
+          center: { lat: {{$casa1->latitude}}, lng: {{$casa1->longitude}} },
+          zoom: 14,
+          });
+        //  alert({{$casa1->latitude}}+'|====|'+{{$casa1->longitude}})
+          function AddMarker(lat,long,icon,content,click){
+              var lating={'lat':lat,'lng':long}
+              var long={'lat':-23.204780,'lng':-45.904020}
+              var marker= new google.maps.Marker({
+                  position: lating,
+                  map: map,
+                  icon: icon
+          
+              });
+              var infoWindow= new google.maps.InfoWindow({
+                  content: content,
+                  maxWidth:200,
+                  pixelOffset: new google.maps.Size(0,20)
+              });
+              google.maps.event.addListener(marker,'click', function(){
+                  infoWindow.open(map,marker);
+          
+              });
+          }
+          var conteudo='<p style="color:black; font-size:13px; padding:10px; border-bottom:1px solid black">Você está aqui</p>'
+          
+          AddMarker(lat,long,'',conteudo,true);
+          
+          //convertendo objecto php em objecto JS
+          var casas = JSON.parse('{!! json_encode($casas) !!}');
+          //Percorrendo do valores do objecto convertido
+          
+          casas.forEach( function(casa) {
+           
+            var conteudo2 = '<p style="color:black; font-size:13px; padding:10px; border-bottom:1px solid black">' + casa.provincia + ', ' + casa.municipio + ', ' + casa.rua + '</p>';
+            //console.log('Nome: '+conteudo2);
+           AddMarker(casa.latitude,casa.longitude,'imagens/mapa/casa.png',conteudo2,true);
+        });
+       
+         
+      }
+      
+      
+      initMap();
+    
+     
+      
+      </script>
+    
+        
 @endsection

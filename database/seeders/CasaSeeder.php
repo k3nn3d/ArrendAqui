@@ -31,7 +31,9 @@ class CasaSeeder extends Seeder
             'casa_de_banho'=>1,
             'id_categoria'=>1,
             'id_unidade'=>1,
-            'plano'=>3
+            'plano'=>3,
+            'latitude'=>-8.907870,
+            'longitude'=>13.363460
           
         ]);
 
@@ -49,7 +51,9 @@ class CasaSeeder extends Seeder
             'cozinha'=>1,
             'id_unidade'=>1,
             'casa_de_banho'=>1,
-            'plano'=>3
+            'plano'=>3,
+            'latitude'=>-7.994902696550908,
+            'longitude'=>14.126801365779613
           
         ]);
 
@@ -66,7 +70,10 @@ class CasaSeeder extends Seeder
             'quartos'=> 5,
             'cozinha'=>1,
             'id_unidade'=>2,
-            'casa_de_banho'=>1
+            'casa_de_banho'=>1,
+            'latitude'=>-7.862651782117677,
+            'longitude'=>13.118569349211063
+            
             
           
         ]);
@@ -84,8 +91,10 @@ class CasaSeeder extends Seeder
             'quartos'=> 1,
             'cozinha'=>1,
             'id_unidade'=>1,
-            'casa_de_banho'=>1
-          
+            'casa_de_banho'=>1,
+            'latitude'=>-8.8288947886903,
+            'longitude'=>13.289885139153832
+             
 
         ]);
 
@@ -103,7 +112,11 @@ class CasaSeeder extends Seeder
             'cozinha'=>1,
             'casa_de_banho'=>1,
             'id_unidade'=>2,
-            'plano'=>2
+            'plano'=>2,
+            'latitude'=>-8.914246312801524,
+            'longitude'=>13.193036846093097
+        
+             
           
         ]);
 
@@ -120,8 +133,11 @@ class CasaSeeder extends Seeder
             'quartos'=> 2,
             'cozinha'=>1,
             'id_unidade'=>1,
-            'casa_de_banho'=>1
-          
+            'casa_de_banho'=>1,
+            'latitude'=>-7.683282978951786,
+            'longitude'=>14.001810688700342
+             
+             
         ]);
 
         Casa::create([
@@ -138,6 +154,9 @@ class CasaSeeder extends Seeder
             'id_unidade'=>1,
             'cozinha'=>1,
             'casa_de_banho'=>1,
+            'latitude'=>-8.909243434350913,
+            'longitude'=>13.192865184724194
+            , 
           
            
         ]);
@@ -155,9 +174,10 @@ class CasaSeeder extends Seeder
             'cozinha'=>1,
             'id_unidade'=>1,
             'casa_de_banho'=>1,
-            'plano'=>1
+            'plano'=>1,
+            'latitude'=>-7.877110015217037,
+            'longitude'=>13.128188707334752
           
-           
         ]);
     }
 }

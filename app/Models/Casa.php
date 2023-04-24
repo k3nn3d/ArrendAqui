@@ -22,6 +22,8 @@ class Casa extends Model
                 'id_user',
                 'cozinha',
                 'descricao',
-                'vc_path'
+                'vc_path',
+                'latitude',
+                'longitude'
     ];
 }

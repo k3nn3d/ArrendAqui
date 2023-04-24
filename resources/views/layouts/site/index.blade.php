@@ -21,8 +21,16 @@
     <link rel="stylesheet" href="tamplate/css/tiny-slider.css" />
     <link rel="stylesheet" href="tamplate/css/aos.css" />
     <link rel="stylesheet" href="tamplate/css/style.css" />
-    <script src="{{ asset('js/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+    <link rel="stylesheet" href="css/googlemaps.css">
 
+    
+    <link rel="stylesheet" href="https://maps.googleapis.com/maps/api/directions/json
+    ?destination=Montreal
+    &origin=Luanda
+    &key=AIzaSyCtgPlK7U7uu9A-boT1BCd6k1ICOCyR_Q0">
+    <script src="{{ asset('js/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script type="module" src="js/googlemaps/googlemaps.js"></script>
     <title>
       PAP &mdash; 2022-2023
     </title>

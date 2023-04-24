@@ -27,6 +27,8 @@ class CreateCasasTable extends Migration
             $table->integer('casa_de_banho');
             $table->integer('estado')->default(1);
             $table->integer('plano')->default(0);
+            $table->double('latitude')->nullable();
+            $table->double('longitude')->nullable();
             $table->unsignedBigInteger('id_user')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->timestamps();
         });

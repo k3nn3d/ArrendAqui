@@ -59,7 +59,9 @@ class UserController extends Controller
     }
 
     public function index2(){
-        return view('site.perfil.dados');
+        $id=Auth::user()->id;
+        $user=User::where('id',$id)->first();
+        return view('site.perfil.dados',compact('user'));
 
     }
 

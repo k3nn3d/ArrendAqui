@@ -128,14 +128,14 @@
                   >
                   @else
                   <a
-                  href="{{ route('site.chat.index',$casa->user_id) }}"
+                  href="{{ route('site.chat.index',['id'=>$casa->user_id,'id_casa'=>$casa->id]) }}"
                   class="btn btn-success py-2 px-3"
                   >Mensagem</a
                 >
                   @endif
                   @else
                   <a
-                  href="{{ route('site.chat.index',$casa->user_id) }}"
+                  href="{{ route('site.chat.index',['id'=>$casa->user_id,'id_casa'=>$casa->id]) }}"
                   class="btn btn-success py-2 px-3"
                   >Mensagem</a
                 >
@@ -197,6 +197,9 @@
       </div>
     </div>
 
+
+   
+
     <section class="features-1">
       <div class="container">
         <div class="row">
@@ -248,6 +251,14 @@
       </div>
     </section>
 
+    <h2 class="font-weight-bold heading text-primary mb-5 mb-md-0" style="text-align: center; padding:1rem">
+      Encontre uma casa perto de si.
+    </h2>
+    <div style="width: 100%; height:600px">
+      <div id="map"></div>
+    </div>
+
+
     <div class="section sec-testimonials">
       <div class="container">
         <div class="row mb-5 align-items-center">
@@ -264,6 +275,9 @@
             </div>
           </div>
         </div>
+
+
+        
 
         <div class="row">
           <div class="col-lg-4"></div>
@@ -308,6 +322,9 @@
       </div>
     </div>
 
+   
+
+    
     <div class="section section-4 bg-light">
       <div class="container">
         <div class="row justify-content-center text-center mb-5">
@@ -540,6 +557,81 @@
 @endif
 
 
+<script type="module">
+
+  let lat;
+  let long;
+  
+  function success(pos){
+      lat=pos.coords.latitude;
+      long=pos.coords.longitude;
+  
+  }
+  
+  
+  function error(err){
+      console.log(err);
+  }
+  var wacthID=navigator.geolocation.watchPosition(success,error,{
+      enableHighAccuracy: true
+  });
+  
+  let map;
+  
+  async function initMap() {
+      //@ts-ignore
+      const { Map } = await google.maps.importLibrary("maps");
+  
+      map = new Map(document.getElementById("map"), {
+      center: { lat: lat, lng: long },
+  
+      zoom: 14,
+      });
+      function AddMarker(lat,long,icon,content,click){
+          var lating={'lat':lat,'lng':long}
+          var long={'lat':-23.204780,'lng':-45.904020}
+          var marker= new google.maps.Marker({
+              position: lating,
+              map: map,
+              icon: icon
+      
+          });
+          var infoWindow= new google.maps.InfoWindow({
+              content: content,
+              maxWidth:200,
+              pixelOffset: new google.maps.Size(0,20)
+          });
+          google.maps.event.addListener(marker,'click', function(){
+              infoWindow.open(map,marker);
+      
+          });
+      }
+      var conteudo='<p style="color:black; font-size:13px; padding:10px; border-bottom:1px solid black">Você está aqui</p>'
+      var conteudo2='<p style="color:black; font-size:13px; padding:10px; border-bottom:1px solid black">Luanda, Viana</p>'
+     
+      AddMarker(lat,long,'',conteudo,true);
+              //convertendo objecto php em objecto JS
+              var casas = JSON.parse('{!! json_encode($casas) !!}');
+      //Percorrendo do valores do objecto convertido
+      
+      casas.forEach( function(casa) {
+       
+        var conteudo2 = '<p style="color:black; font-size:13px; padding:10px; border-bottom:1px solid black">' + casa.provincia + ', ' + casa.municipio + ', ' + casa.rua + '</p>';
+        //console.log('Nome: '+conteudo2);
+       AddMarker(casa.latitude,casa.longitude,'imagens/mapa/casa.png',conteudo2,true);
+     
+  });
+     
+  }
+  
+  
+  initMap();
+  
+  </script>
+
+  
+                          
+  
   
 @endsection
 

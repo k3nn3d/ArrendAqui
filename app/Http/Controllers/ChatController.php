@@ -15,14 +15,14 @@ use Illuminate\Support\Facades\Auth;
 class ChatController extends Controller
 {
     //
-    public function index($id){
+    public function index($id, $casa_id){
         $id2=Auth::user()->id;
     
         $dados['carros']=Carro::where('id_user',$id)->first();
         $dados['casas']=Casa::where('id_user',$id)->first();
         
         $dados['user_2']=User::where('id', $id)->first();
-        
+        $dados['casa']=Casa::where('id',$casa_id)->first();
         if(chat::where('user_1',$id2)->where('user_2',$id)->first()){
             
             $dados['mensagem']=chat::

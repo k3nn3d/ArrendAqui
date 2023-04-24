@@ -38,7 +38,7 @@ Route::post('/contatar', [App\Http\Controllers\contatoController::class, 'store'
 //CHAT
 
 Route::get('/chat_list', [App\Http\Controllers\ChatController::class, 'list'])->name('site.chat.list')->middleware('acesso_site');
-Route::get('/chat_index{id}', [App\Http\Controllers\ChatController::class, 'index'])->name('site.chat.index')->middleware('acesso_site');
+Route::get('/chat_index{id}{id_casa}', [App\Http\Controllers\ChatController::class, 'index'])->name('site.chat.index')->middleware('acesso_site');
 Route::get('/chat_index2{id}', [App\Http\Controllers\ChatController::class, 'list'])->name('site.chat2.index')->middleware('acesso_site');
 Route::post('/chat{id}', [App\Http\Controllers\ChatController::class, 'store'])->name('site.chat.store')->middleware('acesso_site');
 
@@ -65,9 +65,9 @@ Route::post('/motorista_store', [App\Http\Controllers\UserController::class, 'mo
  Route::get('/carro_delete{id}', [App\Http\Controllers\carroController::class, 'delete'])->name('user.carro.delete');
  
 
- //CRUD ALUGUÉIS
+ //CRUD ARRENDAMENTOS
  Route::get('/aluguel', [App\Http\Controllers\aluguelController::class, 'index2'])->name('user.aluguel');
- Route::post('/aluguel_store', [App\Http\Controllers\aluguelController::class, 'store'])->name('user.aluguel.store');
+ Route::post('/aluguel_store{id}', [App\Http\Controllers\aluguelController::class, 'store'])->name('user.aluguel.store');
  Route::post('/aluguel_update{id}', [App\Http\Controllers\aluguelController::class, 'update'])->name('user.aluguel.update');
  Route::get('/aluguel_delete{id}', [App\Http\Controllers\aluguelController::class, 'delete'])->name('user.aluguel.delete');
 

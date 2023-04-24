@@ -133,7 +133,7 @@ $(document).ready(function() {
         $(this).children('a').children('span').toggle();
     });
     // full card
-    $(".card-option .full-card").on('click', function() {
+    $(".card-option .full-card").on('load', function() {
         var $this = $(this);
         var port = $($this.parents('.card'));
         port.toggleClass("full-card");

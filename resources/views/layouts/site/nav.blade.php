@@ -49,13 +49,37 @@
               <li><span style="margin-left: 20px;">@_{{Auth::user()->username}}</span></li>
               <hr>
               <li >
-                <a  href="#"> Definições</a>
+                <a  href="{{ route('user.perfil') }}"> <i class="ti-user"></i>Perfil</a>
+              </li>
+              <li >
+                <a  href="{{ route('site.chat.list') }}"> <i class="ti-user"></i>Mensagens</a>
+              </li>
+              @switch(Auth::user()->vc_tipo_utilizador)
+                @case(5)
+              <li >
+                <a  href="{{ route('user.casa') }}"><i class="ti-home"></i>Casas</a>
+              </li>
+                @break
+                @case(3)
+              <li >
+                <a  href="{{ route('user.carro') }}"><i class="ti-user"></i>Carros</a>
+              </li>
+                @break
+                @endswitch
+              <li >
+                <a  href="{{ route('user.aluguel') }}"><i class="ti-home"></i> @if(Auth::user()->vc_tipo_utilizador==3)Reservas @else Arrendamentos @endif</a>
+              </li>
+              <li >
+                <a  href="{{ route('user.pagemento.index') }}"><i class="ti-home"></i>Pagamentos</a>
+              </li>
+              <li >
+                <a  href="{{ route('user.user.index') }}"><i class="ti-home"></i>Definições</a>
               </li>
               <li >
                 <form method="POST" action="{{ route('logout') }}" id="form_1">
                   @csrf
                   <input type="hidden" id="username" name="username" value="{{ Auth::user()->username }}">
-                <a onclick="document.getElementById('form_1').submit()" style="margin-left: 20px;">Sair</a>
+                <a onclick="document.getElementById('form_1').submit()" style="margin-left: 20px;"><i class="ti-home"></i>Sair</a>
                 
               </form>
           </li>

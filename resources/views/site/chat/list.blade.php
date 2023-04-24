@@ -1,5 +1,8 @@
 @extends('layouts.perfil.index')
+
 @section('conteudo')
+
+
 <div class="pcoded-main-container">
     <div class="pcoded-content">
 <!-- Latest Customers start -->
