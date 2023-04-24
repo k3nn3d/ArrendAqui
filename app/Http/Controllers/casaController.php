@@ -263,9 +263,11 @@ public function store(Request $req){
             $req_imagem=$req->file('vc_path');
             $extension=$req_imagem->extension();
             $imagem_name=md5($req_imagem->getClientOriginalName() . strtotime('now')) . "." . $extension;
-            $destino=$req_imagem->move(public_path("imagens/galeria"), $imagem_name);
-            $dir = "imagens/galeria";
+            $destino=$req_imagem->move(public_path("imagens/casas"), $imagem_name);
+            $dir = "imagens/casas";
             $caminho=$dir. "/". $imagem_name; 
+
+           
            /* $imagem=$req->file('vc_path');
             $caminho=$imagem->store('imagens/galeria','public');*/
 
@@ -278,8 +280,18 @@ public function store(Request $req){
                 
             
             // Carregar as duas imagens
-            $img1 = imagecreatefromjpeg("'$caminho'");
-            $img2 = imagecreatefromjpeg("'$casa_detc->vc_path'");
+          //  $img1 = imagecreatefromjpeg("'$caminho'");
+            //$img2 = imagecreatefromjpeg("'$casa_detc->vc_path'");
+            // Lê o conteúdo do arquivo de imagem em uma string
+            $image_data1 = file_get_contents(public_path($caminho));
+
+            // Cria a imagem a partir da string de dados
+            $img1 = imagecreatefromstring($image_data1);
+             // Lê o conteúdo do arquivo de imagem em uma string
+             $image_data2 = file_get_contents(public_path($casa_detc->vc_path));
+
+             // Cria a imagem a partir da string de dados
+             $img2 = imagecreatefromstring($image_data2);
 
             // Obter as dimensões das imagens
             $width1 = imagesx($img1);
