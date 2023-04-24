@@ -258,7 +258,11 @@ public function store(Request $req){
         
         if($req->hasFile('vc_path') && $req->file('vc_path')->isValid()){
             
-           
+           //Otendo caminho completo da imagem
+           $imagem = "'$req->v_path'";
+            $temp_file = tempnam(sys_get_temp_dir(), 'img');
+            file_put_contents($temp_file, base64_decode($imagem));
+            $caminho_completo = realpath($temp_file);
             // Imagem VC_PATH
             $req_imagem=$req->file('vc_path');
             $extension=$req_imagem->extension();
