@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Untree.co" />
-    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="shortcut icon" href="imagens/logo.png" />
 
     <meta name="description" content="" />
     <meta name="keywords" content="bootstrap, bootstrap5" />
@@ -31,6 +31,8 @@
     <script src="{{ asset('js/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script type="module" src="js/googlemaps/googlemaps.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-Hy05vP8/nh+E/bq7E2W5/g+eD+81t3Az5tT1nRWK1nsa0sF6S+16XqU0zZFn3q7vQ8GZO1cRvFq5PDRJYQJFQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>
       PAP &mdash; 2022-2023
     </title>

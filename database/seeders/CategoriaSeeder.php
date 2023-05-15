@@ -18,14 +18,19 @@ class CategoriaSeeder extends Seeder
         $dados=[
         [
             "id"=> 1,
-            "name"=> "Carro",
+            "name"=> "Prédio",
             
         ],
         [
             "id"=> 2,
-            "name"=> "Casa",
+            "name"=> "Espaço para lazer",
             
-          ]
+        ],
+        [
+            "id"=> 3,
+            "name"=> "Espaços para trabalho",
+            
+        ]
     ];
     
     foreach ($dados as $key => $value){

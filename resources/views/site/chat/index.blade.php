@@ -6,17 +6,38 @@
     <div class="card chat-card">
         <div class="card-header">
             
-            <h5>
+           
                 @if( $user_2->vc_tipo_utilizador==5)
-                Senhorio: {{ $user_2->name }} {{ $user_2->lastname }}
+                <img src="{{$user_2->vc_path}}" alt="user-image" style="width: 40px; height:40px;border-radius:20px">
+                 <h5>{{ $user_2->name }} {{ $user_2->lastname }}</h5>
+                 <br>
+                <span> Senhorio</span>
+                @endif
+                @if( $user_2->vc_tipo_utilizador==2)
+                <img src="{{$user_2->vc_path}}" alt="user-image" style="width: 40px; height:40px;border-radius:20px">
+                <h5>{{ $user_2->name }} {{ $user_2->lastname }}</h5>
+                <br>
+                <span> Gerente</span>
+                @endif
+                @if( $user_2->vc_tipo_utilizador==1)
+                <img src="{{$user_2->vc_path}}" alt="user-image" style="width: 40px; height:40px;border-radius:20px">
+                <h5>{{ $user_2->name }} {{ $user_2->lastname }}</h5>
+                <br>
+                <span> Administrador</span>
                 @endif
                 @if( $user_2->vc_tipo_utilizador==6)
-                Alugador: {{ $user_2->name }} {{ $user_2->lastname }}
+                <img src="{{$user_2->vc_path}}" alt="user-image" style="width: 40px; height:40px;border-radius:20px">
+                <h5>{{ $user_2->name }} {{ $user_2->lastname }}</h5>
+                <br>
+                <span> Cliente</span>
                 @endif
                 @if( $user_2->vc_tipo_utilizador==3)
-                Motorista: {{ $user_2->name }} {{ $user_2->lastname }}
+                <img src="{{$user_2->vc_path}}" alt="user-image" style="width: 40px; height:40px;border-radius:20px">
+                <h5>{{ $user_2->name }} {{ $user_2->lastname }}</h5>
+                <br>
+                <span> Motorista</span>
                 @endif
-            </h5>
+            
             <div class="card-header-right">
                 <div class="btn-group card-option">
                     <button class="btn" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-close-cw">Fechar</i></button>
@@ -96,7 +117,7 @@
             <br>
             <br>
             @endempty
-            <form action="{{route('site.chat.store', $user_2->id)}}" method="POST" enctype="multipart/form-data"> 
+            <form action="{{route('site.chat.store',['id'=>$user_2->id ,'id_casa'=>$id_casa])}}" method="POST" enctype="multipart/form-data"> 
                 @csrf
                 <div class="input-group m-t-15">
                     <input type="text" name="mensagem" class="form-control" id="mensagem" placeholder="Escrever mensagem">

@@ -16,14 +16,16 @@
     <meta name="description" content="" />
     <meta name="keywords" content="">
     <meta name="author" content="Phoenixcoded" />
+
     <!-- Favicon icon -->
-    <link rel="icon" href="tamplate/images/person11.jpg" type="image/x-icon">
+    <link rel="icon" href="imagens/logo.png" type="image/x-icon">
     
 
     <!-- vendor css -->
     <link rel="stylesheet" href="tmp/dist/assets/css/style.css">
     <script src="{{ asset('js/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
 
 </head>

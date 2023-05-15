@@ -3,9 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use \Illuminate\Support\Facades\Http;
 use App\Models\Casa;
+use App\Models\Categoria;
+use App\Models\sub_categoria;
+use App\Models\provincia;
+use App\Models\municipio;
+use App\Models\Unidade;
+use App\Models\log;
+use App\Models\User;
 use App\Models\aluguel;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+use Stevebauman\Location\Facades\Location;
 use DB;
 
 class painelController extends Controller
@@ -52,10 +63,14 @@ class painelController extends Controller
          ->orderBy('categorias.id')
          ->get();
 
+         $cat_name[]=0;
+         $casa_total[]=0;
          
          foreach($casaData as $casa){
-          $cat_name[]=$casa->cat_name;
-          $casa_total[]=$casa->casa_total;
+            $cat_name[]=$casa->cat_name;
+            $casa_total[]=$casa->casa_total;
+          
+         
          }
 
          $casaLabel="'Comparativo de casas mais arrendadas consoante a categoria'";
@@ -66,4 +81,6 @@ class painelController extends Controller
 
        return view('admin.painel.index', compact('userLabel','userAno', 'userTotal','cat_name','casa_total','casaLabel'), $data);
         }
+
+        
 }

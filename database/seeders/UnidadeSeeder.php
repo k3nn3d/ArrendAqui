@@ -22,7 +22,17 @@ class UnidadeSeeder extends Seeder
         ]);
         Unidade::create([
             "id" => 2,
+            'name' => "trimestre",
+            
+        ]);
+        Unidade::create([
+            "id" => 3,
             'name' => "semestre",
+            
+        ]);
+        Unidade::create([
+            "id" => 4,
+            'name' => "ano",
             
         ]);
 

@@ -29,9 +29,12 @@
            </li>
          </ol>
        </nav>
+       <a href="{{ route('user.user.edit',Auth::user()->id) }}" class="btn-success" style="padding:0.8rem; border-radius:20px">Editar</a>
      </div>
+
    </div>
  </div>
+ 
  </div>
  
  <!--HEADER END-->

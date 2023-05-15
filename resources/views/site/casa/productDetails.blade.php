@@ -9,7 +9,7 @@
         <div class="row justify-content-center align-items-center">
           <div class="col-lg-9 text-center mt-5">
             <h1 class="heading" data-aos="fade-up">
-				{{$casa1->name}}
+              {{$casa1->municipio}}, {{$casa1->provincia}}
             </h1>
 
             <nav
@@ -26,7 +26,7 @@
                   class="breadcrumb-item active text-white-50"
                   aria-current="page"
                 >
-                  {{$casa1->name}}
+                {{$casa1->municipio}}, {{$casa1->provincia}}
                 </li>
               </ol>
             </nav>
@@ -54,11 +54,10 @@
           </div>
           
           <div class="col-lg-4">
-            <h2 class="heading text-primary">{{$casa1->name}}</h2>
-            <p class="meta"> {{$casa1->municipio}}, {{$casa1->provincia}} </p>
+            <h2 class="heading text-primary">{{$casa1->municipio}}, {{$casa1->provincia}}</h2>
+            <p class="meta"> {{$casa1->cat_name}} </p>
             <hr style="color:green">
             <h5>Preço</h5>
-            
             <p class="text-black-50">
               {{$casa1->preco}}kz/{{$casa1->unidade_name}}
                   </p>
@@ -118,7 +117,51 @@
                 <ul class="list-unstyled  dark-hover d-flex">
                  
 				 <li>
-					<a href="{{ route('site.chat.index',$casa1->user_id) }}" class="btn btn-primary text-white py-3 px-4"><i class="icon-massage"></i>Alugar</a>
+          @auth
+          @if($casa1->id_user == Auth::user()->id)
+          <a href="{{ route('user.perfil')}}" class="btn btn-primary text-white py-3 px-4"><i class="icon-massage"></i>Perfil</a>
+          @else
+          
+          @foreach($aluguels as $alu)
+          @if($alu->id_user==Auth::user()->id && $alu->id_casa== $casa1->id )
+          <a
+          href="{{ route('user.aluguel.delete',$alu->id) }}"
+          class="btn btn-success py-2 px-3"
+          >Cancelar reserva</a
+        >
+         @endif
+
+        @endforeach
+        @empty($alu)
+        <a
+          href="{{ route('user.aluguel.store',$casa1->id) }}"
+          class="btn btn-success py-2 px-3"
+          >Reservar</a
+        >
+        @endempty
+       
+          
+          @endif
+          @else
+          @foreach($aluguels as $alu)
+          @if($alu->id_user==Auth::user()->id && $alu->id_casa== $casa1->id )
+          <a
+          href="{{ route('user.aluguel.delete',$alu->id) }}"
+          class="btn btn-success py-2 px-3"
+          >Cancelar reserva</a
+        >
+         @endif
+
+        @endforeach
+        @empty($alu)
+        <a
+          href="{{ route('user.aluguel.store',$casa1->id) }}"
+          class="btn btn-success py-2 px-3"
+          >Reservar</a
+        >
+        @endempty
+         
+          @endauth
 				 </li>
 
                 </ul>
@@ -139,7 +182,7 @@
         <div class="row mb-5 align-items-center" style="margin-top: 50px">
           <div class="col-lg-12">
             <h2 class="font-weight-bold text-primary heading" style="text-align: center">
-              Casas em Destaque
+              Casas relacionadas
             </h2>
           </div>
          
@@ -160,7 +203,7 @@
                     <div class="price mb-2"><span>{{$casa->preco}}kz/{{$casa->unidade_name}}</span></div>
                     <div>
                       <span class="d-block mb-2 text-black-50"
-                        >{{$casa->name}}</span
+                        >{{$casa->user_name}} {{$casa->lastname_user}} </span
                       >
                       <span class="city d-block mb-3">{{$casa->provincia}}, {{$casa->municipio}} </span>
     
@@ -295,5 +338,15 @@
       
       </script>
     
-        
+    @if(session('reservado'))
+
+    <script type="text/javascript">
+      
+      Swal.fire(
+      'SUCESSO',
+      'Casa reservada com sucesso. Você será notificado caso o senhorio confirme sua reserva',
+      'success'
+    )
+    </script>
+    @endif   
 @endsection

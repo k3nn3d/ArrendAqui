@@ -73,7 +73,7 @@ class UserSeeder extends Seeder
             'lastname'=>"José",
             'username'=>"toni",
             'email' => "toni@gmail.com",
-            'vc_tipo_utilizador' => 4,
+            'vc_tipo_utilizador' => 3,
             'vc_path' => "imagens/user.png",
             
             'password' => Hash::make("12345678")
@@ -85,7 +85,7 @@ class UserSeeder extends Seeder
             'lastname'=>"Kawanda",
             'username'=>"leti",
             'email' => "leticia@gmail.com",
-            'vc_tipo_utilizador' => 5,
+            'vc_tipo_utilizador' => 3,
             'vc_path' => "imagens/user.png",
             
             'password' => Hash::make("12345678")
@@ -97,7 +97,7 @@ class UserSeeder extends Seeder
             'lastname'=>"Cavunga",
             'username'=>"tonio",
             'email' => "antoni@gmail.com",
-            'vc_tipo_utilizador' => 6,
+            'vc_tipo_utilizador' => 5,
             'vc_path' => "imagens/user.png",
             
             'password' => Hash::make("12345678")
@@ -109,7 +109,7 @@ class UserSeeder extends Seeder
             'lastname'=>"Armando",
             'username'=>"fiona",
             'email' => "fiona@gmail.com",
-            'vc_tipo_utilizador' => 6,
+            'vc_tipo_utilizador' => 5,
             'vc_path' => "imagens/user.png",
             
             'password' => Hash::make("12345678")
@@ -132,6 +132,39 @@ class UserSeeder extends Seeder
             'username'=>"filo",
             'email' => "filomneno@gmail.com",
             'vc_tipo_utilizador' => 5,
+            'vc_path' => "imagens/user.png",
+            
+            'password' => Hash::make("12345678")
+        ]);
+        User::create([
+            "id" => 10,
+            'name' => "Vicente",
+            'lastname'=>"Chiluango",
+            'username'=>"vic",
+            'email' => "vicente@gmail.com",
+            'vc_tipo_utilizador' => 6,
+            'vc_path' => "imagens/user.png",
+            
+            'password' => Hash::make("12345678")
+        ]);
+        User::create([
+            "id" => 11,
+            'name' => "Leonel",
+            'lastname'=>"Kimpovi",
+            'username'=>"leo",
+            'email' => "leonel@gmail.com",
+            'vc_tipo_utilizador' => 6,
+            'vc_path' => "imagens/user.png",
+            
+            'password' => Hash::make("12345678")
+        ]);
+        User::create([
+            "id" => 12,
+            'name' => "Ladislau",
+            'lastname'=>"Generoso",
+            'username'=>"ladi",
+            'email' => "ladislau@gmail.com",
+            'vc_tipo_utilizador' => 6,
             'vc_path' => "imagens/user.png",
             
             'password' => Hash::make("12345678")

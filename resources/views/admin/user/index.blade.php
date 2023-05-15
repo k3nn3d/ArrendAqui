@@ -78,7 +78,7 @@
                     <thead>
                       <tr>
                         <th> Foto </th>
-                        <th> Primeiro Nome </th>
+                        <th> Nome </th>
                         <th> Usuário </th>
                         <th> Email </th>
                         <th>Data de registro  </th>
@@ -93,10 +93,10 @@
                         <td class="py-1">
                           <img  style="max-width: 50px; max-height:50px; border-radius:100%" src="{{$user->vc_path}}" alt="image" />
                         </td>
-                        <td> {{ $user->name }}</td>
-                        <td> {{ $user->username }} </td>
-                        <td>   {{ $user->email }}</td>
-                        <td> {{ $user->created_at->format('d/m/y h:i a') }} </td>
+                        <td>{{ $user->name }} {{ $user->lastname }}</td>
+                        <td>{{ $user->username }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->created_at->format('d/m/y h:i a') }}</td>
                         <td>
                           <a class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ações</a>
                           <div class="dropdown-menu">

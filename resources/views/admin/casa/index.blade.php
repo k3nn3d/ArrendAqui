@@ -67,12 +67,12 @@
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                     
-                          <th> Nome </th>
-                        
-                          <th> Descrição </th>
-                          <th>Data de registro  </th>
-                          <th>Ações  </th>
+                          <th>#</th>
+                          <th>Imagem</th>
+                          <th>Plano</th>
+                          <th>Estado</th>
+                          <th>Data de registro</th>
+                          <th>Ações</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -80,14 +80,16 @@
                             
                         @foreach($casa as $casa)
                        <tr>
-                          <td> {{ $casa->name }}</td>
-                          <td> {{ $casa->descricao }}</td>
-                          <td>  {{ $casa->created_at->format('d/m/y h:i') }} </td>
+                          <td>{{ $casa->id }}</td>
+                          <td><img src="{{ $casa->vc_path }}" alt="" style="width: 60px; height:60px;"></td>
+                          <td>{{ $casa->plano }}</td>
+                          <td>{{ $casa->estado }}</td>
+                          <td>{{ $casa->created_at->format('d/m/y h:i') }} </td>
                        
                           <td>
                             <a class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ações</a>
                             <div class="dropdown-menu">
-                              <a class="dropdown-item" href="#">Ver</a>
+                              <a class="dropdown-item" href="#">Analisar</a>
                               <a   class="dropdown-item" data-toggle="modal" data-target="#exampleModal{{$casa->id}}" data-whatever="@getbootstrap" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-refresh-cw"></i> Editar</a>
                               <a class="dropdown-item" href="{{route('admin.casa.delete', $casa->id)}}"><i class="feather icon-trash"></i>Eliminar</a>
                             

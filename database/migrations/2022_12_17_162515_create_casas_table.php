@@ -15,7 +15,7 @@ class CreateCasasTable extends Migration
     {
         Schema::create('casas', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('bairro');
             $table->string('vc_path');
             $table->string('rua');
             $table->string('link')->nullable();
@@ -25,8 +25,8 @@ class CreateCasasTable extends Migration
             $table->integer('quartos');
             $table->integer('cozinha');
             $table->integer('casa_de_banho');
-            $table->integer('estado')->default(1);
-            $table->integer('plano')->default(0);
+            $table->string('estado')->default('pendente');
+            $table->string('plano')->default('free');
             $table->double('latitude')->nullable();
             $table->double('longitude')->nullable();
             $table->unsignedBigInteger('id_user')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE');

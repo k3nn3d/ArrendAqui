@@ -10,7 +10,7 @@
     
 
 <h1>
-    
+ PDF-RELATÓRIO   
 </h1>
 
 <script src="{{ asset('./js/geolocalizacao.js')}}"></script>

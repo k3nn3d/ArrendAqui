@@ -17,7 +17,7 @@
     <meta name="keywords" content="">
     <meta name="author" content="Phoenixcoded" />
     <!-- Favicon icon -->
-    <link rel="icon" href="tamplate/images/person11.jpg" type="image/x-icon">
+    <link rel="icon" href="imagens/logo.png" type="image/x-icon">
     <!--Google maps-->
     <link rel="stylesheet" href="css/googlemaps.css">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -32,9 +32,11 @@
     &key=AIzaSyCtgPlK7U7uu9A-boT1BCd6k1ICOCyR_Q0">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script type="module" src="js/googlemaps/googlemaps.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!--Google maps end-->
     <script src="{{ asset('js/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
     <!-- vendor css -->

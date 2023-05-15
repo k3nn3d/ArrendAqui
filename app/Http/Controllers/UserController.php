@@ -324,4 +324,9 @@ class UserController extends Controller
     public function motoristaCreate(){
         return view('auth.register-motorista');
     }
+    function app_url(Request $request)
+    {
+   
+    return $request->getScheme() . '://' . $request->getHttpHost();
+    }
 }

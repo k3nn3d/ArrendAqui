@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\aluguel;
+use Illuminate\Support\Facades\Auth;
 
 class aluguelController extends Controller
 {
@@ -27,6 +28,17 @@ class aluguelController extends Controller
            'id_user'=>$user_id,
            'id_casa'=>$id 
         ]);
-        return redirect()->route('carros');
+        return redirect()->back()->with('reservado',1);
+    }
+    public function update($id){
+        aluguel::where('id',$id)->update([
+           'estado'=>'Reservado'
+        ]);
+        return redirect()->back()->with('reservado',1);
+    }
+    public function delete($id){
+       
+        aluguel::where('id',$id)->delete();
+        return redirect()->back()->with('reservado_eliminada',1);
     }
 }

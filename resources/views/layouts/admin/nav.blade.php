@@ -78,7 +78,7 @@
       <a href="{{ route('admin.carro') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></i></span><span class="pcoded-mtext">Carros</span></a>
   </li>
   <li class="nav-item">
-    <a href="{{ route('admin.aluguel') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></i></span><span class="pcoded-mtext">Aluguéis</span></a>
+    <a href="{{ route('admin.aluguel') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></i></span><span class="pcoded-mtext">Arrendamentos</span></a>
 </li>
   <li class="nav-item pcoded-menu-caption">
     <label>Mensagens</label>

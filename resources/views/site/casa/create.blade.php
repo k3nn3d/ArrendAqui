@@ -45,19 +45,6 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                 <form action="{{route('user.casa.store')}}" method="POST" enctype="multipart/form-data">
                   @csrf
                     <div class="row">
-                       
-                        <div class="col-12 mb-3">
-                          <label for="">Nome</label>
-                            <input
-                            type="text"
-                            class="form-control"
-                            name="name"
-                            id="name"
-                            value="{{ old('name') }}"
-                            placeholder="Nome do item"
-                            required 
-                            />
-                        </div>
                         <div class="col-12 mb-3">
                           <label for="">Imagem</label>
                           <input
@@ -159,32 +146,50 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                         </div>
                         <div class="col-4 mb-3">
                           <label for="">Província</label>
-                          <select class="form-control" name="provincia" id="">
+                          <select class="form-control" name="provincia" id="provincia">
                             <option style="align-content: center" value="">Provincia</option>
                             @foreach($provincias as $provincia)
-                            <option value="{{ $provincia->id }} {{ old('provincia')==$provincia->id? 'selected':'' }}">{{ $provincia->name }}</option>
+                            <option value="{{ $provincia->id }} {{ old('provincia')==$provincia->id? 'selected':'' }} {{ $provincia->id == 'selected'? $filtro_municipio=$provincia->id : false }}">{{ $provincia->name }}</option>
                             @endforeach
                           </select>
                         </div>
                         <div class="col-4 mb-3">
                           <label for="">Município</label>
-                          <select class="form-control" name="municipio" id="">
+                          <select class="form-control" name="municipio" id="municipio">
                             <option style="align-content: center" value="">Município</option>
                              @foreach($municipios as $municipio)
+                             @if($filtro_municipio != 0)
+                              @if($municipio->id_provincia == $filtro_municipio)
+                             <option value="{{ $municipio->id }} {{ old('municipio')==$municipio->id? 'selected':'' }}">{{ $municipio->name }}</option>
+                             @endif
+                             @else
                             <option value="{{ $municipio->id }} {{ old('municipio')==$municipio->id? 'selected':'' }}">{{ $municipio->name }}</option>
+                             @endif
                              @endforeach
                           </select>
                         </div>
                         <div class="col-4 mb-3">
-                          Rua
+                          Bairro
                           <input
                           type="text"
                           class="form-control"
-                          name="rua"
-                          id="preco"
+                          name="bairro"
+                          id="bairro"
+                          value="{{ old('bairro') }}"
+                          placeholder="Bairro"
+                          required
+                          />
+                      </div>
+                      <div class="col-12 mb-3">
+                        <label for="">Rua</label>
+                          <input
+                          type="text"
+                          class="form-control"
+                          name="bairro"
+                          id="bairro"
                           value="{{ old('rua') }}"
                           placeholder="Rua"
-                          required
+                          required 
                           />
                       </div>
                         <div class="col-12 mb-3">
@@ -250,6 +255,46 @@ Detalhes
 )
 </script>
 @endif
-                   
+
+
+
+
+
+<!-- JavaScript -->
+<script>
+  // selecione os elementos DOM
+  const provinciaSelect = document.getElementById('provincia');
+  const municipioSelect = document.getElementById('municipio');
+
+  // atualize a lista de municípios quando a província for alterada
+  provinciaSelect.addEventListener('change', () => {
+    // obtenha o valor selecionado da província
+    const provinciaSelecionada = provinciaSelect.value;
+
+    // faça uma chamada AJAX para obter a lista de municípios correspondentes
+    fetch(`/municipios/${provinciaSelecionada}`)
+      .then(response => response.json())
+      .then(municipios => {
+        // limpe a lista de municípios existente
+        municipioSelect.innerHTML = '';
+
+        // adicione as opções de município à lista
+        if (municipios.length) {
+          municipios.forEach(municipio => {
+            const option = document.createElement('option');
+            option.text = municipio.name;
+            option.value = municipio.id;
+            municipioSelect.add(option);
+          });
+        } else {
+          // se não houver municípios disponíveis, adicione uma opção vazia
+          const option = document.createElement('option');
+          option.text = '';
+          municipioSelect.add(option);
+        }
+      });
+  });
+</script>
+
 
 @endsection

@@ -17,8 +17,8 @@ class CreateAluguelsTable extends Migration
             $table->id();
             $table->string('largada')->nullable();
             $table->string('chegada')->nullable();
-            $table->date('data');
-            $table->string('estado')->nullable();
+            $table->date('data')->nullable();
+            $table->string('estado')->default('pendente');
             $table->string('pagamento')->nullable();
             $table->unsignedBigInteger('id_casa')->references('id')->on('casas')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->unsignedBigInteger('id_user')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE');

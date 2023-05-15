@@ -12,6 +12,7 @@ use App\Models\provincia;
 use App\Models\municipio;
 use App\Models\Unidade;
 use App\Models\log;
+use App\Models\aluguel;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Stevebauman\Location\Facades\Location;
@@ -20,18 +21,20 @@ class casaController extends Controller
 {
     //
     public function index(Request $req ){
-        
-        $casas=Casa::join('provincias','provincias.id','casas.id_provincia')
+        $aluguels=aluguel::get();
+        $casas=Casa::where('estado','publicado')
+        ->join('provincias','provincias.id','casas.id_provincia')
         ->join('municipios','municipios.id','casas.id_municipio')
         ->join('unidades','unidades.id','casas.id_unidade')
         ->join('users','users.id','casas.id_user')
-        ->select('casas.*','municipios.name as municipio', 'provincias.name as provincia','users.id as user_id', 'unidades.name as unidade_name')
+        ->select('casas.*','municipios.name as municipio','users.lastname as lastname_user', 'provincias.name as provincia','users.id as user_id','users.name as user_name', 'unidades.name as unidade_name')
         ->get();
-        $casas_destaque=Casa::where('plano','!=',0)->join('provincias','provincias.id','casas.id_provincia')
+        $casas_destaque=Casa::where('estado','publicado')
+        ->where('plano','!=',0)->join('provincias','provincias.id','casas.id_provincia')
         ->join('municipios','municipios.id','casas.id_municipio')
         ->join('unidades','unidades.id','casas.id_unidade')
         ->join('users','users.id','casas.id_user')
-        ->select('casas.*','municipios.name as municipio', 'provincias.name as provincia','users.id as user_id','unidades.name as unidade_name')
+        ->select('casas.*','municipios.name as municipio','users.lastname as lastname_user', 'provincias.name as provincia','users.id as user_id','users.name as user_name','unidades.name as unidade_name')
         ->orderBy('plano','DESC')->get();
         
 
@@ -40,113 +43,67 @@ class casaController extends Controller
        
         $categorias=Categoria::get();
         $sub_categorias=sub_categoria::get();
-        if($req->pesquisa){
-            
-           if(provincia::where('name','like',"%$req->pesquisa%") && municipio::where('name','like',"%$req->pesquisa%")){
-         
-                $nome=$req->pesquisa;
-                
-                $casas=Casa::where('casas.id_provincia', $id_provincia)->join('provincias','provincias.id','casas.id_provincia')
-                ->join('municipios','municipios.id','casas.id_municipio')
-                ->join('users','users.id','casas.id')
-                ->join('unidades','unidades.id','casas.id_unidade')
-                ->select('casas.*','municipios.name as municipio', 'provincias.name as provincia','users.id as user_id', 'unidades.name as unidade_name')
-                ->get();
-             
+        $provincias=provincia::get();
+        $municipios=municipio::get();
+        if($req->provincia_id && $req->municipio_id && $req->preco_min && $req->preco_max  && $req->categoria_id  ){
 
-                $casas_destaque=Casa::where('casas.id_provincia', $id_provincia)->where('plano','!=',0)->join('provincias','provincias.id','casas.id_provincia')
-                ->join('municipios','municipios.id','casas.id_municipio')
-                ->join('users','users.id','casas.id')
-                ->join('unidades','unidades.id','casas.id_unidade')
-                ->select('casas.*','municipios.name as municipio', 'provincias.name as provincia','users.id as user_id','unidades.name as unidade_name')
-                ->orderBy('plano','DESC')->get();
-                
-                return view('site.casa.index', compact('casas','categorias','sub_categorias','nome','casas_destaque'));
-               
-                
-            }
-          
-            
-            if(municipio::where('name','like',"%$req->pesquisa%")){
-                
-               
-                $nome=$req->pesquisa;
-                $casas=Casa::where('casas.id_municipio', $id_municipio)->join('provincias','provincias.id','casas.id_provincia')
-                ->join('municipios','municipios.id','casas.id_municipio')
-                ->join('users','users.id','casas.id')
-                ->join('unidades','unidades.id','casas.id_unidade')
-                ->select('casas.*','municipios.name as municipio', 'provincias.name as provincia','users.id as user_id','unidades.name as unidade_name')
-                ->get();
-                
-
-                $casas_destaque=Casa::where('casas.id_municipio', $id_municipio)->where('plano','!=',0)->join('provincias','provincias.id','casas.id_provincia')
-                ->join('municipios','municipios.id','casas.id_municipio')
-                ->join('users','users.id','casas.id')
-                ->join('unidades','unidades.id','casas.id_unidade')
-                ->select('casas.*','municipios.name as municipio', 'provincias.name as provincia','users.id as user_id','unidades.name as unidade_name')
-                ->orderBy('plano','DESC')->get();
-               
-
-               
-                
-                
-                return view('site.casa.index', compact('casas','categorias','sub_categorias','nome','casas_destaque'));
-
-            }
-
-           
-            
-            if(provincia::where('name','like',"%$req->pesquisa%")){
-             
-
-               
-                $casas=Casa::where('casas.id_provincia', $id_provincia)->join('provincias','provincias.id','casas.id_provincia')
-                ->join('municipios','municipios.id','casas.id_municipio')
-                ->join('users','users.id','casas.id')
-                ->join('unidades','unidades.id','casas.id_unidade')
-                ->select('casas.*','municipios.name as municipio', 'provincias.name as provincia','users.id as user_id', 'unidades.name as unidade_name')
-                ->get();
-                $casas_destaque=Casa::where('casas.id_provincia', $id_provincia)->where('plano','!=',0)->join('provincias','provincias.id','casas.id_provincia')
-                ->join('municipios','municipios.id','casas.id_municipio')
-                ->join('users','users.id','casas.id')
-                ->join('unidades','unidades.id','casas.id_unidade')
-                ->select('casas.*','municipios.name as municipio', 'provincias.name as provincia','users.id as user_id','unidades.name as unidade_name')
-                ->orderBy('plano','DESC')->get();
-                return view('site.casa.index', compact('casas','categorias','sub_categorias','casas_destaque'));
-               
-                
-            }
-                
-           
+            $casas=Casa::where('estado','publicado')
+            ->where('casas.id_provincia',$req->provincia_id)
+            ->where('casas.id_municipio',$req->municipio_id)
+            ->where('casas.id_categoria',$req->categoria_id)
+            ->where('casas.preco',$req->preco_max)
+            ->orwhere('casas.preco',$req->preco_min)
+            ->join('provincias','provincias.id','casas.id_provincia')
+            ->join('municipios','municipios.id','casas.id_municipio')
+            ->join('unidades','unidades.id','casas.id_unidade')
+            ->join('users','users.id','casas.id_user')
+            ->select('casas.*','municipios.name as municipio','users.lastname as lastname_user', 'provincias.name as provincia','users.id as user_id','users.name as user_name', 'unidades.name as unidade_name')
+            ->get();
+            $casas_destaque=Casa::where('estado','publicado')
+            ->where('casas.id_provincia',$req->provincia_id)
+            ->where('casas.id_municipio',$req->municipio_id)
+            ->where('casas.id_categoria',$req->categoria_id)
+            ->where('casas.preco',$req->preco_max)
+            ->where('casas.plano','!=',0)->join('provincias','provincias.id','casas.id_provincia')
+            ->join('municipios','municipios.id','casas.id_municipio')
+            ->join('unidades','unidades.id','casas.id_unidade')
+            ->join('users','users.id','casas.id_user')
+            ->select('casas.*','municipios.name as municipio','users.lastname as lastname_user', 'provincias.name as provincia','users.id as user_id','users.name as user_name','unidades.name as unidade_name')
+            ->orderBy('plano','DESC')->get();
             
 
         }
         
-    return view('site.casa.index', compact('casas','categorias','sub_categorias','casas_destaque'));
+    return view('site.casa.index', compact('casas','aluguels','categorias','sub_categorias','casas_destaque','provincias','municipios'));
 }
 
 
 public function show($id){
-    $casa1=Casa::where('casas.id',$id)->join('users','users.id','id_user')
+    $aluguels=aluguel::get();
+    $casa1=Casa::where('estado','publicado')
+    ->where('casas.id',$id)->join('users','users.id','id_user')
     ->join('provincias','provincias.id','casas.id_provincia')
     ->join('municipios','municipios.id','casas.id_municipio')
     ->join('unidades','unidades.id','casas.id_unidade')
-    ->select('casas.*','users.name as name_user','users.lastname as lastname_user','users.vc_path as foto_user','users.id as user_id','municipios.name as municipio', 'provincias.name as provincia','unidades.name as unidade_name')
+    ->join('categorias','categorias.id','casas.id_categoria')
+    ->select('casas.*','users.name as name_user', 'categorias.name as cat_name','users.name as user_name','users.lastname as lastname_user','users.vc_path as foto_user','users.id as user_id','municipios.name as municipio', 'provincias.name as provincia','unidades.name as unidade_name')
     ->first();
-    $casas=Casa::join('provincias','provincias.id','casas.id_provincia')
+    $casas=Casa::where('estado','publicado')
+    ->join('provincias','provincias.id','casas.id_provincia')
     ->join('municipios','municipios.id','casas.id_municipio')
     ->join('users','users.id','casas.id_user')
     ->join('unidades','unidades.id','casas.id_unidade')
-    ->select('casas.*','municipios.name as municipio', 'provincias.name as provincia','users.id as user_id','unidades.name as unidade_name')
+    ->select('casas.*','municipios.name as municipio', 'users.lastname as lastname_user','users.name as user_name','provincias.name as provincia','users.id as user_id','unidades.name as unidade_name')
     ->get();
-    $casas_destaque=Casa::where('plano','!=',0)->join('provincias','provincias.id','casas.id_provincia')
+    $casas_destaque=Casa::where('estado','publicado')
+    ->where('plano','!=','free')->join('provincias','provincias.id','casas.id_provincia')
     ->join('municipios','municipios.id','casas.id_municipio')
     ->join('users','users.id','casas.id_user')
     ->join('unidades','unidades.id','casas.id_unidade')
-    ->select('casas.*','municipios.name as municipio', 'provincias.name as provincia','users.id as user_id', 'unidades.name as unidade_name')
+    ->select('casas.*','municipios.name as municipio','users.lastname as lastname_user','users.name as user_name', 'provincias.name as provincia','users.id as user_id', 'unidades.name as unidade_name')
     ->orderBy('plano','DESC')->get();
    // dd([$casa->latitude,$casa->longitude]);
-    return view('site.casa.productDetails', compact('casa1','casas','casas_destaque'));
+    return view('site.casa.productDetails', compact('casa1','aluguels','casas','casas_destaque'));
 
 }
 
@@ -176,7 +133,7 @@ public function index2(Request $req){
     $sub_id = $req->sub_categoria_id;
     $name = $req->name;
 
-    return view('site.perfil.casas', compact('casa','sub_id','name','categoria','sub_categoria'));
+    return view('admin.casa.index', compact('casa','sub_id','name','categoria','sub_categoria'));
 
     
     
@@ -194,7 +151,9 @@ public function create(){
     $sub_categorias=sub_categoria::get();
     $provincias=provincia::get();
     $municipios=municipio::get();
-    return view('site.casa.create', compact('unidades','categorias','sub_categorias','provincias','municipios'));
+    $filtro_municipio=0;
+    //dd($filtro_municipio);
+    return view('site.casa.create', compact('unidades','filtro_municipio','categorias','sub_categorias','provincias','municipios'));
 
 }
 
@@ -219,7 +178,7 @@ public function store(Request $req){
             // URL da API de Geocodificação do Google Maps
             $url = "https://maps.googleapis.com/maps/api/geocode/json?address=$endereco&key=$apiKey";
 
-            try {
+            
                 // Faz a solicitação HTTP para a API usando a biblioteca Http do Laravel
                 $response = Http::withOptions([
                     'verify' => 'certificados_ssl/cacert.pem' // caminho para o arquivo de certificado SSL
@@ -241,9 +200,7 @@ public function store(Request $req){
                 // processar a resposta
                 $data = json_decode($response->getBody()->getContents(), true);
 
-            } catch (RequestException $e) {
-                echo $e->getMessage();
-            }
+            
  
           
         
@@ -267,9 +224,9 @@ public function store(Request $req){
             $req_imagem=$req->file('vc_path');
             $extension=$req_imagem->extension();
             $imagem_name=md5($req_imagem->getClientOriginalName() . strtotime('now')) . "." . $extension;
-            $destino=$req_imagem->move(public_path("imagens/casas"), $imagem_name);
-            $dir = "imagens/casas";
-            $caminho=$dir. "/". $imagem_name; 
+            $destino=$req_imagem->move(public_path("imagens/casas_comparar"), $imagem_name);
+            $dir = "imagens/casas_comparar";
+            $caminho1=$dir. "/". $imagem_name; 
 
            
            /* $imagem=$req->file('vc_path');
@@ -287,7 +244,7 @@ public function store(Request $req){
           //  $img1 = imagecreatefromjpeg("'$caminho'");
             //$img2 = imagecreatefromjpeg("'$casa_detc->vc_path'");
             // Lê o conteúdo do arquivo de imagem em uma string
-            $image_data1 = file_get_contents(public_path($caminho));
+            $image_data1 = file_get_contents(public_path($caminho1));
 
             // Cria a imagem a partir da string de dados
             $img1 = imagecreatefromstring($image_data1);
@@ -349,10 +306,15 @@ public function store(Request $req){
 
     //fim
   
-
+    $req_imagem=$req->file('vc_path');
+    $extension=$req_imagem->extension();
+    $imagem_name=md5($req_imagem->getClientOriginalName() . strtotime('now')) . "." . $extension;
+    $destino=$req_imagem->move(public_path("imagens/casas"), $imagem_name);
+    $dir = "imagens/casas";
+    $caminho=$dir. "/". $imagem_name; 
 
             $casa=Casa::create([
-                'name'=>$req->name,
+                'bairro'=>$req->bairro,
                 'rua'=>$req->rua,
                 'preco'=>$req->preco,
                 'quartos'=>$req->quartos,
@@ -388,7 +350,7 @@ public function store(Request $req){
 }else{
    
     $casa=Casa::create([
-        'name'=>$req->name,
+        'bairro'=>$req->bairro,
         'rua'=>$req->rua,
         'preco'=>$req->preco,
         'quartos'=>$req->quartos,
@@ -407,7 +369,7 @@ public function store(Request $req){
 }
 
 }catch (\Throwable $th) {
-    dd($th);
+    //dd($th);
     
     log::create([
         'mensagem'=>'Erro ao cadastrar casa',
@@ -431,7 +393,7 @@ public function update( Request $req, $id){
             $dir = "imagens/galeria";
             $caminho=$dir. "/". $imagem_name;
             $user=Casa::where('id',$id)->update([
-                'name'=>$req->name,
+                'bairro'=>$req->bairro,
                'descricao'=>$req->descricao,
                 'vc_path'=>$caminho
               

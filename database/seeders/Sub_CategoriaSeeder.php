@@ -18,44 +18,31 @@ class Sub_CategoriaSeeder extends Seeder
         $dados=[
             [
                 "id"=> 1,
-                "name"=> "Transporte de Coisas",
+                "name"=> "Vivenda",
                 "id_categoria"=> 1
             ],
               [
                 "id"=> 2,
-                "name"=> "Táxi",
+                "name"=> "Apartamento",
                 "id_categoria"=> 1
               ],
+             
               [
                 "id"=> 3,
-                "name"=> "Dupléx",
+                "name"=> "Esritório",
                 "id_categoria"=> 2
               ],
+             
               [
                 "id"=> 4,
-                "name"=> "Tripléx",
-                "id_categoria"=> 2
-              ],
-              [
-                "id"=> 5,
-                "name"=> "Casa Com piscina",
-                "id_categoria"=> 2
-              ],
-              [
-                "id"=> 6,
                 "name"=> "Casa de alvenaria",
                 "id_categoria"=> 2
               ],
               [
-                "id"=> 7,
-                "name"=> "Vivenda",
+                "id"=> 5,
+                "name"=> "Salão de festas",
                 "id_categoria"=> 2
               ],
-              [
-                "id"=> 8,
-                "name"=> "Condomínio",
-                "id_categoria"=> 2
-              ]
               
         ];
         

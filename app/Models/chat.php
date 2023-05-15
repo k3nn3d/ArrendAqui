@@ -12,7 +12,8 @@ class chat extends Model
         'user_1',
         'user_2',
         'id_mensagem',
-        'mensagem'
+        'mensagem',
+        'id_casa'
 
     ];
 }

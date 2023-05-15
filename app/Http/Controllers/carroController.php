@@ -22,7 +22,7 @@ class carroController extends Controller
         return view('site.carro.index', compact('carros'));
     }
     public function index2(){
-        return view('site.perfil.carros');
+        return view('admin.carro.index');
     }
     public function show($id){
         $carro=Carro::find($id);

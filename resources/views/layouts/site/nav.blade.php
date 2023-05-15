@@ -16,12 +16,13 @@
           <ul
             class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end"
           >
+          <li><img src="imagens/logo.png" alt="logo" style="width: 55px"></li>
             <li class="active"><a href="{{ route('home') }}">Home</a></li>
             <li class="has-children">
               <a href="#">Bens</a>
               <ul class="dropdown" style="border-radius: 8px">
-                <li><a href="{{ route('casas') }}">Alugar</a></li>
-                <li><a href="{{ route('site.casa.create') }}">Pôr em alguel</a></li>
+                <li><a href="{{ route('casas') }}">Todas Casas</a></li>
+                <li><a href="{{ route('site.casa.create') }}">Publicar casa</a></li>
               </ul>
             </li>
             <li><a href="{{ route('servicos') }}">Serviços</a></li>

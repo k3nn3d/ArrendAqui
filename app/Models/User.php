@@ -24,7 +24,10 @@ class User extends Authenticatable
         'email',
         'password',
         'vc_path', 
-        'vc_tipo_utilizador'
+        'vc_tipo_utilizador',
+        'biografia',
+        'ativo',
+        'link',
     ];
 
     /**

@@ -31,25 +31,58 @@
   </div>
   <div class="container">
     <div class="row justify-content-center align-items-center">
-      <div class="col-lg-9 text-center">
+      <div class="col-lg-12 text-center">
         <h1 class="heading" data-aos="fade-up">
           Procure um imóvel perto de si
         </h1>
         <form
-          action="{{ route('casas') }}"
-          class="narrow-w form-search d-flex align-items-stretch mb-3"
-          data-aos="fade-up"
-          data-aos-delay="200"
-        >
-          <input
-            type="text"
-            class="form-control px-4"
-            placeholder="Província, Município..."
-            id="pesquisa"
-            name="pesquisa"
-          />
-          <button type="submit" class="btn btn-primary">Pesquisar</button>
-        </form>
+        action="{{ route('casas') }}"
+        class="narrow-w form-search d-flex align-items-stretch mb-5"
+        style="border: 1px solid; padding:0.2rem; border-radius: 30px"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
+   
+      <select name="provincia_id" id="provincia" class="form-control px-4" style="border-radius: 25px; margin-right:5px">
+        <option value="" >Província</option>
+        @foreach($provincias as $provincia)
+          <option value="{{ $provincia->id }} {{ old('provincia_id')==$provincia->id? 'selected':'' }}" >{{ $provincia->name }}</option>
+        @endforeach
+      </select>
+      <select name="municipio_id" id="municipio" class="form-control px-4" style="border-radius: 25px; margin-right:5px">
+        <option value="" >Município</option>
+        @foreach($municipios as $mun)
+        <option value="{{ $mun->id }} {{ old('municipio_id')==$mun->id? 'selected':'' }}" >{{ $mun->name }}</option>
+        @endforeach
+      </select>
+      <select name="categoria_id" id="categoria_id" class="form-control px-4" style="border-radius: 25px; margin-right:5px">
+        <option value="" >Categoria</option>
+        @foreach($categorias as $cat)
+        <option value="{{ $cat->id }} {{ old('categoria_id')==$cat->id? 'selected':'' }}" >{{ $cat->name }}</option>
+        @endforeach
+      </select>
+      
+        <input
+          type="text"
+          class="form-control px-4"
+          style="border-radius: 25px; margin-right:5px"
+          placeholder="Preço min..."
+          id="pesquisa"
+          name="preco_min"
+          value="{{ old('preco_min') }}"
+        />
+      
+        <input
+        type="text"
+        class="form-control px-4"
+        style="border-radius: 25px; margin-right:5px"
+        placeholder="Preço máx..."
+        id="pesquisa"
+        name="preco_max"
+        value="{{ old('preco_max') }}"
+      />
+        <button type="submit" class="btn btn-primary">Pesquisar</button>
+      </form>
       </div>
     </div>
   </div>
@@ -70,7 +103,6 @@
             <p>
               <a
                 href="{{route('casas')}}"
-                target="_blank"
                 class="btn btn-primary text-white py-3 px-4"
                 >Ver todas as Casas</a
               >
@@ -93,7 +125,7 @@
                     <div class="price mb-2"><span>{{$casa->preco}}kz/{{$casa->unidade_name}}</span></div>
                     <div>
                       <span class="d-block mb-2 text-black-50"
-                        >{{$casa->name}}</span
+                        >{{$casa->user_name}} {{$casa->lastname_user}} @if($casa->user_ativo==1)<i style="background-color:#1abc9c; padding:5px 0.001px 0.001px 5px; border-radius:100%; margin-left:5px; width:9px"></i>@endif</span
                       >
                       <span class="city d-block mb-3">{{$casa->provincia}}, {{$casa->municipio}} </span>
 
@@ -130,14 +162,14 @@
                   <a
                   href="{{ route('site.chat.index',['id'=>$casa->user_id,'id_casa'=>$casa->id]) }}"
                   class="btn btn-success py-2 px-3"
-                  >Mensagem</a
+                  >Reservar</a
                 >
                   @endif
                   @else
                   <a
                   href="{{ route('site.chat.index',['id'=>$casa->user_id,'id_casa'=>$casa->id]) }}"
                   class="btn btn-success py-2 px-3"
-                  >Mensagem</a
+                  >Reservar</a
                 >
                   @endauth
                   
@@ -206,7 +238,7 @@
           <div class="col-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
             <div class="box-feature">
               <span class="flaticon-house"></span>
-              <h3 class="mb-3">Alugue uma casa com facilidade</h3>
+              <h3 class="mb-3">Arrende uma casa com facilidade</h3>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Voluptates, accusamus.
@@ -630,7 +662,42 @@
   </script>
 
   
-                          
+     <!-- JavaScript -->
+<script>
+  // selecione os elementos DOM
+  const provinciaSelect = document.getElementById('provincia');
+  const municipioSelect = document.getElementById('municipio');
+
+  // atualize a lista de municípios quando a província for alterada
+  provinciaSelect.addEventListener('change', () => {
+    // obtenha o valor selecionado da província
+    const provinciaSelecionada = provinciaSelect.value;
+
+    // faça uma chamada AJAX para obter a lista de municípios correspondentes
+    fetch(`/municipios/${provinciaSelecionada}`)
+      .then(response => response.json())
+      .then(municipios => {
+        // limpe a lista de municípios existente
+        municipioSelect.innerHTML = '';
+
+        // adicione as opções de município à lista
+        if (municipios.length) {
+          municipios.forEach(municipio => {
+            const option = document.createElement('option');
+            option.text = municipio.name;
+            option.value = municipio.id;
+            municipioSelect.add(option);
+          });
+        } else {
+          // se não houver municípios disponíveis, adicione uma opção vazia
+          const option = document.createElement('option');
+          option.text = '';
+          municipioSelect.add(option);
+        }
+      });
+  });
+</script>
+                     
   
   
 @endsection

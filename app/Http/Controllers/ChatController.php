@@ -23,17 +23,19 @@ class ChatController extends Controller
         
         $dados['user_2']=User::where('id', $id)->first();
         $dados['casa']=Casa::where('id',$casa_id)->first();
+        $dados['id_casa']=$casa_id;
+        
         if(chat::where('user_1',$id2)->where('user_2',$id)->first()){
             
-            $dados['mensagem']=chat::
-            orderBy('id','asc')->simplePaginate(6);
+            $dados['mensagem']=chat::where('id_casa',$casa_id)
+            ->orderBy('id','asc')->simplePaginate(6);
             return view('site.chat.index', $dados);
-
+       
         }else{
             
-          
-            $dados['mensagem']=chat::
-            orderBy('id','asc')->simplePaginate(6);
+         
+            $dados['mensagem']=chat::where('id_casa',$casa_id)
+            ->orderBy('id','asc')->simplePaginate(6);
             return view('site.chat.index', $dados);
 
         }
@@ -70,13 +72,15 @@ class ChatController extends Controller
     }
 
 
-    public function store(Request $req, $id){
+    public function store(Request $req, $id, $id_casa){
+        
         $id2=Auth::user()->id;
             chat::create([
                 'user_1'=>$id2,
                 'user_2'=>$id,
                 'mensagem'=>$req->mensagem,
-                'id_mensagem'=>$id2
+                'id_mensagem'=>$id2,
+                'id_casa'=>$id_casa
             ]);
             return redirect()->back();
        

@@ -1,148 +1,249 @@
 
 @extends('layouts.site.index')
-<link rel="stylesheet" href="{{ asset('tamplate/style.css') }}">
-
 @section('conteudo')
+<!--HEADER START-->
+<div
+class="hero page-inner overlay"
+style="background-image: url('tamplate/images/hero_bg_1.jpg')"
+>
 
-    <div class="page-wraper">
-        <!--- <div id="loading-area" class="preloader-wrapper-1">
-            <div class="preloader-inner">
-                <div class="preloader-shade"></div>
-                <div class="preloader-wrap"></div>
-                <div class="preloader-wrap wrap2"></div>
-                <div class="preloader-wrap wrap3"></div>
-                <div class="preloader-wrap wrap4"></div>
-                <div class="preloader-wrap wrap5"></div>
-            </div>
-        </div>-->
+<div class="container">
+  <div class="row justify-content-center align-items-center">
+	<div class="col-lg-9 text-center mt-5">
+	  <h1 class="heading" data-aos="fade-up">Editar</h1>
+	  <nav
+		aria-label="breadcrumb"
+		data-aos="fade-up"
+		data-aos-delay="200"
+	  >
+		<ol class="breadcrumb text-center justify-content-center">
+		  <li class="breadcrumb-item"><a href="{{route('user.perfil')}}">Perfil</a></li>
+		  <li
+			class="breadcrumb-item active text-white-50"
+			aria-current="page"
+		  >
+			Editar
+		  </li>
+		</ol>
+	  </nav>
+	</div>
+
+  </div>
+</div>
+
+</div>
+
+<!--HEADER END-->
 
 
-	<!-- Header End -->
-    <!-- Content -->
-    <div class="page-content bg-white">
-		<!-- contact area -->
-        <div class="content-block">
-			<!-- Browse Jobs -->
-			<section class="content-inner bg-white">
-				<div class="container">
-					<div class="row">
-						<div class="col-xl-3 col-lg-4 m-b30">
-							<div class="sticky-top">
-								<div class="shop-account">
-									<div class="account-detail text-center">
-										<div class="my-image" >
-											<a href="javascript:void(0);" >
-												<img alt="" src="{{Auth::user()->vc_path}}" style="max-width: 	170px; max-height:145">
-											</a>
-										</div>
-										<div class="account-title">
-											<div class="">
-												<h4 class="m-b5"><a href="javascript:void(0);">{{ Auth::user()->name }} {{ Auth::user()->lastname }}</a></h4>
-												<p class="m-b0"><a href="javascript:void(0);">@_{{ Auth::user()->username }}</a></p>
-											</div>
-										</div>
-									</div>
-									<ul class="account-list">
-										<li>
-											<a href="{{route('user.perfil')}}" class="active"><i class="far fa-user" aria-hidden="true"></i> 
-											<span>Perfil</span></a>
-										</li>
-										<li>
-											<a href="#"><i class="flaticon-shopping-cart-1"></i>
-											<span>Meus aluguéis</span></a>
-										</li>
-										fc
-								<form  action="{{ route('admin.user.update', Auth::user()->id ) }}">
-									@csrf
-									<div class="row m-b30">
-										<div class="col-lg-6 col-md-6">
-											<div class="mb-3">
-												<label for="formcontrolinput1" class="form-label">Primeiro Nome:</label>
-												<input type="text" name="name" class="form-control" id="formcontrolinput1" placeholder="{{ Auth::user()->name }}">
-											</div>
-										</div>
-										<div class="col-lg-6 col-md-6">
-											<div class="mb-3">
-												<label for="formcontrolinput2" class="form-label"> Último Nome :</label>
-												<input type="text" class="form-control" id="formcontrolinput2" name="lastname" value="{{ Auth::user()->lastname }}">
-											</div>
-										</div>
-										<div class="col-lg-6 col-md-6">
-											<div class="mb-3">
-												<label for="formcontrolinput3" class="form-label">Nome de Usuário</label>
-												<input type="text" class="form-control" id="formcontrolinput3" name="username" value="{{ Auth::user()->username }}">
-											</div>
-										</div>
-										<div class="col-lg-6 col-md-6">
-											<div class="mb-3">
-												<label for="formcontrolinput4" class="form-label">Foto de perfil</label>
-												<input type="file" class="form-control" name="vc_path" id="formcontrolinput4" placeholder="Foto de perfil">
-											</div>
-										</div>
-										<div class="col-lg-12 col-md-12">
-											
-											
-										</div>
-									</div>
-									<div class="shop-bx-title clearfix">
-										<h5 class="text-uppercase">Informações de contacto</h5>
-									</div>
-									<div class="row">
-										<div class="col-lg-6 col-md-6">
-											<div class="mb-3">
-												<label for="formcontrolinput5" class="form-label">Contactos:</label>
-												<input type="text" class="form-control" id="formcontrolinput5" value="+244 931 145 430">
-											</div>
-										</div>
-										<div class="col-lg-6 col-md-6">
-											<div class="mb-3">
-												<label for="formcontrolinput6" class="form-label">Endereço de email:</label>
-												<input type="email" class="form-control" id="formcontrolinput6" name="email" value="{{ Auth::user()->email }}">
-											</div>
-										</div>
-										<div class="col-lg-6 col-md-6">
-											<div class="mb-3">
-												<label for="formcontrolinput7" class="form-label">Província:</label>
-												<input type="text" class="form-control" id="formcontrolinput7" value="Luanda">
-											</div>
-										</div>
-										<div class="col-lg-6 col-md-6">
-											<div class="mb-3">
-												<label for="formcontrolinput8" class="form-label">Monicípio:</label>
-												<input type="text" class="form-control" id="formcontrolinput8" value="Cazenga">
-											</div>
-										</div>
-										<div class="col-lg-6 col-md-6">
-											<div class="mb-3">
-												<label for="formcontrolinput9" class="form-label">Cidade:</label>
-												<input type="text" class="form-control" id="formcontrolinput9" value="Luanda">
-											</div>
-										</div>
-										<div class="col-lg-6 col-md-6">
-											<div class="mb-4">
-												<label for="formcontrolinput10" class="form-label">Endereço Completo:</label>
-												<input type="text" class="form-control" id="formcontrolinput10" value="Rangel, Km CTT">
-											</div>
-										</div>
-									</div>
-									<button class="btn btn-primary btnhover">Salvar configurações</button>
-								</form>
-							</div>    
-						</div>
-					</div>
-				</div>
-			</section>
-            <!-- Browse Jobs END -->
-		</div>
-    </div>
-    <!-- Content END-->
 
-	
-	
+<div class="section">
+    <div class="container">
+      <div class="row mb-5">
+		<div class="col-lg-1"></div>
 		
+        <div class="col-lg-3">
+			<img src="{{ Auth::user()->vc_path }}" alt="user-image" style="border-radius: 70px; height:150px; width:150px">
+			<div class="mb-4">
+				<label for="vc_path"><i class="fas fa-camera"></i>Carregar imagem</label>
+				<input type="file" style="display: none" id="vc_path">
+		    </div>
+			<div style="border-radius:4px" >
+				<ul style="margin:0; padding:0">
+					<li class="btn-success mb-2" style="padding:0.5rem">
+						<a href="">Documentos</a>
+					</li>
+					<li class="btn-success mb-2" style="padding:0.5rem">
+						<a href="">Informações de contato</a>
+					</li>
+					<li class="btn-success mb-4" style="padding:0.5rem">
+						<a href="">Credenciais</a>
+					</li>
+				</ul>
+			</div>
+        </div>
+        
+            <div class="col-lg-7" data-aos="fade-up" data-aos-delay="200">
+                <form action="{{ route('user.user.update',Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
+                  @csrf
+                    <div class="row">
+                        
+                        <div class="col-6 mb-3">
+                          <label for="">Primeiro nome</label>
+                            <input
+                            type="text"
+                            class="form-control"
+                            name="name"
+                            id="name"
+                            placeholder="Primeiro nome"
+                            required min="0"
+							value="{{ Auth::user()->name }}"
+                            />
+                        </div>
 						
- 
+                        
+                        <div class="col-6 mb-3">
+                          <label for="">Último nome</label>
+                          <input
+                          type="text"
+                          class="form-control"
+                          name="lastname"
+                          id="lastname"
+                          placeholder="Último nome"
+                          required min="0"
+						  value="{{ Auth::user()->lastname }}"
+                          />
+                      </div>
+                      <div class="col-12 mb-3">
+                        <label for="">Nome de usuário</label>
+                        <input
+                        type="text"
+                        class="form-control"
+                        name="username"
+                        id="username"
+                        placeholder="Nome de usuário"
+                        required min="0"
+						value="{{ Auth::user()->username }}"
+                        />
+                    </div>
+                    <div class="col-6 mb-3">
+                      <label for="">Email</label>
+                      <input
+                      type="email"
+                      class="form-control"
+                      name="email"
+                      id="email"
+                      placeholder="Email"
+                      required min="0"
+					  value="{{ Auth::user()->email }}"
+                      />
+                  </div>
+                        <div class="col-6 mb-3">
+                          <label for="">Telefone</label>
+                            <input
+                            type="number"
+                            name="telefone"
+                            id="telefone"
+                            class="form-control"
+                            placeholder="Telefone"
+                            required min="0"
+							value="{{ Auth::user()->telefone }}"
+                            />
+                        </div>
+                       
+                        <div class="col-12 mb-3">
+							<label for="">BI</label>
+							  <input
+							  type="file"
+							  class="form-control"
+							  name="bi"
+							  id="bi"
+							  placeholder="BI"
+							  required 
+							  />
+						  </div>
+						  <div class="col-12 mb-3">
+							<label for="">Carta de condução</label>
+							  <input
+							  type="file"
+							  class="form-control"
+							  name="carta_de_conducao"
+							  id="carta_de_conducao"
+							  placeholder="Carta de condução"
+							  required 
+							  />
+						  </div>
+                       
+                        
+                        <div class="col-12 mb-3">
+                          Tipo de conta
+                          <input
+                          type="text"
+                          class="form-control"
+                          name="vc_tipo_utilizador"
+                          id="vc_tipo_utilizador"
+                          placeholder="Tipo de conta"
+                          required
+						  @switch(Auth::user()->vc_tipo_utilizador)
+							  @case(1)
+							  value="Administrador"
+								  @break
+							  @case(2)
+							  value="Gerente"
+								  @break
+							  @case(3)
+							  value="Motorista"
+								@break
+							  @case(5)
+							  value="Cliente"
+								@break
+							  @case(6)
+								value="Senhorio"
+							  @break
+							  @default
+							  
+							  value="Indefinido"
+							  
+								  
+						  @endswitch  
+						  readonly
+                          />
+                      </div>
+                     
+                        <div class="col-12 mb-3">
+                          <label for="">Biogradfia</label>
+                            <textarea
+                            name="descricao"
+                            id="descricao   "
+                            cols="30"
+                            rows="7"
+                            class="form-control"
+                            style="text-align: start"
+                            placeholder="Biografia"
+                            required
+                           
+                            >
+@if(old('descricao')!= '')
+{{ old('descricao') }}
+@endif                         
+                        </textarea>
+                        </div>
 
+                      
+                    </div>
+                    <input
+                   type="submit"
+                   value="Actualizar informações"
+                   class="btn btn-primary mb-2"
+                   />
+
+                  </div>
+                  
+                 </div>
+                  
+                   
+                 
+                  
+                 </div>
+                 </div>
+               </div>
+               </div>
+             </div>
+         </div>
+        </form>
+                
+@if(session('igualdade'))
+
+<script type="text/javascript">
+  
+  Swal.fire(
+  'ERRO',
+  'Você está tentando cadastrar uma casa já existente no sitema',
+  'error'
+)
+</script>
+@endif
+                   
 
 
 @endsection

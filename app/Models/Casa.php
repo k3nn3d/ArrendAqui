@@ -24,6 +24,7 @@ class Casa extends Model
                 'descricao',
                 'vc_path',
                 'latitude',
-                'longitude'
+                'longitude',
+                'estado',
     ];
 }
