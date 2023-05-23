@@ -126,7 +126,7 @@
           @if($alu->id_user==Auth::user()->id && $alu->id_casa== $casa1->id )
           <a
           href="{{ route('user.aluguel.delete',$alu->id) }}"
-          class="btn btn-success py-2 px-3"
+          class="btn btn-danger py-2 px-3"
           >Cancelar reserva</a
         >
          @endif
@@ -143,24 +143,13 @@
           
           @endif
           @else
-          @foreach($aluguels as $alu)
-          @if($alu->id_user==Auth::user()->id && $alu->id_casa== $casa1->id )
-          <a
-          href="{{ route('user.aluguel.delete',$alu->id) }}"
-          class="btn btn-success py-2 px-3"
-          >Cancelar reserva</a
-        >
-         @endif
+        
 
-        @endforeach
-        @empty($alu)
-        <a
-          href="{{ route('user.aluguel.store',$casa1->id) }}"
-          class="btn btn-success py-2 px-3"
-          >Reservar</a
+          <a
+          href="{{ route('login') }}"
+          class="btn btn-danger py-2 px-3"
+          >Faça login para reservar esta casa</a
         >
-        @endempty
-         
           @endauth
 				 </li>
 

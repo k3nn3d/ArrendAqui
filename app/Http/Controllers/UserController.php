@@ -53,8 +53,13 @@ class UserController extends Controller
 
     }
        
-    public function edit($id){
-        return view('site.perfil.edit');
+    public function edit(Request $request,$id){
+       
+       
+        $url= $request->getScheme() . '://' . $request->getHttpHost();
+        
+    
+        return view('site.perfil.edit',compact('url'));
 
     }
 
@@ -324,9 +329,5 @@ class UserController extends Controller
     public function motoristaCreate(){
         return view('auth.register-motorista');
     }
-    function app_url(Request $request)
-    {
    
-    return $request->getScheme() . '://' . $request->getHttpHost();
-    }
 }

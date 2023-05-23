@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Str;
 
 class RegisteredUserController extends Controller
 {
@@ -30,11 +31,10 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(Request $request, User $userafiliado )
    
     {
-        
-      
+         
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
@@ -57,6 +57,7 @@ class RegisteredUserController extends Controller
             'vc_tipo_utilizador'=>$request->vc_tipo_utilizador,
             'password' => Hash::make($request->password),
             'vc_path' => "imagens/user.png",
+            'convite'=>$this->gerarTokenUnico(),
             
           
         ]);
@@ -66,7 +67,7 @@ class RegisteredUserController extends Controller
 
         if($user->vc_tipo_utilizador == 6){
             User::where('id',$id)->update([
-                'link'=>'/convite'+$id
+                'link'=>"/convite/$user->convite"
 
          ]);
         }
@@ -118,4 +119,17 @@ class RegisteredUserController extends Controller
 
     
     }
+
+    public function gerarTokenUnico()
+    {
+        $token = Str::random(20); // Gera uma string aleatória de 20 caracteres
+    
+        // Verifica se o token já existe no banco de dados
+        while (User::where('convite', $token)->exists()) {
+            $token = Str::random(20); // Gera um novo token
+        }
+    
+        return $token;
+    }
+ 
 }

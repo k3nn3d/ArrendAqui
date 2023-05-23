@@ -67,6 +67,22 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                 <form action="{{ route('user.user.update',Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
                   @csrf
                     <div class="row">
+                      @if(Auth::user()->vc_tipo_utilizador==6)
+                      <div class="col-12 mb-3">
+                        <label for="">Código de convite</label>
+                          <input
+                          type="text"
+                          class="form-control"
+                          
+                          id="name"
+                          placeholder="Código de convite"
+                          required min="0"
+                          readonly
+            value="{{$url}}/{{ Auth::user()->link }}"
+                          />
+                      </div>
+                      
+                      @endif
                         
                         <div class="col-6 mb-3">
                           <label for="">Primeiro nome</label>

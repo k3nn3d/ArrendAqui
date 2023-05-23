@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAfiliadosTable extends Migration
+class CreateConvitesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateAfiliadosTable extends Migration
      */
     public function up()
     {
-        Schema::create('afiliados', function (Blueprint $table) {
+        Schema::create('convites', function (Blueprint $table) {
             $table->id();
-            $table->float('valor');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ class CreateAfiliadosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('afiliados');
+        Schema::dropIfExists('convites');
     }
 }

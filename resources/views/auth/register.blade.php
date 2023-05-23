@@ -118,15 +118,12 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                                         -->
                                     </form>
                                     <hr>
+                                   
                                     <div class="text-center">
-                                        @if (Route::has('password.request'))
-                                                <a class="small" href="{{ route('password.request') }}">
-                                                    {{ __('Esqueceu sua senha?') }}
-                                                </a>
-                                        @endif
+                                        <a class="small" href="{{ route('login') }}">Já tem uma conta?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="{{ route('login') }}">Já tem uma conta? Faça Login!</a>
+                                        <a class="small" href="{{ route('login') }}">Faça Login!</a>
                                     </div>
                             </div>
                            

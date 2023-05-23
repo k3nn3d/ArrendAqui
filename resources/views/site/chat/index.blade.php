@@ -14,7 +14,18 @@
                 <span> Senhorio</span>
                 @endif
                 @if( $user_2->vc_tipo_utilizador==2)
+                <div style="position: relative;
+                display: inline-block;">
                 <img src="{{$user_2->vc_path}}" alt="user-image" style="width: 40px; height:40px;border-radius:20px">
+                <div style="position: absolute;
+                top: 30px;
+                right: 2px;
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: rgb(0, 247, 0);
+              "></div>
+                </div>
                 <h5>{{ $user_2->name }} {{ $user_2->lastname }}</h5>
                 <br>
                 <span> Gerente</span>
@@ -37,7 +48,7 @@
                 <br>
                 <span> Motorista</span>
                 @endif
-            
+                
             <div class="card-header-right">
                 <div class="btn-group card-option">
                     <button class="btn" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-close-cw">Fechar</i></button>
@@ -58,7 +69,7 @@
             @if($chat->id_mensagem==$user_2->id)
             <div class="row m-b-20 received-chat">
                 
-                <div class="col-auto p-r-0">
+                <div class="col-auto p-r-0" >
                     
                     <img src="{{ $user_2->vc_path }}" alt="user image" class="img-radius wid-40">
                 </div>
@@ -101,8 +112,6 @@
             
             @endforeach
             
-            {{ $mensagem->links() }}
-            
             @empty($chat)
             <div style="text-align: center"> 
                 <p>
@@ -123,7 +132,7 @@
                     <input type="text" name="mensagem" class="form-control" id="mensagem" placeholder="Escrever mensagem">
                     <div class="input-group-append">
                         <button class="btn btn-primary">
-                            <i class="feather icon-message-circle"></i>
+                            <i class="fas fa-paper-plane"></i>
                         </button>
                     </div>
             </form>
@@ -261,5 +270,6 @@
    
     
     </script>
+
 
 @endsection

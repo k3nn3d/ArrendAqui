@@ -1,0 +1,4 @@
+.pagination-container ul.pagination li:last-child a {
+    background-color: #00c853;
+    color: white;
+}

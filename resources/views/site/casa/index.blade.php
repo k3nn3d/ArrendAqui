@@ -186,7 +186,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
               @endempty
              
                 @endif
-                @else
+                
                 @foreach($aluguels as $alu)
                 @if($alu->id_user==Auth::user()->id && $alu->id_casa== $casa->id )
                 <a
@@ -211,7 +211,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
               >
               @endempty
              
-                @endauth
+              @endauth
                 </div>
               </div>
             </div>
@@ -350,18 +350,20 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                   >
                   @else
                   @foreach($aluguels as $alu)
-                  @if($alu->id_user==Auth::user()->id && $alu->id_casa== $casa->id )
+                  @if($alu->id_user==Auth::user()->id and $alu->id_casa== $casa->id )
                   <a
                   href="{{ route('user.aluguel.delete',$alu->id) }}"
                   class="btn btn-danger py-2 px-3"
                   >Cancelar reserva</a
                 >
                 @else
+                @if(!($alu->id_user==Auth::user()->id && $alu->id_casa== $casa->id) )
                 <a
                 href="{{ route('user.aluguel.store',$casa->id) }}"
                 class="btn btn-success py-2 px-3"
                 >Reservar</a
               >
+              @endif
                  @endif
         
                 @endforeach
@@ -372,34 +374,11 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                   >Reservar</a
                 >
                 @endempty
-               
+                 
                    @endif
                    @endif
-                   @else
-                   @foreach($aluguels as $alu)
-                   @if($alu->id_user==Auth::user()->id && $alu->id_casa== $casa->id )
-                   <a
-                   href="{{ route('user.aluguel.delete',$alu->id) }}"
-                   class="btn btn-danger py-2 px-3"
-                   >Cancelar reserva</a
-                 >
-                 @else
-                 <a
-                 href="{{ route('user.aluguel.store',$casa->id) }}"
-                 class="btn btn-success py-2 px-3"
-                 >Reservar</a
-               >
-                  @endif
-         
-                 @endforeach
-                 @empty($alu)
-                 <a
-                   href="{{ route('user.aluguel.store',$casa->id) }}"
-                   class="btn btn-success py-2 px-3"
-                   >Reservar</a
-                 >
-                 @endempty
-                
+                   
+                 
                   @endauth
                  
                   @endif

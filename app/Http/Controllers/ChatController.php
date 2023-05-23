@@ -26,16 +26,30 @@ class ChatController extends Controller
         $dados['id_casa']=$casa_id;
         
         if(chat::where('user_1',$id2)->where('user_2',$id)->first()){
-            
+            $results =chat::where('id_casa',$casa_id)->get();
+
+            // Defina o número de itens por página
+            $perPage = 6;
+
+            // Crie uma instância de Collection para os resultados
+            $collection = collect($results);
+
+            // Obtenha o número total de itens
+            $totalItems = $collection->count();
+
+            // Calcule o número total de páginas
+            $totalPages = ceil($totalItems / $perPage);
+            $dados['totalPages']=intval($totalPages);
+
             $dados['mensagem']=chat::where('id_casa',$casa_id)
-            ->orderBy('id','asc')->simplePaginate(6);
+            ->orderBy('id','asc')->get();
             return view('site.chat.index', $dados);
        
         }else{
             
          
             $dados['mensagem']=chat::where('id_casa',$casa_id)
-            ->orderBy('id','asc')->simplePaginate(6);
+            ->orderBy('id','asc')->get();
             return view('site.chat.index', $dados);
 
         }
