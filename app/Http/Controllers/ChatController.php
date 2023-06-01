@@ -103,4 +103,50 @@ class ChatController extends Controller
     public function delete($id){
         chat::destroy($id);
     }
+
+    public function actualizar($id, $casa_id){
+
+        $id2=Auth::user()->id;
+    
+        $dados['carros']=Carro::where('id_user',$id)->first();
+        $dados['casas']=Casa::where('id_user',$id)->first();
+        
+        $dados['user_2']=User::where('id', $id)->first();
+        $dados['casa']=Casa::where('id',$casa_id)->first();
+        $dados['id_casa']=$casa_id;
+        
+        if(chat::where('user_1',$id2)->where('user_2',$id)->first()){
+            $results =chat::where('id_casa',$casa_id)->get();
+
+            // Defina o número de itens por página
+            $perPage = 6;
+
+            // Crie uma instância de Collection para os resultados
+            $collection = collect($results);
+
+            // Obtenha o número total de itens
+            $totalItems = $collection->count();
+
+            // Calcule o número total de páginas
+            $totalPages = ceil($totalItems / $perPage);
+            $dados['totalPages']=intval($totalPages);
+
+            $mensagem=chat::where('id_casa',$casa_id)
+            ->orderBy('id','asc')->get();
+            return response()->json($mensagem);
+       
+        }else{
+            
+         
+            $mensagem=chat::where('id_casa',$casa_id)
+            ->orderBy('id','asc')->get();
+            return response()->json($mensagem);
+
+        }
+     
+       
+
+        return response()->json($mensagem);
+
+    }
 }

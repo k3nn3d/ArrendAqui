@@ -6,7 +6,6 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
-        "bacon/bacon-qr-code": "^2.0",
         "barryvdh/laravel-dompdf": "^2.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.5",
@@ -14,6 +13,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "mpdf/mpdf": "^8.1",
+        "simplesoftwareio/simple-qrcode": "^4.2",
         "stevebauman/location": "^6.6",
         "twilio/sdk": "^7.3"
     },

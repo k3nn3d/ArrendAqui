@@ -56,47 +56,47 @@
             <a href="{{ route('admin.painel') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
         </li>
         <li class="nav-item">
-          <a href="{{ route('admin.user') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">Utilizadores</span></a>
+          <a href="{{ route('admin.user') }}" class="nav-link "><span class="pcoded-micon"><i class="fas fa-user"></i></span><span class="pcoded-mtext">Utilizadores</span></a>
       </li>
       <li class="nav-item">
         <a href="{{ route('admin.categoria') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></i></span><span class="pcoded-mtext">Categorias</span></a>
     </li>
     <li class="nav-item">
-      <a href="{{ route('admin.sub_categoria') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-sidebar"></i></i></span><span class="pcoded-mtext">Subcategorias</span></a>
+      <a href="{{ route('admin.sub_categoria') }}" class="nav-link "><span class="pcoded-micon"><i class="fas fa-"></i></i></span><span class="pcoded-mtext">Subcategorias</span></a>
   </li>
   <li class="nav-item">
-    <a href="{{ route('admin.provincia') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></i></span><span class="pcoded-mtext">Províncias</span></a>
+    <a href="{{ route('admin.provincia') }}" class="nav-link "><span class="pcoded-micon"><i class="fas fa-map"></i></i></span><span class="pcoded-mtext">Províncias</span></a>
   </li>
   <li class="nav-item">
-    <a href="{{ route('admin.municipio') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></i></span><span class="pcoded-mtext">Municípios</span></a>
+    <a href="{{ route('admin.municipio') }}" class="nav-link "><span class="pcoded-micon"><i class="fas fa-map"></i></i></span><span class="pcoded-mtext">Municípios</span></a>
   </li>
 
       <li class="nav-item">
-        <a href="{{ route('admin.casa') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Casas</span></a>
+        <a href="{{ route('admin.casa') }}" class="nav-link "><span class="pcoded-micon"><i class="fas fa-home"></i></span><span class="pcoded-mtext">Casas</span></a>
     </li>
     <li class="nav-item">
-      <a href="{{ route('admin.carro') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></i></span><span class="pcoded-mtext">Carros</span></a>
+      <a href="{{ route('admin.carro') }}" class="nav-link "><span class="pcoded-micon"><i class="fas fa-car"></i></i></span><span class="pcoded-mtext">Carros</span></a>
   </li>
   <li class="nav-item">
-    <a href="{{ route('admin.aluguel') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></i></span><span class="pcoded-mtext">Arrendamentos</span></a>
+    <a href="{{ route('admin.aluguel') }}" class="nav-link "><span class="pcoded-micon"><i class="fas fa-key"></i></i></span><span class="pcoded-mtext">Arrendamentos</span></a>
 </li>
   <li class="nav-item pcoded-menu-caption">
     <label>Mensagens</label>
   </li>
   <li class="nav-item">
-    <a href="{{ route('admin.suporte') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></i></span><span class="pcoded-mtext">Suporte</span></a>
+    <a href="{{ route('admin.suporte') }}" class="nav-link "><span class="pcoded-micon"><i class="fas fa-"></i></i></span><span class="pcoded-mtext">Suporte</span></a>
   </li>
   <li class="nav-item">
-    <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></i></span><span class="pcoded-mtext">Comentários</span></a>
+    <a href="{{route('admin.comentario')}}" class="nav-link "><span class="pcoded-micon"><i class="fas fa-comment"></i></i></span><span class="pcoded-mtext">Comentários</span></a>
 </li>
 <li class="nav-item pcoded-menu-caption">
-  <label>Pedidos</label>
+  <label>Preço pagamentos</label>
 </li>
 <li class="nav-item">
-  <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></i></span><span class="pcoded-mtext">Motoristas</span></a>
+  <a href="{{route('admin.motorista.preco')}}" class="nav-link "><span class="pcoded-micon"><i class="fas fa-car"></i></i></span><span class="pcoded-mtext">Motoristas</span></a>
 </li>
 <li class="nav-item">
-  <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></i></span><span class="pcoded-mtext">Afiliados</span></a>
+  <a href="{{route('admin.afiliado.preco')}}" class="nav-link "><span class="pcoded-micon"><i class="fas fa-users"></i></i></span><span class="pcoded-mtext">Afiliados</span></a>
 </li>
 
         
@@ -104,10 +104,10 @@
           <label>Pagamentos</label>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Motoristas</span></a>
+          <a href="{{route('admin.motorista')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">Motoristas</span></a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Afiliados</span></a>
+        <a href="{{route('admin.afiliado')}}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-users"></i></span><span class="pcoded-mtext">Afiliados</span></a>
     </li>
        
 
@@ -115,10 +115,9 @@
             <label>Outros</label>
         </li>
         <li class="nav-item">
-            <a href="{{ route('admin.logs') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Logs</span></a>
+            <a href="{{ route('admin.logs') }}" class="nav-link "><span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">Logs</span></a>
         </li>
-
-        <li class="nav-item pcoded-menu-caption">
+{{--        <li class="nav-item pcoded-menu-caption">
           <label>EXECESSO</label>
       </li>
         <li class="nav-item">
@@ -146,6 +145,8 @@
         <li class="nav-item"><a href="sample-page.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Sample page</span></a></li>
 
       </ul>
+      --}}
+
       
            
     </div>

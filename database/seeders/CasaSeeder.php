@@ -32,9 +32,11 @@ class CasaSeeder extends Seeder
             'id_categoria'=>1,
             'id_unidade'=>4,
             'plano'=>3,
-            'estado'=>'pedente',
+            'estado'=>'pendente',
             'latitude'=>-8.907870,
-            'longitude'=>13.363460
+            'longitude'=>13.363460,
+            'planta'=>'pdf/casa/planta/document.pdf',
+            'propriedade'=>'pdf/casa/propriedade/document.pdf'
           
         ]);
 
@@ -55,7 +57,9 @@ class CasaSeeder extends Seeder
             'plano'=>3,
             'estado'=>'pendente',
             'latitude'=>-7.994902696550908,
-            'longitude'=>14.126801365779613
+            'longitude'=>14.126801365779613,
+            'planta'=>'pdf/casa/planta/document.pdf',
+            'propriedade'=>'pdf/casa/propriedade/document.pdf'
           
         ]);
 
@@ -75,7 +79,9 @@ class CasaSeeder extends Seeder
             'casa_de_banho'=>1,
             'estado'=>'publicado',
             'latitude'=>-7.862651782117677,
-            'longitude'=>13.118569349211063
+            'longitude'=>13.118569349211063,
+            'planta'=>'pdf/casa/planta/document.pdf',
+            'propriedade'=>'pdf/casa/propriedade/document.pdf'
             
             
           
@@ -97,7 +103,9 @@ class CasaSeeder extends Seeder
             'casa_de_banho'=>1,
             'estado'=>'publicado',
             'latitude'=>-8.8288947886903,
-            'longitude'=>13.289885139153832
+            'longitude'=>13.289885139153832,
+            'planta'=>'pdf/casa/planta/document.pdf',
+            'propriedade'=>'pdf/casa/propriedade/document.pdf'
              
 
         ]);
@@ -119,7 +127,9 @@ class CasaSeeder extends Seeder
             'estado'=>'publicado',
             'plano'=>2,
             'latitude'=>-8.914246312801524,
-            'longitude'=>13.193036846093097
+            'longitude'=>13.193036846093097,
+            'planta'=>'pdf/casa/planta/document.pdf',
+            'propriedade'=>'pdf/casa/propriedade/document.pdf'
         
              
           
@@ -141,7 +151,9 @@ class CasaSeeder extends Seeder
             'casa_de_banho'=>1,
             'estado'=>'publicado',
             'latitude'=>-7.683282978951786,
-            'longitude'=>14.001810688700342
+            'longitude'=>14.001810688700342,
+            'planta'=>'pdf/casa/planta/document.pdf',
+            'propriedade'=>'pdf/casa/propriedade/document.pdf'
              
              
         ]);
@@ -163,7 +175,8 @@ class CasaSeeder extends Seeder
             'casa_de_banho'=>1,
             'latitude'=>-8.909243434350913,
             'longitude'=>13.192865184724194
-            , 
+            , 'planta'=>'pdf/casa/planta/document.pdf',
+            'propriedade'=>'pdf/casa/propriedade/document.pdf'
           
            
         ]);
@@ -184,7 +197,9 @@ class CasaSeeder extends Seeder
             'plano'=>1,
             'estado'=>'publicado',
             'latitude'=>-7.877110015217037,
-            'longitude'=>13.128188707334752
+            'longitude'=>13.128188707334752,
+            'planta'=>'pdf/casa/planta/document.pdf',
+            'propriedade'=>'pdf/casa/propriedade/document.pdf'
           
         ]);
 
@@ -206,7 +221,9 @@ class CasaSeeder extends Seeder
             'plano'=>1,
             'estado'=>'publicado',
             'latitude'=>-7.877110015217037,
-            'longitude'=>13.128188707334752
+            'longitude'=>13.128188707334752,
+            'planta'=>'pdf/casa/planta/document.pdf',
+            'propriedade'=>'pdf/casa/propriedade/document.pdf'
           
         ]);
     }

@@ -25,21 +25,11 @@
     <div class="col-md-12 col-xl-12">
     <div class="card">
       <div class="card-body">
-        
-
-        
-
-        
-      
-        <a class="nav-link btn btn-success create-new-button" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">+ Adicionar novo</a>
-        
-      <br>
-     
       <form action="{{ route('admin.user') }}" method="GET" id="form_2">
         @csrf
         <div class="row">
        <div class="col-6" >
-      <select class="form-control" name="vc_tipo_utilizador"   
+      <select class="form-control" name="vc_tipo_utilizador"  > 
         <option value="" onclick="document.getElementById('form_2').submit()">Filtro de Usuários</option>
         <option value="1" onclick="document.getElementById('form_2').submit()" {{ 1 == 1? 'selected':'' }} >Todas</option>
         <option value="2" onclick="document.getElementById('form_2').submit()" {{ 2 == 1?'selected':'' }}>Condomínio</option>
@@ -53,7 +43,7 @@
      <br>
       <div class="col-6">
       <input type="text" name="name" class="form-control" placeholder="Pesquisar por nome" value="@if(isset($name)){{ $name }} @endif" 
-      <br>
+      ><br>
     </div>
   </div>
    <input type="submit"class="btn btn-sm btn-outline-primary" value="Pesquisar">
@@ -68,26 +58,30 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th> Foto </th>
-                <th> Primeiro Nome </th>
-                <th> Usuário </th>
-                <th> Email </th>
-                <th>Data de registro  </th>
+                
+                <th>Casa</th>
+                <th> Cliente </th>
+                <th> Senhorio</th>
+                <th>Estado</th>
                 <th>Ações  </th>
               </tr>
             </thead>
             <tbody>
           
                   
-              
+              @foreach($arrendamentos as $arr)
               <tr>
                 <td class="py-1">
-                  <img  style="max-width: 70px; border-radius:100%" src="{{asset('tamplate/img/ken.jpg')}}" alt="image" />
+                  <img  style="width: 70px; height:70px;" src="{{ $arr->casa }}" alt="image" />
                 </td>
-                <td> </td>
-                <td> </td>
-                <td>   </td>
-                <td>  </td>
+                <td> {{ $arr->cliente_p }} {{ $arr->cliente_u }}</td>
+                @foreach($users as $user)
+                @if($user->id == $arr->id_casa)
+                <td> {{ $user->name }} {{ $user->lastname }}</td>
+                @endif
+                @endforeach
+                <td> {{ $arr->estado }}  </td>
+                
                 <td>
                   <a class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ações</a>
                   <div class="dropdown-menu">
@@ -99,13 +93,14 @@
                 </td>
               </tr> 
              
-              
+              @endforeach
 
-             
+             @empty($arr)
               
               <tr>
                 <td colspan="6" style="text-align: center"> Não há resultados</td>
               </tr>
+              @endempty
                   
             
              

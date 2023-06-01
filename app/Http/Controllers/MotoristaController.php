@@ -8,70 +8,81 @@ use App\Models\log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use App\Models\motorista;
+
 class MotoristaController extends Controller
 {
     //
 
     public function index(){ 
-     
-        
-        return view('admin.motorista.index');
+        $users=User::where('users.vc_tipo_utilizador',3)
+        ->where('aluguels.estado','reservado')
+        ->join('carros','carros.id_user','users.id')
+        ->join('aluguels','aluguels.id_carro','carros.id')
+        ->select('users.*',DB::raw('SUM(carros.preco) as carroPreco'))
+        ->groupBy('users.id')
+        ->get();
+
+        $users2=User::where('users.vc_tipo_utilizador',3)
+        ->where('aluguels.estado','reservado')
+        ->join('carros','carros.id_user','users.id')
+        ->join('aluguels','aluguels.id_carro','carros.id')
+        ->join('pagamentos','pagamentos.id_user','users.id')
+        ->select('users.*','pagamentos.valor as valorPago','pagamentos.estado as estadoPago','pagamentos.comprovativo as comprovativoPagamento',DB::raw('SUM(carros.preco) as carroPreco'))
+        ->groupBy('users.id')
+        ->orderBy('users.id','desc')
+        ->get();
+        $motorista=motorista::orderBy('id','desc')->first();
+        return view('admin.motorista.index',compact('users','motorista','users2'));
         
 
         
         }
-        public function index2(){ 
-     
-        
-            return view('auth.register-motorista');
-            
-    
-            
-            }
+    public function preco(){
+        $motoristas=motorista::orderBy('id','desc')
+        ->get();
+        return view('admin.motorista.preco',compact('motoristas')); 
+    }
+      
+    public function store(Request $req){
+        try{
+        motorista::create([
+            'valor'=>$req->valor
+        ]);
+        return redirect()->back()->with('cadastrada',1);
+    }catch (\Throwable $th) {
+        return redirect()->back()->with("cadastrada_f", 1);
+    }
+    }
+    public function update($id, Request $req){
+        try{
+        motorista::where('id',$id)->update([
+            'valor'=>$req->valor
+        ]);
+        return redirect()->back()->with('editada',1);
+    }catch (\Throwable $th) {
+        return redirect()->back()->with("editada_f", '1');
+    }
+    }
+    public function delete($id){
+        try{
+        motorista::destroy($id);
+        return redirect()->back()->with('eliminada',1);
+    }catch (\Throwable $th) {
+        return redirect()->back()->with("eliminada_f", '1');
+    }
+    }
 
-            public function update($id, Request $req){
 
 
-            $req_bi=$req->bi;
-            $extension=$req_bi->extension();
-            $bi_name=md5($req_bi->getClientOriginalName() . strtotime('now')) . "." . $extension;
-            $destino=$req_bi->move(public_path("imagens/bi"), $bi_name);
-            $dir = "imagens/bi";
-            $caminho_bi=$dir. "/". $bi_name;    
- 
-            $req_habilitacoes=$req->habilitacoes;
-            $extension=$req_habilitacoes->extension();
-            $habilitacoes_name=md5($req_habilitacoes->getClientOriginalName() . strtotime('now')) . "." . $extension;
-            $destino=$req_habilitacoes->move(public_path("imagens/habilitacoes"), $habilitacoes_name);
-            $dir = "imagens/habilitacoes";
-            $caminho_habilitacoes=$dir. "/". $habilitacoes_name;
 
-                try{
-                User::where('id',$id)->update([
-                    'habilitacoes'=>$req->habilitacoes,
-                    'bi'=>$caminho_bi,
-                    'telefone'=>$caminho_habilitacoes
-                ]);
-                return redirect()->back()->with('editada', 1);
-        
-            } catch (\Throwable $th) {
-                $user=User::where('id', $id)->get('username');
-                log::create([
-                    'mensagem'=>"Erro ao actualizar dados de $user para tornar-se motorista",
-                     
-            
-                ]);
-                return redirect()->back()->with('editada_f', 1);
-            }
-            }
 
-    
+
 
 
     public function motorista(){ 
         $dados['titulo']="Minhas Dividas";
         $perct=motorista::orderBy('id','DESC')->first('valor');
-        $dados['empresa']=empresa::orderBy('id','desc')->first();
        $id=Auth::user()->id;
 
         $dados['motoristas']=pagamento_motorista::join('users','pagamento_motoristas.id_user','users.id')

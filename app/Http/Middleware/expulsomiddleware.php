@@ -16,8 +16,8 @@ class expulsomiddleware
      */
     public function handle(Request $request, Closure $next)
     {   if(Auth::check()){
-            if(Auth::user()->estado==4){
-                return dd('ola');
+            if(Auth::user()->estado=='bloqueado'){
+                return dd('Você foi bloqueado');
             }
             else{
                 return $next($request);

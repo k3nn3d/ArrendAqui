@@ -111,8 +111,7 @@
                 <h3 class="mb-0"> {{$casa1->name_user}} {{$casa1->lastname_user}}</h3>
                 <div class="meta mb-3">Senhorio(a)</div>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Ratione laborum quo quos omnis sed magnam id ducimus saepe
+                  {{$casa1->biografia_user}}
                 </p>
                 <ul class="list-unstyled  dark-hover d-flex">
                  

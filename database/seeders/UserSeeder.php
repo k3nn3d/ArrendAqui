@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -62,8 +63,8 @@ class UserSeeder extends Seeder
             'email' => "catia@gmail.com",
             'vc_tipo_utilizador' => 3,
             'vc_path' => "imagens/user.png",
-            
-            
+            'telefone'=>'937539143',
+            'carta'=>'pdf/casa/propriedade/document.pdf',
             'password' => Hash::make("12345678")
         ]);
 
@@ -74,8 +75,9 @@ class UserSeeder extends Seeder
             'username'=>"toni",
             'email' => "toni@gmail.com",
             'vc_tipo_utilizador' => 3,
+            'telefone'=>'937539143',
             'vc_path' => "imagens/user.png",
-            
+            'carta'=>'pdf/casa/propriedade/document.pdf',
             'password' => Hash::make("12345678")
         ]);
 
@@ -86,8 +88,9 @@ class UserSeeder extends Seeder
             'username'=>"leti",
             'email' => "leticia@gmail.com",
             'vc_tipo_utilizador' => 3,
+            'telefone'=>'937539143',
             'vc_path' => "imagens/user.png",
-            
+            'carta'=>'pdf/casa/propriedade/document.pdf',
             'password' => Hash::make("12345678")
         ]);
 
@@ -99,7 +102,8 @@ class UserSeeder extends Seeder
             'email' => "antoni@gmail.com",
             'vc_tipo_utilizador' => 5,
             'vc_path' => "imagens/user.png",
-            
+            'telefone'=>'937539143',
+            'bi'=>'pdf/casa/propriedade/document.pdf',
             'password' => Hash::make("12345678")
         ]);
 
@@ -110,8 +114,9 @@ class UserSeeder extends Seeder
             'username'=>"fiona",
             'email' => "fiona@gmail.com",
             'vc_tipo_utilizador' => 5,
+            'telefone'=>'937539143',
             'vc_path' => "imagens/user.png",
-            
+            'bi'=>'pdf/casa/propriedade/document.pdf',
             'password' => Hash::make("12345678")
         ]);
         User::create([
@@ -122,7 +127,8 @@ class UserSeeder extends Seeder
             'email' => "ana@gmail.com",
             'vc_tipo_utilizador' => 5,
             'vc_path' => "imagens/user.png",
-            
+            'telefone'=>'937539143',
+            'bi'=>'pdf/casa/propriedade/document.pdf',
             'password' => Hash::make("12345678")
         ]);
         User::create([
@@ -132,44 +138,71 @@ class UserSeeder extends Seeder
             'username'=>"filo",
             'email' => "filomneno@gmail.com",
             'vc_tipo_utilizador' => 5,
+            'telefone'=>'937539143',
             'vc_path' => "imagens/user.png",
-            
+            'bi'=>'pdf/casa/propriedade/document.pdf',
             'password' => Hash::make("12345678")
         ]);
-        User::create([
+        $user1= User::create([
             "id" => 10,
             'name' => "Vicente",
             'lastname'=>"Chiluango",
             'username'=>"vic",
             'email' => "vicente@gmail.com",
             'vc_tipo_utilizador' => 6,
+            'pontos'=>700,
             'vc_path' => "imagens/user.png",
+            'convite'=>$this->gerarTokenUnico(),
             
             'password' => Hash::make("12345678")
         ]);
-        User::create([
+        $user1->update([
+            'link'=>"register/$user1->convite"
+        ]);
+        $user2=User::create([
             "id" => 11,
             'name' => "Leonel",
             'lastname'=>"Kimpovi",
             'username'=>"leo",
+            'link'=>'register/',
             'email' => "leonel@gmail.com",
             'vc_tipo_utilizador' => 6,
             'vc_path' => "imagens/user.png",
-            
+            'convite'=>$this->gerarTokenUnico(),
             'password' => Hash::make("12345678")
         ]);
-        User::create([
+        $user2->update([
+            'link'=>"register/$user2->convite"
+        ]);
+        $user3=User::create([
             "id" => 12,
             'name' => "Ladislau",
             'lastname'=>"Generoso",
             'username'=>"ladi",
+            'link'=>'register/',
+            'pontos'=>500,
             'email' => "ladislau@gmail.com",
             'vc_tipo_utilizador' => 6,
             'vc_path' => "imagens/user.png",
-            
+            'convite'=>$this->gerarTokenUnico(),
             'password' => Hash::make("12345678")
+        ]);
+        $user3->update([
+            'link'=>"register/$user3->convite"
         ]);
     }
 
+    public function gerarTokenUnico()
+    {
+        $token = Str::random(20); // Gera uma string aleatória de 32 caracteres
+    
+        // Verifica se o token já existe no banco de dados
+        while (User::where('convite', $token)->exists()) {
+            $token = Str::random(20); // Gera um novo token
+        }
+    
+        return $token;
+    }
+ 
    
 }

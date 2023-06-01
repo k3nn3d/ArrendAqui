@@ -41,7 +41,7 @@
  
      <br>
       <div class="col-12">
-      <input type="text" name="name" class="form-control" placeholder="Pesquisar por província" value="@if(isset($name)){{ $name }} @endif" 
+      <input type="text" name="name" class="form-control" placeholder="Pesquisar por província" value="@if(isset($name)){{ $name }} @endif" >
       <br>
     </div>
   </div>
@@ -118,7 +118,22 @@
               @endempty
                   
 
-{{-- Cadastrar user --}}
+
+              
+                  
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+  </div>
+ 
+  
+ </div>
+ {{-- Cadastrar user --}}
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content">
@@ -142,19 +157,5 @@
 </div>
 
 
-              
-                  
-              
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    </div>
-    </div>
-  </div>
- 
-  
- </div>
 
 @endsection

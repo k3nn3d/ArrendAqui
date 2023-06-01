@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class motorista extends Model
 {
     use HasFactory;
+    protected $fillable=[
+        'valor',
+
+    ];
 }

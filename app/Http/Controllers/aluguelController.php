@@ -4,13 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\aluguel;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class aluguelController extends Controller
 {
     //
     public function index(){
-        return view('admin.aluguel.index');
+        $arrendamentos=aluguel::join('casas','casas.id','aluguels.id_casa')
+        ->join('users','users.id','aluguels.id_user')
+        ->select('aluguels.*','casas.vc_path as casa','users.name as cliente_p','users.lastname as cliente_u')
+        ->get();
+        $users=User::get();
+        return view('admin.aluguel.index',compact('arrendamentos','users'));
     }
     public function index2(){
         return view('site.perfil.alugueis');

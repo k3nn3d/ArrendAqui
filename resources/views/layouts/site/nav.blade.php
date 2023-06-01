@@ -22,7 +22,14 @@
               <a href="#">Bens</a>
               <ul class="dropdown" style="border-radius: 8px">
                 <li><a href="{{ route('casas') }}">Todas Casas</a></li>
+                @auth
+                @if(Auth::user()->vc_tipo_utilizador==5)
                 <li><a href="{{ route('site.casa.create') }}">Publicar casa</a></li>
+                @endif
+                @if(Auth::user()->vc_tipo_utilizador==3)
+                <li><a href="{{ route('site.casa.create') }}">Publicar carro</a></li>
+                @endif
+                @endauth
               </ul>
             </li>
             <li><a href="{{ route('servicos') }}">Serviços</a></li>
@@ -36,7 +43,7 @@
             </li>
             @else
             <li class="nav-item">
-              <a class="nav-link" href="{{route('user.perfil')}}"> <i class="ti-user"></i> Perfil</a>
+              <a class="nav-link" href="{{route('user.user.perfil',Auth::user()->id)}}"> <i class="ti-user"></i> Perfil</a>
             </li>
             @endif
             @endauth
@@ -45,12 +52,12 @@
             @auth
         
           <li class="has-children">
-            <a> <img style="width: 24px" src="{{Auth::user()->vc_path}}" alt=""> </a>
+            <a> <img style="width: 24px; heigtht:20px; border-radius:50%;" src="{{Auth::user()->vc_path}}" alt=""> </a>
             <ul class="dropdown" style="border-radius: 8px">
               <li><span style="margin-left: 20px;">@_{{Auth::user()->username}}</span></li>
               <hr>
               <li >
-                <a  href="{{ route('user.perfil') }}"> <i class="ti-user"></i>Perfil</a>
+                <a  href="{{ route('user.user.perfil',Auth::user()->id) }}"> <i class="ti-user"></i>Perfil</a>
               </li>
               <li >
                 <a  href="{{ route('site.chat.list') }}"> <i class="ti-user"></i>Mensagens</a>

@@ -25,11 +25,11 @@
              class="breadcrumb-item active text-white-50"
              aria-current="page"
            >
-             Perfil
+             Painel
            </li>
          </ol>
        </nav>
-       <a href="{{ route('user.user.edit',Auth::user()->id) }}" class="btn-success" style="padding:0.8rem; border-radius:20px">Editar</a>
+       <a href="{{ route('user.user.perfil',Auth::user()->id) }}" class="btn-success" style="padding:0.8rem; border-radius:20px">Perfil</a>
      </div>
 
    </div>
@@ -71,7 +71,7 @@
                                   Cliente
                               @break
                               @default
-                                  
+                                Usuário Indefinido 
                           @endswitch</a></li>
                       </ul>
                   </div>
@@ -86,7 +86,7 @@
 
         
         <!-- seo start -->
-        <div class="col-xl-4 col-md-12" style="margin-bottom: 1.5rem">
+       {{-- <div class="col-xl-4 col-md-12" style="margin-bottom: 1.5rem">
           <div class="card">
               <div class="card-body">
                   <div class="row align-items-center">
@@ -100,7 +100,7 @@
                   </div>
               </div>
           </div>
-      </div>
+      </div>--}}
       <div class="col-xl-4 col-md-6" style="margin-bottom: 1.5rem">
           <div class="card">
               <div class="card-body">
@@ -116,7 +116,9 @@
                                 @case(3)
                                 {{ $arrendamento_mot }}
                                 @break
+                                
                             @default
+                            0
                                 
                         @endswitch</h3>
                           <h6 class="text-muted m-b-0">@if(Auth::user()->vc_tipo_utilizador==3)Reservas @else Arrendamentos @endif</h6>
@@ -128,6 +130,7 @@
               </div>
           </div>
       </div>
+    @if(Auth::user()->vc_tipo_utilizador ==5)
       <div class="col-xl-4 col-md-6" style="margin-bottom: 1.5rem">
           <div class="card">
               <div class="card-body">
@@ -143,14 +146,15 @@
               </div>
           </div>
       </div>
+      @endif
 
-      
+        @if(Auth::user()->vc_tipo_utilizador ==6)
           <div class="col-xl-4 col-md-12" style="margin-bottom: 1.5rem">
               <div class="card">
                   <div class="card-body">
                       <div class="row align-items-center">
                           <div class="col-6">
-                              <h3>{{Auth::user()->pontos *0}}</h3>
+                              <h3>{{Auth::user()->pontos}}</h3>
                               <h6 class="text-muted m-b-0">Pontos</h6>
                           </div>
                           <div class="col-6">
@@ -160,6 +164,7 @@
                   </div>
               </div>
           </div>
+        @endif
           <div class="col-xl-4 col-md-6" style="margin-bottom: 1.5rem">
               <div class="card">
                   <div class="card-body">
@@ -175,6 +180,7 @@
                   </div>
               </div>
           </div>
+        @if(Auth::user()->vc_tipo_utilizador ==3)
           <div class="col-xl-4 col-md-6" style="margin-bottom: 1.5rem">
               <div class="card">
                   <div class="card-body">
@@ -190,7 +196,7 @@
                   </div>
               </div>
           </div>
-          
+          @endif
           <!-- seo end -->
 
         

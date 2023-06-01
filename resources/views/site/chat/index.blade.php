@@ -5,15 +5,7 @@
 <div class="col-lg-12 col-md-12">
     <div class="card chat-card">
         <div class="card-header">
-            
-           
-                @if( $user_2->vc_tipo_utilizador==5)
-                <img src="{{$user_2->vc_path}}" alt="user-image" style="width: 40px; height:40px;border-radius:20px">
-                 <h5>{{ $user_2->name }} {{ $user_2->lastname }}</h5>
-                 <br>
-                <span> Senhorio</span>
-                @endif
-                @if( $user_2->vc_tipo_utilizador==2)
+                
                 <div style="position: relative;
                 display: inline-block;">
                 <img src="{{$user_2->vc_path}}" alt="user-image" style="width: 40px; height:40px;border-radius:20px">
@@ -28,26 +20,26 @@
                 </div>
                 <h5>{{ $user_2->name }} {{ $user_2->lastname }}</h5>
                 <br>
-                <span> Gerente</span>
-                @endif
-                @if( $user_2->vc_tipo_utilizador==1)
-                <img src="{{$user_2->vc_path}}" alt="user-image" style="width: 40px; height:40px;border-radius:20px">
-                <h5>{{ $user_2->name }} {{ $user_2->lastname }}</h5>
-                <br>
-                <span> Administrador</span>
-                @endif
-                @if( $user_2->vc_tipo_utilizador==6)
-                <img src="{{$user_2->vc_path}}" alt="user-image" style="width: 40px; height:40px;border-radius:20px">
-                <h5>{{ $user_2->name }} {{ $user_2->lastname }}</h5>
-                <br>
-                <span> Cliente</span>
-                @endif
-                @if( $user_2->vc_tipo_utilizador==3)
-                <img src="{{$user_2->vc_path}}" alt="user-image" style="width: 40px; height:40px;border-radius:20px">
-                <h5>{{ $user_2->name }} {{ $user_2->lastname }}</h5>
-                <br>
-                <span> Motorista</span>
-                @endif
+                </span>
+                    @switch($user_2->vc_tipo_utilizador)
+                        @case(1)
+                            Administrador
+                        @break
+                        @case(2)
+                            Gerente
+                        @break
+                        @case(3)
+                            Motorista
+                        @break
+                        @case(5)
+                            Senhorio
+                        @break
+                        @case(6)
+                            Cliente
+                        @break
+                        @default
+                        @endswitch
+                <span> 
                 
             <div class="card-header-right">
                 <div class="btn-group card-option">
@@ -63,7 +55,8 @@
                 </div>
             </div>
         </div>
-        <div class="card-body">
+        <div class="card-body" id="div-atualizar" style="height: 400px; overflow: auto; scroll-behavior: smooth;">
+           
             @foreach($mensagem as $chat)
             
             @if($chat->id_mensagem==$user_2->id)
@@ -118,15 +111,10 @@
                     Não há mensagens para esta conversa
                 </p>
             </div>
-
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
             @endempty
-            <form action="{{route('site.chat.store',['id'=>$user_2->id ,'id_casa'=>$id_casa])}}" method="POST" enctype="multipart/form-data"> 
+           
+            </div>
+            <form action="{{route('site.chat.store',['id'=>$user_2->id ,'id_casa'=>$id_casa])}}" method="POST" enctype="multipart/form-data" style="padding: 1rem"> 
                 @csrf
                 <div class="input-group m-t-15">
                     <input type="text" name="mensagem" class="form-control" id="mensagem" placeholder="Escrever mensagem">
@@ -136,7 +124,6 @@
                         </button>
                     </div>
             </form>
-            </div>
         </div>
     </div>
 </div>
@@ -271,5 +258,49 @@
     
     </script>
 
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+        var cardBody = document.querySelector('.card-body');
+        cardBody.scrollTop = cardBody.scrollHeight;
+        });
 
+        
+    </script>
+
+  <script>
+
+
+                
+            
+    function atualizarMensagem() {
+        $.ajax({
+            url: '{{ route("site.chat.actualizar", ["id" => Auth::user()->id, "id_casa" => $id_casa]) }}',
+            type: 'GET',
+            success: function(response) {
+                
+               // var mensagem = JSON.parse('{!! json_encode($mensagem) !!}');
+        //Percorrendo do valores do objecto convertido
+        
+       // mensagem.forEach( function(chat) {
+         //   alert(chat);
+           //});
+           
+                
+                // Atualiza o valor da variável $mensagem com os dados recebidos
+               $mensagem=JSON.stringify(response);
+               $mensagem=json_decode($mensagem);
+
+              //$mensagem=response
+                //alert($mensagem);
+            },
+            error: function(xhr) {
+                console.log('Ocorreu um erro:', xhr.status);
+            }
+        });
+    }
+
+    // Chama a função para atualizar a mensagem a cada 5 segundos (ou outro intervalo de tempo desejado)
+    setInterval(atualizarMensagem, 1000); // 5000 milissegundos = 5 segundos
+</script>
+  
 @endsection

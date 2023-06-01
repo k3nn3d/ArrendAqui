@@ -18,9 +18,11 @@ class RegisteredUserController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create( User $user)
+
     {
-        return view('auth.register');
+        //dd($user->name);
+        return view('auth.register',compact('user'));
     }
 
     /**
@@ -31,9 +33,10 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request, User $userafiliado )
+    public function store(Request $request )
    
     {
+        
          
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -61,13 +64,22 @@ class RegisteredUserController extends Controller
             
           
         ]);
-
-
         $id=$user->id;
+
+        if($user->vc_tipo_utilizador == 3){
+
+        }
+        User::where('id',$id)->update([
+           'estado'=>'pedente'
+
+     ]);
+
+
+        
 
         if($user->vc_tipo_utilizador == 6){
             User::where('id',$id)->update([
-                'link'=>"/convite/$user->convite"
+                'link'=>"/register/$user->convite"
 
          ]);
         }
@@ -86,8 +98,8 @@ class RegisteredUserController extends Controller
         $req_bi=$request->bi;
         $extension=$req_bi->extension();
         $bi_name=md5($req_bi->getClientOriginalName() . strtotime('now')) . "." . $extension;
-        $destino=$req_bi->move(public_path("imagens/bi"), $bi_name);
-        $dir = "imagens/bi";
+        $destino=$req_bi->move(public_path("pdf/user/bi"), $bi_name);
+        $dir = "pdf/user/bi";
         $caminho_bi=$dir. "/". $bi_name;
         $id=$user->id;
         User::where('id',$id)->update([
@@ -95,17 +107,17 @@ class RegisteredUserController extends Controller
          ]);
         }
 
-            if($request->hasFile('habilitacoes') && $req->file('habilitacoes')->isValid()){
+            if($request->hasFile('carta') && $req->file('carta')->isValid()){
                 // Imagem Hablitacôes
-            $req_habilitacoes=$request->habilitacoes;
-            $extension=$req_habilitacoes->extension();
-            $habilitacoes_name=md5($req_habilitacoes->getClientOriginalName() . strtotime('now')) . "." . $extension;
-            $destino=$req_habilitacoes->move(public_path("imagens/habilitacoes"), $habilitacoes_name);
-            $dir = "imagens/habilitacoes";
-            $caminho_habilitacoes=$dir. "/". $habilitacoes_name;
+            $req_carta=$request->carta;
+            $extension=$req_carta->extension();
+            $carta_name=md5($req_carta->getClientOriginalName() . strtotime('now')) . "." . $extension;
+            $destino=$req_carta->move(public_path("pdf/user/carta"), $carta_name);
+            $dir = "pdf/user/carta";
+            $caminho_carta=$dir. "/". $carta_name;
             $id=$user->id;
             User::where('id',$id)->update([
-                    'habilitacoes'=>$caminho_habilitacoes
+                    'carta'=>$caminho_carta
              ]);
             
         }
@@ -122,7 +134,7 @@ class RegisteredUserController extends Controller
 
     public function gerarTokenUnico()
     {
-        $token = Str::random(20); // Gera uma string aleatória de 20 caracteres
+        $token = Str::random(20); // Gera uma string aleatória de 32 caracteres
     
         // Verifica se o token já existe no banco de dados
         while (User::where('convite', $token)->exists()) {

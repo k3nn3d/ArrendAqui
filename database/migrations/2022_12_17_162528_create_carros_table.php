@@ -21,6 +21,8 @@ class CreateCarrosTable extends Migration
             $table->integer('estrelas')->nullable();
             $table->string('combustivel')->nullable();
             $table->float('preco');
+            $table->float('estado');
+            $table->float('documento');
             $table->integer('lugares');
             $table->integer('espaco');
             $table->unsignedBigInteger('id_user')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE');

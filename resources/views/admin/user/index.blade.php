@@ -52,16 +52,16 @@
                 <option value="" onclick="document.getElementById('form_2').submit()">Filtro de Usuários</option>
                 <option value="1" onclick="document.getElementById('form_2').submit()" {{ 1 == $tipo? 'selected':'' }} >Administradores</option>
                 <option value="2" onclick="document.getElementById('form_2').submit()" {{ 2 == $tipo? 'selected':'' }}>Gerentes</option>
-                <option value="6" onclick="document.getElementById('form_2').submit()" {{ 6 == $tipo? 'selected':'' }}>Clientes</option>
-                <option value="4" onclick="document.getElementById('form_2').submit()" {{ 4 == $tipo? 'selected':'' }}>Afiliados</option>
-                <option value="5" onclick="document.getElementById('form_2').submit()" {{ 5 == $tipo? 'selected':'' }}>Alugadores</option>
                 <option value="3" onclick="document.getElementById('form_2').submit()" {{ 3 == $tipo? 'selected':'' }}>Motoristas</option>
+                <option value="5" onclick="document.getElementById('form_2').submit()" {{ 5 == $tipo? 'selected':'' }}>Senhorios</option>
+                <option value="6" onclick="document.getElementById('form_2').submit()" {{ 6 == $tipo? 'selected':'' }}>Clientes</option>
+             
               </select>
             </div>
          
              <br>
               <div class="col-6">
-              <input type="text" name="name" class="form-control" placeholder="Pesquisar por nome" value="@if(isset($name)){{ $name }} @endif" style="color: azure">
+              <input type="text" name="name" class="form-control" placeholder="Pesquisar por nome" value="@if(isset($name)){{ $name }} @endif" style="color: black">
               <br>
             </div>
           </div>
@@ -74,7 +74,7 @@
                
                
                 <div class="table-responsive">
-                  <table class="table table-striped">
+                  <table class="table table-striped" id="minha-tabela">
                     <thead>
                       <tr>
                         <th> Foto </th>
@@ -102,8 +102,10 @@
                           <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">Ver</a>
                             <a   class="dropdown-item" data-toggle="modal" data-target="#exampleModal{{$user->id}}" data-whatever="@getbootstrap" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-refresh-cw"></i> Editar</a>
+                            @if(Auth::user()->vc_tipo_utilizador==2 &&  $user->vc_tipo_utilizador==1 )
+                            @else
                             <a class="dropdown-item" href="{{route('admin.user.delete', $user->id)}}"><i class="feather icon-trash"></i>Eliminar</a>
-                           
+                           @endif
                           </div>
                         </td>
                       </tr> 
@@ -255,7 +257,24 @@
 </script>
 @endif
 
+<script>
+  $(document).ready(function() {
+  $('#minha-tabela').DataTable();
+});
 
+
+
+$(document).ready(function() {
+  $('#minha-tabela').DataTable({
+    lengthMenu: [10, 25, 50],
+    searching: true,
+    ordering: true,
+    paging: true
+    // Mais opções...
+  });
+});
+
+</script>
 
 @endsection
 

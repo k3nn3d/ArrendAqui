@@ -5,12 +5,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\municipio;
 use App\Models\log;
+use App\Models\provincia;
 class MunicipiosController extends Controller
 {
     public function index(){
+        $municipios=municipio::get();
+        $provincias=provincia::get();
         
 
-        return view('admin.municipio.index');
+        return view('admin.municipio.index',compact('municipios','provincias'));
     }
 
     public function store(Request $req){

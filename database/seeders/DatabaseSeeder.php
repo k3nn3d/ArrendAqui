@@ -32,6 +32,8 @@ class DatabaseSeeder extends Seeder
             CasaSeeder::class,
             ComentarioSeeder::class,
             UnidadeSeeder::class,
+            motoristaSeeder::class,
+            afiliadoSeeder::class, 
 
 
           

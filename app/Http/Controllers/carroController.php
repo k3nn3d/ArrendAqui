@@ -22,7 +22,29 @@ class carroController extends Controller
         return view('site.carro.index', compact('carros'));
     }
     public function index2(){
-        return view('admin.carro.index');
+       
+        $categorias=Categoria::get();
+        $sub_categorias=sub_categoria::get();
+        $provincias=provincia::get();
+        $municipios=municipio::get();         
+        $carros=Carro::join('users','users.id','carros.id_user')
+        ->select('carros.*','users.name as userName','users.lastname as userLastname')
+        ->get();
+        return view('admin.carro.index',compact('carros','categorias','sub_categorias','provincias','municipios'));
+    }
+    public function index_user(){
+       
+        $categorias=Categoria::get();
+        $sub_categorias=sub_categoria::get();
+        $provincias=provincia::get();
+        $municipios=municipio::get();         
+        $carros=Carro::where('id_user',Auth::user()->id)->get();
+        
+        
+        //join('users','users.id','carros.id_user')
+        //->select('carros.*','users.name as userName','users.lastname as userLastname')
+        //->get();
+        return view('site.perfil.carros',compact('carros','categorias','sub_categorias','provincias','municipios'));
     }
     public function show($id){
         $carro=Carro::find($id);

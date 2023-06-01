@@ -14,7 +14,7 @@ class AlterTableUsers extends Migration
     public function up(){
        //
         Schema::table('users', function (Blueprint $table) { 
-        $table->unsignedBigInteger('id_convite')->references('id')->on('convites')->onDelete('CASCADE')->onUpdate('CASCADE')->nullable();
+        $table->unsignedBigInteger('id_convite')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE')->nullable();
         
     });
 }

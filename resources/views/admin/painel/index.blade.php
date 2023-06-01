@@ -21,6 +21,9 @@
         </div>
         <!-- [ breadcrumb ] end -->
         <!-- [ Main Content ] start -->
+        <div style="margin:1rem; margin-left:0">
+          <a href="{{route('pdf')}}" class="btn btn-success" target="_blank">Gerar relatório</a>
+        </div>
         <div class="row">
           <!-- seo start -->
           <div class="col-xl-4 col-md-12">

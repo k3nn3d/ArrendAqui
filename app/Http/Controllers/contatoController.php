@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contato;
+use App\Models\Comentario;
 use App\Models\log;
 
 class contatoController extends Controller
@@ -17,6 +18,18 @@ class contatoController extends Controller
         $contatos=Contato::get();
 
         return view('admin.suporte.index', compact('contatos'));
+    }
+    public function index3(){
+        $comentarios=Comentario::join('users','users.id','comentarios.id_user')
+        ->select('comentarios.*','users.name as userName','users.lastname as userLastname')
+        ->get();
+        return view('admin.comentario.index',compact('comentarios'));
+    }
+    public function delete_comment($id){
+
+        Comentario::find($id)->delete();
+        return redirect()->back()->with('eliminado',1);
+
     }
 
     public function store(Request $req)

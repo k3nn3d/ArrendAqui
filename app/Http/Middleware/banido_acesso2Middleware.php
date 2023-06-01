@@ -18,7 +18,7 @@ class banido_acesso2Middleware
     public function handle(Request $request, Closure $next)
     {
         if(Auth::check()){
-            if(Auth::user()->estado!=4){
+            if(Auth::user()->estado!='banido'){
             return $next($request);
             }
         

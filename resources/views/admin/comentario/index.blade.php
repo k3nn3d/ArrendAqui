@@ -24,41 +24,15 @@
           <!-- table card-1 start -->
     <div class="col-md-12 col-xl-12">
     <div class="card">
-      <div class="card-body">
-        
-
-
-        
-      
-        <a class="nav-link btn btn-success create-new-button" data-toggle="modal" data-target="#exampleModal  " data-whatever="@getbootstrap" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">+ Adicionar novo</a>
-        
-      <br>
-     
-      <form action="{{ route('admin.provincia') }}" method="GET" id="form_2">
-        @csrf
-        <div class="row">
-    
- 
-     <br>
-      <div class="col-12">
-      <input type="text" name="name" class="form-control" placeholder="Pesquisar por província" value="@if(isset($name)){{ $name }} @endif" style="color: azure">
-      <br>
-    </div>
-  </div>
-   <input type="submit"class="btn btn-sm btn-outline-primary" value="Pesquisar">
-    </form>
- 
- 
-
-
-       
-       
+      <div class="card-body">       
         <div class="table-responsive">
           <table class="table table-striped">
             <thead>
               <tr>
                
-                <th> Nome </th>
+                <th> Usuário </th>
+                <th>Comentário</th>
+                <th>Estrelas dadas ao site</th>
                 <th>Data de registro  </th>
                 <th>Ações  </th>
               </tr>
@@ -66,43 +40,38 @@
             <tbody>
           
                   
-              @foreach ($provincias as $provincia)
+              @foreach ($comentarios as $comment)
                   
              
               <tr>
                
                
-                <td> {{ $provincia->name }}</td>
-                <td> {{ $provincia->created_at->format('d/m/y h:i') }}  </td>
+                <td> {{ $comment->userName }} {{ $comment->userLastname }}</td>
+                <td>{{ $comment->conteudo }}</td>
+                <td>{{ $comment->estrelas }}</td>
+                <td> {{ $comment->created_at->format('d/m/y h:i') }}  </td>
               
                 <td>
                   <a class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ações</a>
                   <div class="dropdown-menu">
                   
-                    <a   class="dropdown-item" data-toggle="modal" data-target="#exampleModal{{$provincia->id}}" data-whatever="@getbootstrap" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-refresh-cw"></i> Editar</a>
-                    <a class="dropdown-item" href="{{route('admin.provincia.delete', $provincia->id)}}"><i class="feather icon-trash"></i>Eliminar</a>
+                    <a   class="dropdown-item" data-toggle="modal" data-target="#exampleModal{{$comment->id}}" data-whatever="@getbootstrap" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-refresh-cw"></i> Editar</a>
+                    <a class="dropdown-item" href="{{route('admin.comentario.delete', $comment->id)}}"><i class="feather icon-trash"></i>Eliminar</a>
                    
            
                   </div>
                 </td>
               </tr> 
              
-              <div class="modal fade" id="exampleModal{{$provincia->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal fade" id="exampleModal{{$comment->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Editar {{$provincia->name}}</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Editar {{$comment->name}}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{route('admin.provincia.update',$provincia->id)}}" method="post" enctype="multipart/form-data">
-                                @csrf
-                                @include('admin.provincia.edit')
-                                <div class="modal-footer">
-                                    <button type="button" class="btn  btn-secondary" data-dismiss="modal">Cancelar</button>
-                                    <button  class="btn  btn-primary" id="ajaxSubmit" >Salvar alterações</button>
-                                </div>
-                            </form>
+                          
                         </div>
                     </div>
                 </div>
@@ -111,40 +80,11 @@
               @endforeach
 
              
-              @empty($provincia)
+              @empty($comment)
               <tr>
-                <td colspan="6" style="text-align: center"> Não há resultados</td>
+                <td colspan="6" style="text-align: center"> Não há comentários</td>
               </tr>
               @endempty
-                  
-
-{{-- Cadastrar user --}}
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl" role="document">
-      <div class="modal-content">
-          <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Nova Província</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          </div>
-          <div class="modal-body">
-              <form action="{{route('admin.provincia.store')}}" method="post" enctype="multipart/form-data">
-                  @csrf
-                  @include('admin.provincia.form')
-
-                  <div class="modal-footer">
-                      <button type="button" class="btn  btn-secondary" data-dismiss="modal">Cancelar</button>
-                      <button  class="btn  btn-primary" id="ajaxSubmit" >Adicionar</button>
-                  </div>
-              </form>
-          </div>
-      </div>
-  </div>
-</div>
-
-
-              
-                  
-              
             </tbody>
           </table>
         </div>
@@ -156,5 +96,29 @@
  
   
  </div>
+ @if(session('eliminado'))
+      
+<script type="text/javascript">
+  
+  Swal.fire(
+  'SUCESSO',
+  'Comentário eliminado com sucesso',
+  'success'
+)
+</script>
+@endif
+@if(session('eliminado_f'))
+      
+<script type="text/javascript">
+  
+  Swal.fire(
+  'ERRO',
+  'Erro ao eliminar Comentário',
+  'error'
+)
+</script>
+@endif
+
+
 
 @endsection
