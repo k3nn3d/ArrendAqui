@@ -1,289 +1,91 @@
-
-@extends('layouts.site.index')
+@extends('layouts.site.index2')
 @section('conteudo')
-<!--HEADER START-->
-<div
-class="hero page-inner overlay"
-style="background-image: url('tamplate/images/hero_bg_1.jpg')"
->
 
-<div class="container">
-  <div class="row justify-content-center align-items-center">
-    <div class="col-lg-9 text-center mt-5">
-      <h1 class="heading" data-aos="fade-up">Publicar imóvel</h1>
 
-      <nav
-        aria-label="breadcrumb"
-        data-aos="fade-up"
-        data-aos-delay="200"
-      >
-        <ol class="breadcrumb text-center justify-content-center">
-          <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-          <li
-            class="breadcrumb-item active text-white-50"
-            aria-current="page"
-          >
-          Publicar imóvel
-          </li>
-        </ol>
-      </nav>
-    </div>
-  </div>
-</div>
-</div>
 
-<!--HEADER END-->
-
-<div class="section">
+<div class="section" >
     <div class="container">
-      <div class="row mb-5">
-        <h2 style="text-align: center" class="mb-5" data-aos="fade-up" data-aos-delay="200">Cadastre um imóvel</h2>
-        <div class="col-lg-3">
+        <a href="{{ route('back') }}">Voltar</a>
+      <div class="row mb-5" >
+        <h2 style="text-align: center" class="mb-5" data-aos="fade-up" data-aos-delay="200">Faça uma reserva</h2>
+        <div class="col-lg-2">
 
         </div>
        
         
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+              <center>
               <div style="display:flex;" class="mb-4"> 
-                <button class="next1 btn" >Imagens</button>    <button class="next1 btn">Descrição</button>  <button class="next1 btn" >Localização</button>    <button class="next1 btn">Documentos</button> <button class="next1 btn" >Plano</button>  <button class="next1 btn" >Pagamento</button>  
+               
+              <button class="next1 btn">Reserva</button>  <button class="next1 btn" >Encontrar carro</button>   <button class="next1 btn" >Finalizar</button>  
+              
                 </div>
-                
+              </center>
+                <hr>
               
               
-                <form action="{{route('user.casa.store')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('user.casa.store')}}" method="POST" enctype="multipart/form-data" style="box-shadow: 2px 2px 2px 2px  rgba(0, 0, 0, 0.055); padding:2rem;">
                   @csrf
                     <div class="row">
-                      <div class="step" id="step-1">
-                        <h1>Images</h1>
-                        <div class="row">
-                        <div class="col-12 mb-3">
-                          <label for="vc_path" onclick="addDuplicateElement()">
-                            Adicionar
-                          <br>
-                          <div  style="width: 120px;cursor:pointer;padding:5px; height:120px; border-radius:20px; border:5px solid gray;" >
-                            <img  alt="" src="imagens/camera.png"  style="width: 100%; height:100%;" id="image-preview">
-                          </div>
-                         </label>
-                          <input
-                          type="file"
-                          name="vc_path[]"
-                          id="vc_path"
-                          class="form-control"
-                          value="{{ old('vc_path') }}"
-                          required
-                          style="display: none"
-                          />
-                      </div>
-                    </div>
-                    
-                      <button type="button" class="next btn btn-success">Próximo</button>
                       
-                    </div>
+                    
                     <div class="step" id="step-1">
-                      <h1>Descricão</h1>
                       <div class="row">
-                        <div class="col-8 mb-3">
-                          <label for="">Preço da Renda</label>
+
+                      <h1>Detalhes da Reserva</h1>
+                                                 
+                          <div class="col-6 mb-3">
+                            <label for="">Data</label>
                             <input
-                            type="number"
+                            type="date"
                             class="form-control"
-                            name="preco"
-                            id="preco"
-                            value="{{ old('preco') }}"
-                            placeholder="Preço da Renda"
-                            required min="0"
-                            />
-                        </div>
-                        <div class="col-4 mb-3">
-                          <label for="">Frequêcia</label>
-                          <select class="form-control" name="id_unidade" id="id_unidade">
-                            @foreach ($unidades as $unidade)
-                            <option style="align-content: center" value="{{ $unidade->id }} {{ old('id_unidade')==$unidade->id? 'selected' :'' }}">/{{$unidade->name}}</option>
-                            @endforeach
-                          </select>
-                        </div>
-                        <div class="col-12 mb-3">
-                          <label for="">Categoria</label>
-                          <select class="form-control" name="id_categoria" id="">
-                            <option style="align-content: center" value="">Categoria</option>
-                            @foreach($categorias as $categoria)
-                            <option value="{{$categoria->id}} {{ old('id_categoria')==$categoria->id? 'selected':'' }}">{{ $categoria->name }}</option>
-                            @endforeach
-                            
-                          </select>
-                        </div>
-                        <div class="col-12 mb-3">
-                          Subcategoria
-                          <select class="form-control" name="id_sub_categoria" id="">
-                            <option style="align-content: center" value="">Subcategoria</option>
-                            @foreach($sub_categorias as $sub)
-                            <option value="{{ $sub->id }} {{ old('id_sub_categotia')==$sub->id? 'selected':'' }}">{{$sub->name}}</option>
-                            @endforeach
-                          </select>
-                        </div>
-                        <div class="col-6 mb-3">
-                          <label for="">Quartos</label>
-                          <input
-                          type="number"
-                          class="form-control"
-                          name="quartos"
-                          id="quartos"
-                          value="{{ old('quartos') }}"
-                          placeholder="Quartos"
-                          required min="0"
-                          />
-                      </div>
-                      <div class="col-6 mb-3">
-                        <label for="">Casas de banho</label>
-                        <input
-                        type="number"
-                        class="form-control"
-                        name="casa_de_banho"
-                        id="casa_de_banho"
-                        value="{{ old('casa_de_banho') }}"
-                        placeholder="Casas de banho"
-                        required min="0"
-                        />
-                    </div>
-                    <div class="col-6 mb-3">
-                      <label for="">Cozinhas</label>
-                      <input
-                      type="number"
-                      class="form-control"
-                      name="cozinha"
-                      id="cozinha"
-                      value="{{ old('cozinha') }}"
-                      placeholder="Cozinhas"
-                      required min="0"
-                      />
-                  </div>
-                        <div class="col-6 mb-3">
-                          <label for="">Salas</label>
-                            <input
-                            type="number"
-                            name="sala"
-                            id="sala"
-                            class="form-control"
-                            value="{{ old('sala') }}"
-                            placeholder="Salas"
-                            required min="0"
-                            />
-                        </div>
+                            name="data"
+                            id="data"
+                            value="{{ old('data') }}"
                         
-                        <div class="col-12 mb-3">
-                          <label for="">Detalhes</label>
-                            <textarea
-                            name="descricao"
-                            id="descricao   "
-                            cols="30"
-                            rows="7"
-                            class="form-control"
-                            style="text-align: start"
-                            placeholder=""
                             required
-                           
-                            >
-@if(old('descricao')!= '')
-{{ old('descricao') }}
-@else
-Detalhes
-@endif                         
-                        </textarea>
-                        </div>
-
-                       
-
-                      </div>
-                      <button type="button" class="prev btn btn-primary">Anterior</button>
-                      <button type="button" class="next btn btn-success">Próximo</button>
-                     
-                    </div>
-
-                    <div class="step" id="step-1">
-                      <div class="row">
-
-                      <h1>Localização</h1>
-                        <div class="col-6 mb-3">
-                          <label for="">Província</label>
-                          <select class="form-control" name="provincia" id="provincia">
-                            <option style="align-content: center" value="">Provincia</option>
-                            @foreach($provincias as $provincia)
-                            <option value="{{ $provincia->id }} {{ old('provincia')==$provincia->id? 'selected':'' }} {{ $provincia->id == 'selected'? $filtro_municipio=$provincia->id : false }}">{{ $provincia->name }}</option>
-                            @endforeach
-                          </select>
+                            />
                         </div>
                         <div class="col-6 mb-3">
-                          <label for="">Município</label>
-                          <select class="form-control" name="municipio" id="municipio">
-                            <option style="align-content: center" value="">Município</option>
-                             @foreach($municipios as $municipio)
-                             @if($filtro_municipio != 0)
-                              @if($municipio->id_provincia == $filtro_municipio)
-                             <option value="{{ $municipio->id }} {{ old('municipio')==$municipio->id? 'selected':'' }}">{{ $municipio->name }}</option>
-                             @endif
-                             @else
-                            <option value="{{ $municipio->id }} {{ old('municipio')==$municipio->id? 'selected':'' }}">{{ $municipio->name }}</option>
-                             @endif
-                             @endforeach
-                          </select>
-                        </div>
+                            <label for="">Hora</label>
+                            <input
+                            type="time"
+                            class="form-control"
+                            name="hora"
+                            id="hora"
+                            value="{{ old('hora') }}"
+                            required
+                            />
+                        </div> 
                         <div class="col-12 mb-3">
-                          Bairro
-                          <input
-                          type="text"
-                          class="form-control"
-                          name="bairro"
-                          id="bairro"
-                          value="{{ old('bairro') }}"
-                          placeholder="Bairro"
-                          required
-                          />
-                      </div>
-                      <div class="col-12 mb-3">
-                        <label for="">Rua</label>
-                          <input
-                          type="text"
-                          class="form-control"
-                          name="bairro"
-                          id="bairro"
-                          value="{{ old('rua') }}"
-                          placeholder="Rua"
-                          required 
-                          />
-                      </div>
+                            <label for="">Local de Partida</label>
+                            <input
+                            type="text"
+                            class="form-control"
+                            name="partida"
+                            id="partida"
+                            value="{{ old('partida') }}"
+                            placeholder="País, município, rua ou destrito"
+                            required min="0"
+                            />
+                           <button class="btn" type="button" onclick="pegar_minha_localizacao()" id="location"> Pegar minha Localização</button>
+                          <p id="errorText" style="color: red;">
+
+                          </p>
+                           <input type="text" name="lat"  id="lat">
+                           <input type="text" name="long"  id="long">
+                        </div> 
 
                     </div>
                     <button type="button" class="prev btn btn-primary">Anterior</button>
-                    <button type="button" class="next btn btn-success">Próximo</button>
+                    <button type="button" class="next btn btn-success">Fazer reserva</button>
                    
                   </div>
                   <div class="step" id="step-1">
-                    <h1>Documentos</h1>
-                    <div class="row">
-                      <div class="col-12 mb-3">
-                        <label for="">Planta(Opcional)</label>
-                        <input
-                        type="file"
-                        name="planta"
-                        id="planta"
-                        class="form-control"
-                        value="{{ old('planta') }}"
-                        
-                        />
-                    </div>
-                    <div class="col-12 mb-3">
-                      <label for="">Propriedade</label>
-                      <input
-                      type="file"
-                      name="propriedade"
-                      id="propriedade"
-                      class="form-control"
-                      value="{{ old('propriedade') }}"
-                      required
-                      />
-                  </div>
-
-                    </div>
+                    <h1>Encontrar carro</h1>
+                   
+                        <div id="map" style="width: 100%; height: 600px;"></div>
+                      
                     <button type="button" class="prev btn btn-primary">Anterior</button>
                     <button type="button" class="next btn btn-success">Próximo</button>
                    
@@ -674,4 +476,168 @@ counter++;
     parentElement.parentNode.insertBefore(duplicateElement, parentElement.nextSibling);
   }
   </script>
+
+
+
+<script>
+
+ function pegar_minha_localizacao(){ 
+  let lat;
+  let long;
+  let lati = document.getElementById('lat');
+  let longi = document.getElementById('long');
+  let partida = document.getElementById('partida');
+  var errorText = document.getElementById('errorText');
+
+  
+  function success(pos){
+      lat=pos.coords.latitude;
+      long=pos.coords.longitude;
+      lati.value=lat;
+      longi.value=long;  
+      //let  zoom= 12;
+    var url = "https://nominatim.openstreetmap.org/reverse?format=json&lat=" + lat + "&lon=" + long;//+ "&zoom=" + zoom;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        var municipality = data.address.city || data.address.town || data.address.village || data.address.hamlet;
+        var street = data.address.road || data.address.pedestrian || data.address.pedestrian_area;
+        var province = data.address.state;
+        var address = "";
+        if (street) {
+          address += street + ", ";
+        }
+        if (municipality) {
+          address += municipality + ", ";
+        }
+        if (province) {
+          address += province + ", ";
+        }
+        address += data.address.country;
+        //console.log('Endereço:', address);
+        partida.value =  address;
+        errorText.textContent = ""; // Limpa a mensagem de erro
+      })
+      .catch(error => {
+        console.log('Erro ao obter o endereço:', error);
+      });
+  }
+  
+  
+  function error(err){
+      console.log(err);
+  }
+ 
+  var wacthID = navigator.geolocation.getCurrentPosition(success,error,{
+      enableHighAccuracy: true
+  });
+    //navigator.geolocation.clearWatch(watchID); // Para o acompanhamento anterior
+}
+  
+</script>
+
+
+
+<script>
+
+
+var typingTimer;
+var doneTypingInterval = 500; // Intervalo em milissegundos após o usuário terminar de digitar
+let lati = document.getElementById('lat');
+let longi = document.getElementById('long');
+var addressInput = document.getElementById('partida');
+var errorText = document.getElementById('errorText');
+
+var searchButton = document.getElementById('location');
+
+addressInput.addEventListener('input', function() {
+  clearTimeout(typingTimer);
+  typingTimer = setTimeout(getCoordinates, doneTypingInterval);
+});
+
+
+function getCoordinates() {
+  var address = addressInput.value;
+  var url = "https://nominatim.openstreetmap.org/search?format=json&q=" + encodeURIComponent(address);
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      if (data.length > 0) {
+        var latitude = data[0].lat;
+        var longitude = data[0].lon;
+        //console.log('Latitude:', latitude);
+        //console.log('Longitude:', longitude);
+        lati.value = latitude;
+        longi.value= longitude;
+        errorText.textContent = ""; // Limpa a mensagem de erro
+      } else {
+        console.log('Endereço inválido. Por favor, insira um endereço válido.');
+        lati.value = '';
+        longi.value= '';
+        errorText.textContent = "Por favor, insira um endereço válido.";
+      }
+    })
+    .catch(error => {
+      console.log('Erro ao obter as coordenadas:', error);
+      lati.value = '';
+      longi.value= '';
+      errorText.textContent = "Erro ao obter as coordenadas.";
+    });
+}
+
+</script>
+
+
+
+
+
+{{--OpenStreetmaps--}}
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+<script >
+
+
+  let lat;
+  let long;
+    
+    function success(pos){
+    
+        lat=pos.coords.latitude;
+        long=pos.coords.longitude;
+        var map = L.map('map').setView([lat, long], 13); // Substitua latitude e longitude pelas coordenadas iniciais desejadas
+  
+  // Adiciona o layer do OpenStreetMap ao mapa
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+  
+  // Adiciona um marcador na localização atual
+  L.marker([lat,long]).addTo(map)
+      .bindPopup('Você está aqui!')
+      .openPopup();
+
+      L.marker([-8.8630933,13.323073632735849]).addTo(map)
+      .bindPopup('Outro ponto')
+      .openPopup();
+  
+  
+        
+    
+    }
+   
+    
+    
+    function error(err){
+        console.log(err);
+    }
+  
+    var wacthID=navigator.geolocation.watchPosition(success,error,{
+        enableHighAccuracy: true
+    });
+   
+    
+          // Cria o mapa e define a visualização inicial
+</script>
 @endsection
+

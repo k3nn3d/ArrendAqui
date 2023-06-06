@@ -9,6 +9,7 @@ use App\Models\provincia;
 use App\Models\município;
 use App\Models\Unidade;
 use App\Models\Carro;
+use App\Models\User;
 use App\Models\chat;
 use App\Models\Categoria;
 use App\Models\sub_categoria;
@@ -69,4 +70,12 @@ class perfilController extends Controller
        
         return view('site.perfil.alugueis',compact('casas','aluguels','casas1'));
        }
+
+      public function convidados(Request $request)
+      {
+        $url= $request->getScheme() . '://' . $request->getHttpHost();
+        $users = User::where('codigo_convite', Auth::user()->convite)->get();
+
+        return view('site.perfil.convidados',compact('users','url'));
+      }
 }

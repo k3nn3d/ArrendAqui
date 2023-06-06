@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 //==SITE AREA==
 
 Route::get('/',[App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/voltar',[App\Http\Controllers\HomeController::class, 'voltar'])->name('back');
 Route::get('/sobre-nos',[App\Http\Controllers\sobreController::class, 'index'])->name('sobre-nos');
 Route::get('/servicos',[App\Http\Controllers\servicoController::class, 'index'])->name('servicos');
 Route::get('/contate-nos',[App\Http\Controllers\contatoController::class, 'index'])->name('contato');
@@ -53,8 +54,9 @@ Route::get('/chat_index2{id}', [App\Http\Controllers\ChatController::class, 'lis
 Route::post('/chat{id}{id_casa}', [App\Http\Controllers\ChatController::class, 'store'])->name('site.chat.store')->middleware('acesso_site');
 
 //CONVITE
-Route::get('/convite{id}', [App\Http\Controllers\UserController::class, 'index3'])->name('convite.create');
-Route::post('/convite_store{id}', [App\Http\Controllers\UserController::class, 'store2'])->name('convite.store');
+Route::get('/convidados', [App\Http\Controllers\perfilController::class, 'convidados'])->name('user.convidado')->middleware('redirect_login');
+//Route::get('/convite{id}', [App\Http\Controllers\UserController::class, 'index3'])->name('convite.create');
+//Route::post('/convite_store{id}', [App\Http\Controllers\UserController::class, 'store2'])->name('convite.store');
 
 //CRUD DOS MOTORISTAS
 Route::get('/motorista-create', [App\Http\Controllers\UserController::class, 'motoristaCreate'])->name('motorista.create');
@@ -62,11 +64,11 @@ Route::post('/motorista_store', [App\Http\Controllers\UserController::class, 'mo
 
 
  //CRUD CASAS
- Route::get('/casa', [App\Http\Controllers\perfilController::class, 'casas'])->name('user.casa');
- Route::post('/casa_store', [App\Http\Controllers\casaController::class, 'store'])->name('user.casa.store');
- Route::post('/casa_update{id}', [App\Http\Controllers\casaController::class, 'update'])->name('user.casa.update');
- Route::get('/casa_delete{id}', [App\Http\Controllers\casaController::class, 'delete'])->name('user.casa.delete');
- Route::get('/casa_promover{id}', [App\Http\Controllers\casaController::class, 'promover'])->name('user.promover');
+ Route::get('/casa', [App\Http\Controllers\perfilController::class, 'casas'])->name('user.casa')->middleware('redirect_login');
+ Route::post('/casa_store', [App\Http\Controllers\casaController::class, 'store'])->name('user.casa.store')->middleware('redirect_login');
+ Route::post('/casa_update{id}', [App\Http\Controllers\casaController::class, 'update'])->name('user.casa.update')->middleware('redirect_login');
+ Route::get('/casa_delete{id}', [App\Http\Controllers\casaController::class, 'delete'])->name('user.casa.delete')->middleware('redirect_login');
+ Route::get('/casa_promover{id}', [App\Http\Controllers\casaController::class, 'promover'])->name('user.promover')->middleware('redirect_login');
  Route::get('/municipios/{provincia}', function($provincia) {
     $municipios = DB::table('municipios')
                     ->where('id_provincia', $provincia)
@@ -74,25 +76,28 @@ Route::post('/motorista_store', [App\Http\Controllers\UserController::class, 'mo
     return response()->json($municipios);
 })->name('municipio_consultar');
  //CRUD CARROS
- Route::get('/carro', [App\Http\Controllers\carroController::class, 'index_user'])->name('user.carro');
- Route::post('/carro_store', [App\Http\Controllers\carroController::class, 'store'])->name('user.carro.store');
- Route::post('/carro_update{id}', [App\Http\Controllers\carroController::class, 'update'])->name('user.carro.update');
- Route::get('/carro_delete{id}', [App\Http\Controllers\carroController::class, 'delete'])->name('user.carro.delete');
+ Route::get('/carro', [App\Http\Controllers\carroController::class, 'index_user'])->name('user.carro')->middleware('redirect_login');
+ Route::post('/carro_store', [App\Http\Controllers\carroController::class, 'store'])->name('user.carro.store')->middleware('redirect_login');
+ Route::post('/carro_update{id}', [App\Http\Controllers\carroController::class, 'update'])->name('user.carro.update')->middleware('redirect_login');
+ Route::get('/carro_delete{id}', [App\Http\Controllers\carroController::class, 'delete'])->name('user.carro.delete')->middleware('redirect_login');
  
 
- //CRUD ARRENDAMENTOS
- Route::get('/aluguel', [App\Http\Controllers\perfilController::class, 'arrendamentos'])->name('user.aluguel');
- Route::any('/aluguel_store{id}', [App\Http\Controllers\aluguelController::class, 'store'])->name('user.aluguel.store');
- Route::any('/aluguel_update{id}', [App\Http\Controllers\aluguelController::class, 'update'])->name('user.aluguel.update');
- Route::get('/aluguel_delete{id}', [App\Http\Controllers\aluguelController::class, 'delete'])->name('user.aluguel.delete');
+ //CRUD ARRENDAMENTOS 
+ Route::get('/arrendamentos', [App\Http\Controllers\perfilController::class, 'arrendamentos'])->name('user.aluguel')->middleware('redirect_login');
+ Route::any('/arrendamento_store{id}', [App\Http\Controllers\aluguelController::class, 'store'])->name('user.aluguel.store')->middleware('redirect_login');
+ Route::any('/arrendamento_update{id}', [App\Http\Controllers\aluguelController::class, 'update'])->name('user.aluguel.update')->middleware('redirect_login');
+ Route::get('/arrendamento_delete{id}', [App\Http\Controllers\aluguelController::class, 'delete'])->name('user.aluguel.delete')->middleware('redirect_login');
+ //RESERVAS
+ Route::get('/reservar_carro{id}{id_casa}', [App\Http\Controllers\aluguelController::class, 'reservar_carro'])->name('user.reservar.carro')->middleware('redirect_login');
+ Route::get('/cancelar_reservar_carro{id}', [App\Http\Controllers\aluguelController::class, 'n_reservar_carro'])->name('user.n_reservar.carro')->middleware('redirect_login');
 
 //Crud dos Pagamentos
-Route::get('/pagemento_show{id}', [App\Http\Controllers\PagamentoController::class, 'show'])->name('user.pagemento.show1');
-Route::get('/pagemento', [App\Http\Controllers\PagamentoController::class, 'index'])->name('user.pagemento.index');
-Route::get('/pagemento_edit{id}', [App\Http\Controllers\PagamentoController::class, 'edit'])->name('user.pagemento.edit1');
-Route::post('/pagemento_store', [App\Http\Controllers\PagamentoController::class, 'store'])->name('user.pagemento.store1');
-Route::post('/pagemento_update/{id}', [App\Http\Controllers\PagamentoController::class, 'update'])->name('user.pagemento.update');
-Route::get('/pagemento_delete/{id}', [App\Http\Controllers\PagamentoController::class, 'delete'])->name('user.pagemento.delete');
+Route::get('/pagemento_show{id}', [App\Http\Controllers\PagamentoController::class, 'show'])->name('user.pagemento.show1')->middleware('redirect_login');
+Route::get('/pagemento', [App\Http\Controllers\PagamentoController::class, 'index'])->name('user.pagemento.index')->middleware('redirect_login');
+Route::get('/pagemento_edit{id}', [App\Http\Controllers\PagamentoController::class, 'edit'])->name('user.pagemento.edit1')->middleware('redirect_login');
+Route::post('/pagemento_store', [App\Http\Controllers\PagamentoController::class, 'store'])->name('user.pagemento.store1')->middleware('redirect_login');
+Route::post('/pagemento_update/{id}', [App\Http\Controllers\PagamentoController::class, 'update'])->name('user.pagemento.update')->middleware('redirect_login');
+Route::get('/pagemento_delete/{id}', [App\Http\Controllers\PagamentoController::class, 'delete'])->name('user.pagemento.delete')->middleware('redirect_login');
 
 //== FIM USER AREA==
 

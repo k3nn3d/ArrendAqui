@@ -143,7 +143,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                     </span>
                   </div>
 
-                  @if($casa->plano != 0)
+                  @if($casa->plano != 'free')
                   <div style="padding: 0.4rem 0.5rem">
                       <i class="icon-star text-warning"></i>  Patrocinado
                   </div>
@@ -317,7 +317,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                       </span>
                       
                     </div>
-                    @if($casa->plano != 0)
+                    @if($casa->plano != 'free')
                     <div style="padding: 0.4rem 0.5rem">
                         <i class="icon-star text-warning"></i>  Patrocinado
                     </div>
@@ -335,14 +335,14 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                     >
                     @if(Route::has('login'))
                     @auth
-                    @if($casa->id_user === Auth::user()->id && $casa->plano != 0)
+                    @if($casa->id_user === Auth::user()->id && $casa->plano != 'free')
                     <a
                     href="{{route('user.promover', $casa->id)}}"
                     class="btn btn-warning py-2 px-3"
                     >Editar</a
                   >
                     @else
-                    @if($casa->id_user === Auth::user()->id && $casa->plano == 0)
+                    @if($casa->id_user === Auth::user()->id && $casa->plano == 'free')
                     <a
                     href="{{route('user.promover', $casa->id)}}"
                     class="btn btn-success py-2 px-3"

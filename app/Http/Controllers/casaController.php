@@ -42,32 +42,36 @@ class casaController extends Controller
 
         $id_municipio=municipio::where('name','like',"%$req->pesquisa%")->get('id')->toArray();
         $id_provincia=provincia::where('name','like',"%$req->pesquisa%")->get('id')->toArray();
-       
         $categorias=Categoria::get();
         $sub_categorias=sub_categoria::get();
         $provincias=provincia::get();
         $municipios=municipio::get();
         $unidades=Unidade::get();
+       
+        
         if($req->provincia_id && $req->municipio_id && $req->preco_min && $req->preco_max  && $req->categoria_id  ){
-
+            //dd($req->municipio_id);
+           // dd($req->categoria_id);
             $casas=Casa::where('casas.estado','publicado')
             ->where('casas.id_provincia',$req->provincia_id)
             ->where('casas.id_municipio',$req->municipio_id)
             ->where('casas.id_categoria',$req->categoria_id)
-            ->where('casas.preco',$req->preco_max)
-            ->orwhere('casas.preco',$req->preco_min)
+            ->where('casas.preco','<=',$req->preco_max)
+            ->where('casas.preco','>=',$req->preco_min)
             ->join('provincias','provincias.id','casas.id_provincia')
             ->join('municipios','municipios.id','casas.id_municipio')
             ->join('unidades','unidades.id','casas.id_unidade')
             ->join('users','users.id','casas.id_user')
             ->select('casas.*','municipios.name as municipio','users.lastname as lastname_user', 'provincias.name as provincia','users.id as user_id','users.name as user_name', 'unidades.name as unidade_name')
             ->get();
+            
             $casas_destaque=Casa::where('casas.estado','publicado')
             ->where('casas.id_provincia',$req->provincia_id)
             ->where('casas.id_municipio',$req->municipio_id)
             ->where('casas.id_categoria',$req->categoria_id)
-            ->where('casas.preco',$req->preco_max)
-            ->where('casas.plano','!=',0)->join('provincias','provincias.id','casas.id_provincia')
+            ->where('casas.preco','<=',$req->preco_max)
+            ->where('casas.preco','>=',$req->preco_min)
+            ->where('casas.plano','!=','free')->join('provincias','provincias.id','casas.id_provincia')
             ->join('municipios','municipios.id','casas.id_municipio')
             ->join('unidades','unidades.id','casas.id_unidade')
             ->join('users','users.id','casas.id_user')
@@ -172,71 +176,50 @@ public function store(Request $req){
 
     
     try{
-       
-        //Obtendo o enderço da casa
-        $provincia_name=provincia::where('id',$req->provincia)->value('name');
-        $municipio_name=municipio::where('id',$req->municipio)->value('name');
+       //Obtendo o endereço da casa
+        $provincia_name = provincia::where('id', $req->provincia)->value('name');
+        $municipio_name = municipio::where('id', $req->municipio)->value('name');
 
-            //código para obter a latitude e longitude pelo googlemaps
-            // Insira sua chave de API do Google Maps Geocoding API
-            $apiKey = 'AIzaSyCtgPlK7U7uu9A-boT1BCd6k1ICOCyR_Q0';
+        // URL da API para obter a latitude e longitude
+        $endereco = "$req->bairro,$municipio_name,$provincia_name,Angola";
+        $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($endereco);
 
-            // Endereço que você deseja obter a latitude e longitude
-            $endereco = "'$req->rua,$municipio_name,$provincia_name,Angola'";
+        // Faz a solicitação HTTP para a API usando a biblioteca Http do Laravel
+        $response = Http::withOptions([
+            'verify' => 'certificados_ssl/cacert.pem' // caminho para o arquivo de certificado SSL
+        ])->get($url);
 
-            // URL da API de Geocodificação do Google Maps
-            $url = "https://maps.googleapis.com/maps/api/geocode/json?address=$endereco&key=$apiKey";
+        // Extrai a latitude e longitude do conteúdo da resposta JSON
+        $data = json_decode($response->body());
+        if (!empty($data)) {
+            $latitude = $data[0]->lat;
+            $longitude = $data[0]->lon;
+        } else {
+            // Tratar caso não tenha nenhum resultado retornado pela API
+            $userIP = $_SERVER['REMOTE_ADDR'];
+            $location = Location::get('80.88.9.0');
+            $latitude = $location->latitude;
+            $longitude = $location->longitude;
+        }
 
-            
-                // Faz a solicitação HTTP para a API usando a biblioteca Http do Laravel
-                $response = [];/*Http::withOptions([
-                    'verify' => 'certificados_ssl/cacert.pem' // caminho para o arquivo de certificado SSL
-                ])->get($url);*/
-
-                // Extrai a latitude e longitude do objeto JSON retornado pela API
-                $data = $response/*->json()['results'];*/;
-                if (!empty($data)) {
-                    $data = $data[0]['geometry']['location'];
-                    $latitude = $data['lat'];
-                    $longitude = $data['lng'];
-                } else {
-                    // Tratar caso não tenha nenhum resultado retornado pela API
-                    $userIP= $_SERVER['REMOTE_ADDR'];
-                    $location=Location::get('80.88.9.0');
-                    $latitude = $location->latitude;
-                    $longitude = $location->longitude;
-                }
-                // processar a resposta
-               // $data = json_decode($response->getBody()->getContents(), true);
-
-            
- 
-          
-        
-
-
-
-  
-    
-        
-         $id_user=Auth::user()->id; 
+        $id_user=Auth::user()->id; 
 
         
-        if($req->hasFile('vc_path') && $req->file('vc_path')->isValid()){
-            
+        if($req->hasFile('vc_path') && $req->file('vc_path')->isValid() && $req->plano == 'free'){
            //Otendo caminho completo da imagem
-           $imagem = "'$req->v_path'";
-            $temp_file = tempnam(sys_get_temp_dir(), 'img');
-            file_put_contents($temp_file, base64_decode($imagem));
-            $caminho_completo = realpath($temp_file);
+            //$temp_file = tempnam(sys_get_temp_dir(), 'img');
+            //file_put_contents($temp_file, base64_decode($imagem));
+            //$caminho_completo = realpath($temp_file);
+            //dd($caminho_completo);
             // Imagem VC_PATH
             $req_imagem=$req->file('vc_path');
+           // dd($req_imagem);
             $extension=$req_imagem->extension();
             $imagem_name="comparar". "." . $extension;
             $destino=$req_imagem->move(public_path("imagens/casas_comparar"), $imagem_name);
             $dir = "imagens/casas_comparar";
             $caminho1=$dir. "/". $imagem_name; 
-
+            
            
            /* $imagem=$req->file('vc_path');
             $caminho=$imagem->store('imagens/galeria','public');*/
@@ -260,6 +243,7 @@ public function store(Request $req){
             $img1 = imagecreatefromstring($image_data1);
              // Lê o conteúdo do arquivo de imagem em uma string
              $image_data2 = file_get_contents(public_path($casa_detc->vc_path));
+             
 
              // Cria a imagem a partir da string de dados
              $img2 = imagecreatefromstring($image_data2);
@@ -279,18 +263,19 @@ public function store(Request $req){
             // Calcular a diferença pixel a pixel
             $difference = 0;
             
-            for ($y = 0; $y < $height1; $y++) {
-                for ($x = 0; $x < $width1; $x++) {
+            
+            for ($y = 0; $y < $height1 && $y < $height2; $y++) {
+                for ($x = 0; $x < $width1 && $x < $width2; $x++) {
                     $rgb1 = imagecolorat($img1, $x, $y);
                     $r1 = ($rgb1 >> 16) & 0xFF;
                     $g1 = ($rgb1 >> 8) & 0xFF;
                     $b1 = $rgb1 & 0xFF;
-                
+                   
                     $rgb2 = imagecolorat($img2, $x, $y);
                     $r2 = ($rgb2 >> 16) & 0xFF;
                     $g2 = ($rgb2 >> 8) & 0xFF;
                     $b2 = $rgb2 & 0xFF;
-                    
+                
                     $difference += abs($r1 - $r2) + abs($g1 - $g2) + abs($b1 - $b2);
                     
                 }
@@ -353,26 +338,6 @@ public function store(Request $req){
                 Casa::where('id',$casa->id)->update([
                     'plano'=>$req->plano
                 ]);
-                if($req->plano =='free'){
-                    
-                        $data =  date('Y-m') . (int) date('d') + 7 ;
-                        $data = date('d/m/Y', strtotime($data));
-                    
-                    Casa::where('id',$casa->id)->update([
-                        'plano_expiracao'=>$data,
-                    ]);}
-                if($req->plano =='2'){
-                    $data =  date('Y') . (int) date('m') + 1 . date('d');
-                    $data = date('d/m/Y', strtotime($data));
-                    Casa::where('id',$casa->id)->update([
-                        'plano_expiracao'=>$data,
-                    ]);}
-                if($req->plano =='3'){
-                    $data =  date('Y') . (int) date('m') + 2 . date('d');
-                    $data = date('d/m/Y', strtotime($data));
-                    Casa::where('id',$casa->id)->update([
-                        'plano_expiracao'=>$data,
-                    ]);}
             }
             if($req->id_user){
                 Casa::where('id',$casa->id)->update([
@@ -488,16 +453,36 @@ public function analisar($id){
 }
 public function analisar_confirm( Request $req , $id){
     if($req->doc ==1 && $req->comp_doc==1 && $req->apto==1){
-    Casa::where('id',$id)->update([
-        'estado'=>'publicado'
+        $casa = Casa::where('id',$id)->update([
+            'estado'=>'publicado'
 
-    ]);
+        ]);
+        if($casa->plano =='free'){        
+            $data =  date('Y-m') . (int) date('d') + 7 ;
+            $data = date('d/m/Y', strtotime($data));
+            Casa::where('id',$casa->id)->update([
+            'plano_expiracao'=>$data,
+        ]);}
+
+        if($casa->plano =='2'){
+            $data =  date('Y') . (int) date('m') + 1 . date('d');
+            $data = date('d/m/Y', strtotime($data));
+            Casa::where('id',$casa->id)->update([
+                'plano_expiracao'=>$data,
+            ]);}
+
+        if($casa->plano =='3'){
+            $data =  date('Y') . (int) date('m') + 2 . date('d');
+            $data = date('d/m/Y', strtotime($data));
+            Casa::where('id',$casa->id)->update([
+                'plano_expiracao'=>$data,
+            ]);}
 }
     else{
-        dd($req->doc);
+        return redirect()->route('admin.casa')->with('publicado_f',1);
 
     }
-    return redirect()->route('admin.casa');
+    return redirect()->route('admin.casa')->with('publicado',1);
     
 }
 }

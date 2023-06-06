@@ -68,6 +68,7 @@ return array(
     'App\\Models\\Galeria' => $baseDir . '/app/Models/Galeria.php',
     'App\\Models\\GaleriaCarro' => $baseDir . '/app/Models/GaleriaCarro.php',
     'App\\Models\\GaleriaCasa' => $baseDir . '/app/Models/GaleriaCasa.php',
+    'App\\Models\\Notificacao' => $baseDir . '/app/Models/Notificacao.php',
     'App\\Models\\Pagamento' => $baseDir . '/app/Models/Pagamento.php',
     'App\\Models\\Unidade' => $baseDir . '/app/Models/Unidade.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',

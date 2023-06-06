@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\log;
+use App\Models\User;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -38,6 +39,16 @@ class AuthenticatedSessionController extends Controller
             'mensagem'=> "O usuário $request->username fez login"
 
         ]);
+
+        $user=User::where('username',$request->username)->first();
+        if($user->vc_tipo_utilizador== 1 || $user->vc_tipo_utilizador== 2){
+            return redirect()->route('admin.painel');
+       
+
+        }else{
+            return redirect()->route('user.dashboard');
+        }
+
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }

@@ -21,10 +21,10 @@
             <li class="has-children">
               <a href="#">Bens</a>
               <ul class="dropdown" style="border-radius: 8px">
-                <li><a href="{{ route('casas') }}">Todas Casas</a></li>
+                <li><a href="{{ route('casas') }}">Todos os imóveis</a></li>
                 @auth
                 @if(Auth::user()->vc_tipo_utilizador==5)
-                <li><a href="{{ route('site.casa.create') }}">Publicar casa</a></li>
+                <li><a href="{{ route('site.casa.create') }}">Publicar imóvel</a></li>
                 @endif
                 @if(Auth::user()->vc_tipo_utilizador==3)
                 <li><a href="{{ route('site.casa.create') }}">Publicar carro</a></li>

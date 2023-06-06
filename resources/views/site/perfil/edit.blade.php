@@ -81,6 +81,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                       </div>
                       
                       <div id="step-1" class="step">
+                        <div class="row">
                       <div class="col-12 mb-3">
                         <h1>Dados</h1>
                       </div>
@@ -101,7 +102,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                       
                       @endif
                         
-                        <div class="col-12 mb-3">
+                        <div class="col-6 mb-3">
                           <label for="">Primeiro nome</label>
                             <input
                             type="text"
@@ -115,7 +116,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                         </div>
 						
                         
-                        <div class="col-12 mb-3">
+                        <div class="col-6 mb-3">
                           <label for="">Último nome</label>
                           <input
                           type="text"
@@ -126,6 +127,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                           required min="0"
 						  value="{{ Auth::user()->lastname }}"
                           />
+                          
                       </div>
                       <div class="col-12 mb-3">
                         <label for="">Nome de usuário</label>
@@ -139,6 +141,19 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
 						value="{{ Auth::user()->username }}"
                         />
                        </div>
+                     
+                      <div class="col-12 mb-3">
+                        <label for="">IBAN</label>
+                        <input
+                        type="text"
+                        class="form-control"
+                        name="lastname"
+                        id="lastname"
+                        placeholder="IBAN"
+                        required min="0"
+            value="{{ Auth::user()->iban }}"
+                        />
+                    </div>
                           
                        <div class="col-12 mb-3">
                         <label for="">Tipo de conta</label>
@@ -160,10 +175,10 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
               @case(3)
               value="Motorista"
               @break
-              @case(5)
+              @case(6)
               value="Cliente"
               @break
-              @case(6)
+              @case(5)
               value="Senhorio"
               @break
               @default
@@ -203,9 +218,9 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                       class="btn btn-primary mb-2"
                       />  
                  
-                    
                     </div>
-                   </form>
+                    </div>
+                  
                     
                     <div id="step-2" class="step">
                     <div class="col-12 mb-3">
@@ -276,7 +291,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                   class="btn btn-primary mb-2"
                   />  
                   </div>
-                
+                </form>
                   <form action="{{ route('user.user.update',Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
                   <div id="step-" class="step">
 

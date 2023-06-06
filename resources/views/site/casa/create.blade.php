@@ -9,7 +9,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
 <div class="container">
   <div class="row justify-content-center align-items-center">
     <div class="col-lg-9 text-center mt-5">
-      <h1 class="heading" data-aos="fade-up">Publi casa</h1>
+      <h1 class="heading" data-aos="fade-up">Publicar imóvel</h1>
 
       <nav
         aria-label="breadcrumb"
@@ -22,7 +22,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
             class="breadcrumb-item active text-white-50"
             aria-current="page"
           >
-          Publicar casa
+          Publicar imóvel
           </li>
         </ol>
       </nav>
@@ -54,8 +54,9 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                     <div class="row">
                       <div class="step" id="step-1">
                         <h1>Images</h1>
+                        <div class="row">
                         <div class="col-12 mb-3">
-                          <label for="vc_path">
+                          <label for="vc_path" onclick="addDuplicateElement()">
                             Adicionar
                           <br>
                           <div  style="width: 120px;cursor:pointer;padding:5px; height:120px; border-radius:20px; border:5px solid gray;" >
@@ -64,7 +65,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                          </label>
                           <input
                           type="file"
-                          name="vc_path"
+                          name="vc_path[]"
                           id="vc_path"
                           class="form-control"
                           value="{{ old('vc_path') }}"
@@ -72,6 +73,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                           style="display: none"
                           />
                       </div>
+                    </div>
                     
                       <button type="button" class="next btn btn-success">Próximo</button>
                       
@@ -96,6 +98,25 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                           <select class="form-control" name="id_unidade" id="id_unidade">
                             @foreach ($unidades as $unidade)
                             <option style="align-content: center" value="{{ $unidade->id }} {{ old('id_unidade')==$unidade->id? 'selected' :'' }}">/{{$unidade->name}}</option>
+                            @endforeach
+                          </select>
+                        </div>
+                        <div class="col-12 mb-3">
+                          <label for="">Categoria</label>
+                          <select class="form-control" name="id_categoria" id="">
+                            <option style="align-content: center" value="">Categoria</option>
+                            @foreach($categorias as $categoria)
+                            <option value="{{$categoria->id}} {{ old('id_categoria')==$categoria->id? 'selected':'' }}">{{ $categoria->name }}</option>
+                            @endforeach
+                            
+                          </select>
+                        </div>
+                        <div class="col-12 mb-3">
+                          Subcategoria
+                          <select class="form-control" name="id_sub_categoria" id="">
+                            <option style="align-content: center" value="">Subcategoria</option>
+                            @foreach($sub_categorias as $sub)
+                            <option value="{{ $sub->id }} {{ old('id_sub_categotia')==$sub->id? 'selected':'' }}">{{$sub->name}}</option>
                             @endforeach
                           </select>
                         </div>
@@ -147,25 +168,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                             required min="0"
                             />
                         </div>
-                        <div class="col-12 mb-3">
-                          <label for="">Categoria</label>
-                          <select class="form-control" name="id_categoria" id="">
-                            <option style="align-content: center" value="">Categoria</option>
-                            @foreach($categorias as $categoria)
-                            <option value="{{$categoria->id}} {{ old('id_categoria')==$categoria->id? 'selected':'' }}">{{ $categoria->name }}</option>
-                            @endforeach
-                            
-                          </select>
-                        </div>
-                        <div class="col-12 mb-3">
-                          Subcategoria
-                          <select class="form-control" name="id_sub_categoria" id="">
-                            <option style="align-content: center" value="">Subcategoria</option>
-                            @foreach($sub_categorias as $sub)
-                            <option value="{{ $sub->id }} {{ old('id_sub_categotia')==$sub->id? 'selected':'' }}">{{$sub->name}}</option>
-                            @endforeach
-                          </select>
-                        </div>
+                        
                         <div class="col-12 mb-3">
                           <label for="">Detalhes</label>
                             <textarea
@@ -292,12 +295,15 @@ Detalhes
                         <input type="radio" class="plano" id="plano1" name="plano" value="free" placeholder="Plano">
                         <label for="plano1">
                           <div class="btn btn-success">
-                            <h4 style="text-align: center">Plano 1</h4>
+                            <h4 style="text-align: center">Free</h4>
+                            <hr>
                             <div>
+                              <h5>1 semana</h5>
+                               
                               <ul>
-                                <li>Free</li>
+                                <li></li>
                               </ul>
-                              <p>Sua casa estará disponível na plataforma durante 1 semana</p>
+                              <hr>
                               <p>Preço: 00.00kz</p>
                             </div>
                           </div>
@@ -307,12 +313,15 @@ Detalhes
                         <input type="radio" class="plano" id="plano2" name="plano" value="2" placeholder="Plano">
                         <label for="plano2">
                           <div class="btn btn-warning" >
-                            <h4 style="text-align: center">Plano 2</h4>
+                            <h4 style="text-align: center">Fácil</h4>
+                            <hr>
                             <div>
+                              <h5>2 meses</h5>
+                               
                               <ul>
-                                <li>Fácil</li>
+                                <li></li>
                               </ul>
-                              <p>Sua casa será divulgada durante 2meses</p>
+                              <hr>
                               <p>Preço: 1.000kz</p>
                             </div>
                           </div>
@@ -322,12 +331,16 @@ Detalhes
                         <input type="radio" id="plano3" class="plano" name="plano" value="3" placeholder="Plano">
                         <label for="plano3">
                           <div class="btn btn-primary" for="plano3" style="">
-                            <h4 style="text-align: center">Plano 3</h4>
+                            <h4 style="text-align: center">Prático</h4>
+                            <hr>
                             <div>
-                              <ul>
-                                <li>Prático</li>
-                              </ul>
-                              <p>Sua casa será divulgada durante 3meses</p>
+                              
+                                <h5>3 meses</h5>
+                              
+                                <ul>
+                                  <li></li>
+                                </ul>
+                                <hr>
                               <p>Preço: 1.800kz</p>
                             </div>
                           </div>
@@ -632,4 +645,32 @@ URL.revokeObjectURL(url);
 
 </script>
 
+
+
+<script>
+  let counter = 1;
+  function addDuplicateElement() {
+   
+    // Obtém o elemento pai
+    const parentElement = document.getElementById('vc_path').parentNode;
+  
+    // Cria uma cópia do elemento pai e seus filhos
+    const duplicateElement = parentElement.cloneNode(true);
+     // Gera um novo nome único para o elemento duplicado
+     const newName = `vc_path[${counter}]`;
+//alert(newName);
+     counter += 1;
+
+// Atualiza o atributo "name" do elemento duplicado
+duplicateElement.querySelector('input').setAttribute('name', newName);
+
+// Incrementa o contador para gerar um novo nome único para a próxima duplicação
+counter++;
+    // Adiciona uma classe ao novo elemento para exibi-lo horizontalmente
+    duplicateElement.classList.add('duplicate-element');
+  
+    // Adiciona a cópia como um novo elemento no DOM
+    parentElement.parentNode.insertBefore(duplicateElement, parentElement.nextSibling);
+  }
+  </script>
 @endsection

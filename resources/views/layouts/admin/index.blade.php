@@ -19,17 +19,19 @@
 
     <!-- Favicon icon -->
     <link rel="icon" href="imagens/logo.png" type="image/x-icon">
-    <!--DataTable-->
-    <link rel="stylesheet" type="text/css" href="datatables.css">
-    <!--<script src="caminho/para/jquery.js"></script>-->
-    <script src="datatables.js"></script>
-
     <!-- vendor css -->
     <link rel="stylesheet" href="tmp/dist/assets/css/style.css">
     <script src="{{ asset('js/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.0/css/jquery.dataTables.min.css">
+  
+
     
 
 </head>
@@ -66,6 +68,12 @@
     <script src="tmp/dist/assets/js/pages/dashboard-main.js"></script>
    
     
+     
+      <!-- Biblioteca jQuery -->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   
+      <!-- Script do DataTable -->
+      <script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
    
     
    

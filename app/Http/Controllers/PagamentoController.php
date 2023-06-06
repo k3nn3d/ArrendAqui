@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\afiliado;
 use App\Models\motorista;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Pagamento;
 
 
@@ -14,7 +15,15 @@ class PagamentoController extends Controller
 {
     //
     public function index(){
-        return view('site.perfil.pagamentos');
+        $users=User::where('id',Auth::user()->id)
+        ->get();
+        $users2=User::where('users.id', Auth::user()->id)
+        ->join('pagamentos','pagamentos.id_user','users.id')
+        ->select('users.*','pagamentos.valor as valorPago','pagamentos.comprovativo as comprovativoPagamento','pagamentos.estado as estadoPagamento')
+        ->orderBy('users.id','desc')
+        ->get();
+        $afiliado=afiliado::orderBy('id','desc')->first();
+        return view('site.perfil.pagamentos',compact('users','afiliado','users2'));
     }
 
     public function pagar_afiliado(Request $req, $id){

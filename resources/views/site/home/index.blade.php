@@ -96,7 +96,7 @@
         <div class="row mb-5 align-items-center">
           <div class="col-lg-6">
             <h2 class="font-weight-bold text-primary heading">
-              Casas em Destaque
+              Imóveis em Destaque
             </h2>
           </div>
           <div class="col-lg-6 text-lg-end">
@@ -104,7 +104,7 @@
               <a
                 href="{{route('casas')}}"
                 class="btn btn-primary text-white py-3 px-4"
-                >Ver todas as Casas</a
+                >Ver todos os imóveis</a
               >
             </p>
           </div>
@@ -193,7 +193,7 @@
                               
               </div>
               @empty($casa)
-              <p style="text-align: center">Sem Casas em Destaque</p>
+              <p style="text-align: center">Sem imóveis em Destaque</p>
               @endempty
 
 
@@ -427,7 +427,7 @@
               <span class="number"
                 ><span class="countup text-primary">{{$num_casas_alugadas}}</span></span
               >
-              <span class="caption text-black-50">de Casas alugadas</span>
+              <span class="caption text-black-50">de imóveis arrendados</span>
             </div>
           </div>
           <div
@@ -439,7 +439,7 @@
               <span class="number"
                 ><span class="countup text-primary">{{$num_casas_para_aluguel}}</span></span
               >
-              <span class="caption text-black-50">de Casas disponíveis para aluguel</span>
+              <span class="caption text-black-50">de imóveis disponíveis para arrendamento</span>
             </div>
           </div>
           <div
@@ -451,7 +451,7 @@
               <span class="number"
                 ><span class="countup text-primary">{{$num_casas}}</span></span
               >
-              <span class="caption text-black-50">de todas as Casas</span>
+              <span class="caption text-black-50">de todos os imóveis</span>
             </div>
           </div>
           <div

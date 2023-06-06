@@ -17,7 +17,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
 		data-aos-delay="200"
 	  >
 		<ol class="breadcrumb text-center justify-content-center">
-		  <li class="breadcrumb-item"><a href="{{route('user.perfil')}}">Perfil</a></li>
+		  <li class="breadcrumb-item"><a href="{{route('user.user.perfil',Auth::user()->id)}}">Perfil</a></li>
 		  <li
 			class="breadcrumb-item active text-white-50"
 			aria-current="page"
@@ -37,24 +37,6 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
 
 
 <!-- [ Main Content ] start -->
-<div class="pcoded-main-container"  >
-    <div class="pcoded-content" >
-        <!-- [ breadcrumb ] start -->
-        <div class="page-header">
-            <div class="page-block">
-                <div class="row align-items-center">
-                    <div class="col-md-12">
-                        <div class="page-header-title">
-                            <h5 class="m-b-10">Dashboard Analytics</h5>
-                        </div>
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="#!">Dashboard Analytics</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- [ breadcrumb ] end -->
         <!-- [ Main Content ] start -->
         @if(Auth::user()->vc_tipo_utilizador==5)
@@ -62,7 +44,6 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
             <div class="container">
               <div class="row mb-5 align-items-center">
                
-                    <hr> 
                    
                     <div class="latest_product_inner">
                       <div class="row">
@@ -72,6 +53,8 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                             Casas em "{{ $nome ?? '' }}"
                             @else
                             Reservas
+                            
+                            <hr> 
                             @endif
                           </h2>
                         </div>
@@ -242,12 +225,12 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
               </div>
             </section>
             @endif
-            @if(Auth::user()->vc_tipo_utilizador==2)
+            @if(Auth::user()->vc_tipo_utilizador==6)
             <div class="section">
                 <div class="container">
                   <div class="row mb-5 align-items-center">
                    
-                        <hr> 
+                      
                        
                         <div class="latest_product_inner">
                           <div class="row">
@@ -257,6 +240,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                                 Casas em "{{ $nome ?? '' }}"
                                 @else
                                 Reservas
+                                <hr> 
                                 @endif
                               </h2>
                             </div>
@@ -287,7 +271,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                                   <h6 class="d-block mb-2 text-black-50"
                                     >{{$casa->aluguel_estado}}</h6
                                   >
-                                  <span class="city d-block mb-3">{{$casa->provincia}}, {{$casa->municipio}} </span>
+                                  <span class="city d-block mb-3">{{$casa->provincia}}, {{$casa->municipio}}, {{$casa->bairro}} </span>
               
                                   <div class="specs d-flex mb-4">
                                     <span class="d-block d-flex align-items-center me-3">

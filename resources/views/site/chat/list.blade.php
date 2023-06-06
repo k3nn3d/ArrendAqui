@@ -32,7 +32,7 @@
                         <img src="{{$chat->user_foto}}" alt="user image" class="img-radius profile-img cust-img m-b-15">
                     </div>
                     <div class="col">
-                        <a href="{{ route('site.chat.index',$chat->user_id) }}">
+                        <a href="{{ route('site.chat.index',['id'=>2,'id_casa'=>1]) }}">
                             <h6 class="m-b-15">{{$chat->user_name}} <span class="float-right f-13 text-muted"> a week ago</span></h6>
                             <i class="feather icon-star-on f-18 text-c-yellow"></i>
                             <i class="feather icon-star-on f-18 text-c-yellow"></i>

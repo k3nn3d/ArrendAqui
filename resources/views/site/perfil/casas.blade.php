@@ -17,7 +17,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
 		data-aos-delay="200"
 	  >
 		<ol class="breadcrumb text-center justify-content-center">
-		  <li class="breadcrumb-item"><a href="{{route('user.perfil')}}">Perfil</a></li>
+		  <li class="breadcrumb-item"><a href="{{route('user.user.perfil',Auth::user()->id)}}">Perfil</a></li>
 		  <li
 			class="breadcrumb-item active text-white-50"
 			aria-current="page"
@@ -34,30 +34,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
 </div>
 
 <!--HEADER END-->
-
-
-<!-- [ Main Content ] start -->
-<div class="pcoded-main-container"  >
-    <div class="pcoded-content" >
-        <!-- [ breadcrumb ] start -->
-        <div class="page-header">
-            <div class="page-block">
-                <div class="row align-items-center">
-                    <div class="col-md-12">
-                        <div class="page-header-title">
-                            <h5 class="m-b-10">Dashboard Analytics</h5>
-                        </div>
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="#!">Dashboard Analytics</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- [ breadcrumb ] end -->
-        <!-- [ Main Content ] start -->
-        <div class="section">
+      <div class="section">
             <div class="container">
               <div class="row mb-5 align-items-center">
                
@@ -88,7 +65,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                       </div>
                     </div>
                     --}}
-                    <hr> 
+                    
                     
                     <div class="latest_product_inner">
                       <div class="row">
@@ -98,6 +75,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                             Casas em "{{ $nome ?? '' }}"
                             @else
                             Suas casas
+                            <hr> 
                             @endif
                           </h2>
                         </div>
@@ -128,7 +106,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                                 </span>
                                 
                               </div>
-                              @if($casa->plano != 0)
+                              @if($casa->plano != 'free')
                               <div style="padding: 0.4rem 0.5rem">
                                   <i class="icon-star text-warning"></i>  Patrocinado
                               </div>
@@ -146,14 +124,20 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                               >
                               @if(Route::has('login'))
                               @auth
-                              @if($casa->id_user === Auth::user()->id && $casa->plano != 0)
+                              @if($casa->id_user === Auth::user()->id && $casa->plano != 'free')
                               <a
                               href="{{route('user.promover', $casa->id)}}"
                               class="btn btn-warning py-2 px-3"
                               >Editar</a
                             >
+                            <a
+                            href="{{route('user.promover', $casa->id)}}"
+                            class="btn btn-success py-2 px-3"
+                            >Banner</a
+                          >
+
                               @else
-                              @if($casa->id_user === Auth::user()->id && $casa->plano == 0)
+                              @if($casa->id_user === Auth::user()->id && $casa->plano == 'free')
                               <a
                               href="{{route('user.promover', $casa->id)}}"
                               class="btn btn-success py-2 px-3"

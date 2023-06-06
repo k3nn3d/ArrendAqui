@@ -664,6 +664,7 @@ class ComposerStaticInit55a5b40a52bf222534cf9271e8c5196b
         'App\\Models\\Galeria' => __DIR__ . '/../..' . '/app/Models/Galeria.php',
         'App\\Models\\GaleriaCarro' => __DIR__ . '/../..' . '/app/Models/GaleriaCarro.php',
         'App\\Models\\GaleriaCasa' => __DIR__ . '/../..' . '/app/Models/GaleriaCasa.php',
+        'App\\Models\\Notificacao' => __DIR__ . '/../..' . '/app/Models/Notificacao.php',
         'App\\Models\\Pagamento' => __DIR__ . '/../..' . '/app/Models/Pagamento.php',
         'App\\Models\\Unidade' => __DIR__ . '/../..' . '/app/Models/Unidade.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',

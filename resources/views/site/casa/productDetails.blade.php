@@ -54,7 +54,7 @@
           </div>
           
           <div class="col-lg-4">
-            <h2 class="heading text-primary">{{$casa1->municipio}}, {{$casa1->provincia}}</h2>
+            <h2 class="heading text-primary">{{$casa1->municipio}}, {{$casa1->provincia}}, {{$casa1->bairro}}</h2>
             <p class="meta"> {{$casa1->cat_name}} </p>
             <hr style="color:green">
             <h5>Preço</h5>
@@ -94,7 +94,7 @@
             </p>
             
            
-             @if($casa1->plano==0)
+             @if($casa1->plano=='free')
 
 
              @else
@@ -113,12 +113,14 @@
                 <p>
                   {{$casa1->biografia_user}}
                 </p>
-                <ul class="list-unstyled  dark-hover d-flex">
+               
+             <ul class="list-unstyled  dark-hover d-flex">
                  
+                
 				 <li>
           @auth
           @if($casa1->id_user == Auth::user()->id)
-          <a href="{{ route('user.perfil')}}" class="btn btn-primary text-white py-3 px-4"><i class="icon-massage"></i>Perfil</a>
+          <a href="{{route('user.user.perfil',Auth::user()->id)}}" class="btn btn-primary text-white py-3 px-4"><i class="icon-massage"></i>Perfil</a>
           @else
           
           @foreach($aluguels as $alu)
@@ -170,7 +172,7 @@
         <div class="row mb-5 align-items-center" style="margin-top: 50px">
           <div class="col-lg-12">
             <h2 class="font-weight-bold text-primary heading" style="text-align: center">
-              Casas relacionadas
+              Imóveis relacionados
             </h2>
           </div>
          
@@ -193,7 +195,7 @@
                       <span class="d-block mb-2 text-black-50"
                         >{{$casa->user_name}} {{$casa->lastname_user}} </span
                       >
-                      <span class="city d-block mb-3">{{$casa->provincia}}, {{$casa->municipio}} </span>
+                      <span class="city d-block mb-3">{{$casa->provincia}}, {{$casa->municipio}}, {{$casa1->bairro}} </span>
     
                       <div class="specs d-flex mb-4">
                         <span class="d-block d-flex align-items-center me-3">
@@ -221,7 +223,7 @@
                               
               </div>
               @empty($casa)
-              <p style="text-align: center">Sem Casas em Destaque</p>
+              <p style="text-align: center">Sem imóveis em Destaque</p>
               @endempty
               <div
                 id="property-nav"

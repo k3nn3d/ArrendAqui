@@ -13,6 +13,7 @@ use App\Models\municipio;
 use App\Models\Comentario;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
 
 
 class HomeController extends Controller
@@ -49,5 +50,10 @@ class HomeController extends Controller
     public function gerar_pdf(){
         $pdf= Pdf::loadview('admin.pdf.pdf');
          return $pdf->stream();
+    }
+    public function voltar(){
+
+
+        return redirect()->route('user.aluguel',Auth::user()->id);
     }
 }

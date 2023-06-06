@@ -53,7 +53,18 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                                    
                                     <form  method="POST" action="{{ route('register') }}" class="user">
                                         @csrf
+                                      
                                         <div class="form-group row mb-3">
+                                            @if($user->convite)
+                                        
+                                            <div class="col-sm-12 mb-4">
+                                                <label for="">Código de convite</label>
+                                                <input type="text" class="form-control form-control-user" name="convite" value="{{ $user->convite }}"  id="exampleFirstName"
+                                                    placeholder="código de convite" readonly>        
+                                                
+                                            </div>
+                                            @endif
+                                            <h1>Dados</h1>
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <label for="">Primeiro nome</label>
                                                 <input type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  id="exampleFirstName"
@@ -80,6 +91,46 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                                                 placeholder="Email" required>
                                                 {{ ($errors->has('email')) ? $errors->first('email'): '' }}
                                         </div>
+                                        <div class="form-group mb-3">
+                                            <label for="">Tipo de conta</label>
+                                           <select name="vc_tipo_utilizador" id="vc_tipo_utilizador" class="form-control" >
+                                            <option class="tipo" value="">--Selecione um tipo de conta</option>
+                                            <option class="tipo" value="6" {{ old('vc_tipo_utilizador')==6 ? 'selected' : '' }}>Cliente</option>
+                                            <option class="tipo" value="5" {{ old('vc_tipo_utilizador')==5 ? 'selected' : '' }}>Senhorio</option>
+                                            <option class="tipo" value="3" {{ old('vc_tipo_utilizador')==3 ? 'selected' : '' }}>Motorista</option>
+                                           </select>
+                                        </div>
+                                        <div id="senhorio" style="display:none">
+                                            <h1>Documentos</h1>
+                                            <div class="form-group mb-3">
+                                                <label for="">BI</label>
+                                                <input type="file" class="form-control form-control-user" @error('bi') is-invalid @enderror value="{{ old('bi') }}" name="bi" id="bi_s"
+                                                    placeholder="Email" required>
+                                                    {{ ($errors->has('bi')) ? $errors->first('bi'): '' }}
+                                            </div>
+                                            </div>
+                                        <div id="motorista" style="display:none">
+                                            <h1>Documentos</h1>
+                                            <div class="form-group mb-3">
+                                                <label for="">BI</label>
+                                                <input type="file" class="form-control form-control-user" @error('bi') is-invalid @enderror value="{{ old('bi') }}" name="bi" id="bi_m"
+                                                    placeholder="BI" required>
+                                                    {{ ($errors->has('email')) ? $errors->first('bi'): '' }}
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label for="">Carta de condução</label>
+                                                <input type="file" class="form-control form-control-user" @error('carta') is-invalid @enderror value="{{ old('carta') }}" name="carta" id="carta"
+                                                    placeholder="Carta de condução" required>
+                                                    {{ ($errors->has('carta')) ? $errors->first('carta'): '' }}
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label for="">Registro Criminal</label>
+                                                <input type="file" class="form-control form-control-user" @error('registro_criminal') is-invalid @enderror value="{{ old('registro_criminal') }}" name="registro_criminal" id="reg"
+                                                    placeholder="Registro criminal" required>
+                                                    {{ ($errors->has('registro_criminal')) ? $errors->first('registro_criminal'): '' }}
+                                            </div>
+                                        </div>
+                                        <h1>Segurança</h1>
                                         <div class="form-group row mb-3">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <label for="">Senha</label>
@@ -94,15 +145,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                                             </div>
                                         </div>
                                        
-                                        <div class="form-group mb-3">
-                                            <label for="">Tipo de conta</label>
-                                           <select name="vc_tipo_utilizador" id="vc_tipo_utilizador" class="form-control" >
-                                            <option value="0">--Selecione um tipo de conta</option>
-                                            <option value="6" {{ old('vc_tipo_utilizador')==6 ? 'selected' : '' }}>Cliente</option>
-                                            <option value="5" {{ old('vc_tipo_utilizador')==5 ? 'selected' : '' }}>Senhorio</option>
-                                           </select>
-                                        </div>
-                                
+                                       
                                     
                                         <button class="btn btn-success btn-user btn-block">
                                             Criar Conta
@@ -135,6 +178,53 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
 
     </div>
 
+<script>
+            
+        const motorista = document.getElementById('motorista');
+        const senhorio = document.getElementById('senhorio');
+        const bi_m = document.getElementById('bi_m');
+        const bi_c = document.getElementById('bi_s');
+        const carta = document.getElementById('carta');
+        const reg = document.getElementById('reg');
+        const tipos = document.getElementById('vc_tipo_utilizador');
 
+
+        tipos.addEventListener('change', function() {
+        const selectedTipo = tipos.value;
+        
+                        if(tipos.value == 3){
+                            motorista.style.display='block';
+                            senhorio.style.display='none';
+                            reg.required= true;
+                            carta.required=true;
+                            bi_m.required=true;
+                            bi_s.required=false;
+                            bi_s.name='';
+
+
+                        }
+                        if(tipos.value == 5){
+                            motorista.style.display='none'
+                            senhorio.style.display='block'
+                            reg.required=false;
+                            carta.required=false;
+                            bi_m.required=false;
+                            bi_s.required=true;
+                            bi_m.name='';
+
+
+                        }
+                        if(tipos.value == 6){
+                            motorista.style.display='none'
+                            senhorio.style.display='none'
+                            reg.required=false;
+                            carta.required=false;
+                            bi_m.required=false;
+                            bi_s.required=false;
+                            bi_s.name='';
+                
+                        }
+    });
+</script>
 
    @endsection

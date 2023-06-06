@@ -50,7 +50,7 @@ class RegisteredUserController extends Controller
         ]
     );
 
-
+//dd($this->gerarTokenUnico());
 
         $user = User::create([
             'name' => $request->name,
@@ -60,29 +60,46 @@ class RegisteredUserController extends Controller
             'vc_tipo_utilizador'=>$request->vc_tipo_utilizador,
             'password' => Hash::make($request->password),
             'vc_path' => "imagens/user.png",
-            'convite'=>$this->gerarTokenUnico(),
+            'convite'=> $this->gerarTokenUnico(),
             
           
         ]);
         $id=$user->id;
 
         if($user->vc_tipo_utilizador == 3){
+            User::where('id',$id)->update([
+                'estado'=>'pedente'
+     
+             ]);
 
         }
-        User::where('id',$id)->update([
-           'estado'=>'pedente'
+        if($user->vc_tipo_utilizador == 6){
+            User::where('id',$id)->update([
+                'link'=>"/register$user->convite"
 
-     ]);
+         ]);
+        }
+    
+      
+     if($request->convite){
+        
+        User::where('id',$id)->update([
+            'codigo_convite'=>$request->convite,
+ 
+         ]);
+         $user2 = User::where('convite',$request->convite)->first();
+         $novos_pontos = $user2->pontos + 0.5;
+         User::where('convite',$request->convite)->update([
+            'pontos'=>$novos_pontos,
+ 
+         ]);
+
+     }
 
 
         
 
-        if($user->vc_tipo_utilizador == 6){
-            User::where('id',$id)->update([
-                'link'=>"/register/$user->convite"
-
-         ]);
-        }
+      
         if($request->iban){
            
             User::where('id',$id)->update([
@@ -121,6 +138,21 @@ class RegisteredUserController extends Controller
              ]);
             
         }
+
+        if($request->hasFile('registro_criminal') && $req->file('registro_criminal')->isValid()){
+            // Imagem Hablitacôes
+        $req_carta=$request->carta;
+        $extension=$req_carta->extension();
+        $carta_name=md5($req_carta->getClientOriginalName() . strtotime('now')) . "." . $extension;
+        $destino=$req_carta->move(public_path("pdf/user/registro_criminal"), $carta_name);
+        $dir = "pdf/user/registro_criminal";
+        $caminho_carta=$dir. "/". $carta_name;
+        $id=$user->id;
+        User::where('id',$id)->update([
+                'registro_criminal'=>$caminho_carta
+         ]);
+        
+    }
        
 
         event(new Registered($user));

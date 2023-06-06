@@ -44,29 +44,6 @@
                 
               <br>
              
-              <form action="{{ route('admin.user') }}" method="GET" id="form_2">
-                @csrf
-                <div class="row">
-               <div class="col-6" >
-              <select class="form-control" name="vc_tipo_utilizador" >  
-                <option value="" onclick="document.getElementById('form_2').submit()">Filtro de Usuários</option>
-                <option value="1" onclick="document.getElementById('form_2').submit()" {{ 1 == $tipo? 'selected':'' }} >Administradores</option>
-                <option value="2" onclick="document.getElementById('form_2').submit()" {{ 2 == $tipo? 'selected':'' }}>Gerentes</option>
-                <option value="3" onclick="document.getElementById('form_2').submit()" {{ 3 == $tipo? 'selected':'' }}>Motoristas</option>
-                <option value="5" onclick="document.getElementById('form_2').submit()" {{ 5 == $tipo? 'selected':'' }}>Senhorios</option>
-                <option value="6" onclick="document.getElementById('form_2').submit()" {{ 6 == $tipo? 'selected':'' }}>Clientes</option>
-             
-              </select>
-            </div>
-         
-             <br>
-              <div class="col-6">
-              <input type="text" name="name" class="form-control" placeholder="Pesquisar por nome" value="@if(isset($name)){{ $name }} @endif" style="color: black">
-              <br>
-            </div>
-          </div>
-           <input type="submit"class="btn btn-sm btn-outline-primary" value="Pesquisar">
-            </form>
          
          
         
@@ -74,7 +51,7 @@
                
                
                 <div class="table-responsive">
-                  <table class="table table-striped" id="minha-tabela">
+                  <table  id="myTable">
                     <thead>
                       <tr>
                         <th> Foto </th>
@@ -172,7 +149,6 @@
                       
                     </tbody>
                   </table>
-        
                 </div>
               </div>
             </div>
@@ -257,7 +233,17 @@
 </script>
 @endif
 
-<script>
+
+{{--<script>
+  $(document).ready(function() {
+    $('#myTable').DataTable({
+      searching: true
+    });
+  });
+</script>
+--}}
+
+{{--<script>
   $(document).ready(function() {
   $('#minha-tabela').DataTable();
 });
@@ -274,6 +260,14 @@ $(document).ready(function() {
   });
 });
 
+</script>
+--}}
+
+<script>
+  $(document).ready(function() {
+    $('#myTable').DataTable({
+    });
+  });
 </script>
 
 @endsection

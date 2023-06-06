@@ -9,6 +9,7 @@
                 <div style="position: relative;
                 display: inline-block;">
                 <img src="{{$user_2->vc_path}}" alt="user-image" style="width: 40px; height:40px;border-radius:20px">
+                @if($user_2->ativo ==1)
                 <div style="position: absolute;
                 top: 30px;
                 right: 2px;
@@ -17,6 +18,8 @@
                 border-radius: 50%;
                 background-color: rgb(0, 247, 0);
               "></div>
+              @else
+              @endif
                 </div>
                 <h5>{{ $user_2->name }} {{ $user_2->lastname }}</h5>
                 <br>
@@ -180,6 +183,72 @@
     </div>
   </div>
 
+
+
+
+
+  <div class="section">
+    <div class="container">
+      <div class="row mb-5 align-items-center">
+        <div class="col-lg-12">
+          <h2 class="font-weight-bold heading" style="text-align: center">
+            Alugue um carro para levar suas coisas à sua nova morada!
+          </h2>
+        </div>
+       
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="property-slider-wrap">
+            <div class="property-slider">
+           
+                
+              <div class="property-item">
+                <a href="property-single.html" class="img">
+                  <img src="{{$casa->vc_path}}" alt="Image" class="img-fluid" style="width: 600px; height:300px" />
+                </a>
+  
+                <div class="property-content">
+                  <div class="price mb-2"><span>{{$casa->preco}}kz/{{$casa->unidade_name}}</span></div>
+                  <div>
+                    <span class="d-block mb-2 text-black-50"
+                      >{{$casa->user_name}} {{$casa->lastname_user}}</span
+                    >
+                    <span class="city d-block mb-3">{{$casa->provincia}}, {{$casa->municipio}} </span>
+  
+                    <div class="specs d-flex mb-4">
+                      <span class="d-block d-flex align-items-center me-3">
+                        <span class="icon-bed me-2"></span>
+                        <span class="caption">{{$casa->quartos}} quarto(s)</span>
+                      </span>
+                      <span class="d-block d-flex align-items-center">
+                        <span class="icon-bath me-2"></span>
+                        <span class="caption"> {{$casa->casa_de_banho}} casa(s) de banho</span>
+                      </span>
+                    </div>
+  
+                    @if($casa->plano != 'free')
+                    <div style="padding: 0.4rem 0.5rem">
+                        <i class="icon-star text-warning"></i>  Patrocinado
+                    </div>
+                    @endif
+                    <a
+                      href="{{route('casa.show', $casa->id)}}"
+                      class="btn btn-primary py-2 px-3"
+                      >Alugar um carro</a
+                    >
+                  </div>
+                </div>
+              </div>
+            
+              <!-- .item -->
+              
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
 
 
   

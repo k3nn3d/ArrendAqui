@@ -162,11 +162,16 @@ class UserController extends Controller
             $user=User::where('id',$id)->update([
                 'name'=>$req->name,
                 'email'=>$req->email,
-                'password'=>Hash::make($req->password),
                 'vc_tipo_utilizador'=>$req->vc_tipo_utilizador
                
             ]);
-           
+            
+           if($req->password){
+            $user=User::where('id',$id)->update([
+                'password'=>Hash::make($req->password),
+            ]);
+            
+        }
             
             if($req->hasFile('vc_path') && $req->file('vc_path')->isValid()){
                 // Imagem VC_PATH

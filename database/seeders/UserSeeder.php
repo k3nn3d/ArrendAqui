@@ -103,6 +103,7 @@ class UserSeeder extends Seeder
             'vc_tipo_utilizador' => 5,
             'vc_path' => "imagens/user.png",
             'telefone'=>'937539143',
+            'biografia'=>'Confiaça no futuro!',
             'bi'=>'pdf/casa/propriedade/document.pdf',
             'password' => Hash::make("12345678")
         ]);
@@ -116,6 +117,7 @@ class UserSeeder extends Seeder
             'vc_tipo_utilizador' => 5,
             'telefone'=>'937539143',
             'vc_path' => "imagens/user.png",
+            'biografia'=>'Arrende uma casa e realize o sonho de ter um teto',
             'bi'=>'pdf/casa/propriedade/document.pdf',
             'password' => Hash::make("12345678")
         ]);
@@ -127,6 +129,7 @@ class UserSeeder extends Seeder
             'email' => "ana@gmail.com",
             'vc_tipo_utilizador' => 5,
             'vc_path' => "imagens/user.png",
+            'biografia'=>"Olá, estou no Arrend'Aqui",
             'telefone'=>'937539143',
             'bi'=>'pdf/casa/propriedade/document.pdf',
             'password' => Hash::make("12345678")
@@ -138,6 +141,7 @@ class UserSeeder extends Seeder
             'username'=>"filo",
             'email' => "filomneno@gmail.com",
             'vc_tipo_utilizador' => 5,
+            'biografia'=>'Arrende esta casa e ganhe muitos outros privilégios',
             'telefone'=>'937539143',
             'vc_path' => "imagens/user.png",
             'bi'=>'pdf/casa/propriedade/document.pdf',
@@ -157,7 +161,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make("12345678")
         ]);
         $user1->update([
-            'link'=>"register/$user1->convite"
+            'link'=>"register$user1->convite"
         ]);
         $user2=User::create([
             "id" => 11,
@@ -172,7 +176,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make("12345678")
         ]);
         $user2->update([
-            'link'=>"register/$user2->convite"
+            'link'=>"register$user2->convite"
         ]);
         $user3=User::create([
             "id" => 12,
@@ -188,7 +192,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make("12345678")
         ]);
         $user3->update([
-            'link'=>"register/$user3->convite"
+            'link'=>"register$user3->convite"
         ]);
     }
 
