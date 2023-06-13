@@ -72,6 +72,20 @@ public function store(Request $req){
     try{
     
          $id_user=Auth::user()->id; 
+         $carro=Carro::create([
+             
+            'modelo'=>$req->modelo,
+            'marca'=>$req->marca,
+            'estrelas'=>$req->estrelas,
+            'combustivel'=>$req->combustivel,
+            'lugares'=>$req->lugares,
+            'espaco'=>$req->espaco,
+            'id_user'=>$id_user,
+            'id_categoria'=>$req->id_categoria
+         
+        ]);
+
+       
         
         if($req->hasFile('vc_path') && $req->file('vc_path')->isValid()){
             dd($id_user);
@@ -82,56 +96,39 @@ public function store(Request $req){
             $destino=$req_imagem->move(public_path("imagens/galeria"), $imagem_name);
             $dir = "imagens/galeria";
             $caminho=$dir. "/". $imagem_name;
-            $carro=Carro::create([
-             
-                'modelo'=>$req->modelo,
-                'vc_path'=>$req->vc_path,
-                'marca'=>$req->marca,
-                'estrelas'=>$req->estrelas,
-                'combustivel'=>$req->combustivel,
-                'preco'=>$req->preco,
-                'lugares'=>$req->lugares,
-                'espaco'=>$req->espaco,
-                'id_user'=>$id_user,
-                'id_categoria'=>$req->id_categoria
-             
-            ]);
+            $carro->update([
+                'vc_path'=> $caminho,
+               ]);
 
+           }  
             
             if($req->id_user){
                 Carro::where('id',$carro->id)->update([
                     'id_user'=>$req->id_user
                 ]);
             }
+
+            if($req->hasFile('propriedade') && $req->file('propriedade')->isValid()){
+                $req_imagem=$req->propriedade;
+                $extension=$req_imagem->extension();
+                $imagem_name=md5($req_imagem->getClientOriginalName() . strtotime('now')) . "." . $extension;
+                $destino=$req_imagem->move(public_path("imagens/galeria"), $imagem_name);
+                $dir = "imagens/galeria";
+                $caminho=$dir. "/". $imagem_name;
+                Carro::where('id',$carro->id)->update([
+                    'propriedade'=> $caminho,
+                ]);
+            }
         
 
            
           
-          return redirect()->route('carros')->with('cadastrada', 1);
-}else{
-    $req_imagem=$req->vc_path;
-    $extension=$req_imagem->extension();
-    $imagem_name=md5($req_imagem->getClientOriginalName() . strtotime('now')) . "." . $extension;
-    $destino=$req_imagem->move(public_path("imagens/galeria"), $imagem_name);
-    $dir = "imagens/galeria";
-    $caminho=$dir. "/". $imagem_name;
-    $carro=Carro::create([
-        'modelo'=>$req->modelo,
-        'vc_path'=>$req->vc_path,
-        'marca'=>$req->marca,
-        'estrelas'=>$req->estrelas,
-        'combustivel'=>$req->combustivel,
-        'preco'=>$req->preco,
-        'lugares'=>$req->lugares,
-        'espaco'=>$req->espaco,
-        'id_user'=>$id_user,
-        'id_categoria'=>$req->id_categoria
-     
-    ]);
-    return redirect()->route('carros')->with('cadastrada', 1);
-}
+
+
+            return redirect()->route('carros')->with('cadastrada', 1);
 
 }catch (\Throwable $th) {
+    dd($th);
     log::create([
         'mensagem'=>'Erro ao cadastrar carro',
          
@@ -199,6 +196,5 @@ public function delete($id){
     return redirect()->back()->with('eliminada_f', 1);
 }
 }
+
 }
-
-

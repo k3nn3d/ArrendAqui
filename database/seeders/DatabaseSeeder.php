@@ -33,7 +33,8 @@ class DatabaseSeeder extends Seeder
             ComentarioSeeder::class,
             UnidadeSeeder::class,
             motoristaSeeder::class,
-            afiliadoSeeder::class, 
+            afiliadoSeeder::class,
+            GaleriaSeeder::class, 
 
 
           

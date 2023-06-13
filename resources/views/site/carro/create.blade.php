@@ -10,7 +10,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
 <div class="container">
   <div class="row justify-content-center align-items-center">
     <div class="col-lg-9 text-center mt-5">
-      <h1 class="heading" data-aos="fade-up">Publicar imóvel</h1>
+      <h1 class="heading" data-aos="fade-up">Publicar carro</h1>
 
       <nav
         aria-label="breadcrumb"
@@ -23,7 +23,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
             class="breadcrumb-item active text-white-50"
             aria-current="page"
           >
-          Publicar imóvel
+          Publicar carro
           </li>
         </ol>
       </nav>
@@ -37,7 +37,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
 <div class="section">
     <div class="container">
       <div class="row mb-5">
-        <h2 style="text-align: center" class="mb-5" data-aos="fade-up" data-aos-delay="200">Cadastre um imóvel</h2>
+        <h2 style="text-align: center" class="mb-5" data-aos="fade-up" data-aos-delay="200">Cadastre um carro</h2>
         <div class="col-lg-3">
 
         </div>
@@ -45,12 +45,12 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
         
             <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
               <div style="display:flex;" class="mb-4"> 
-                <button class="next1 btn" >Imagens</button>    <button class="next1 btn">Descrição</button>  <button class="next1 btn" >Localização</button>    <button class="next1 btn">Documentos</button> <button class="next1 btn" >Plano</button>  <button class="next1 btn" >Pagamento</button>  
+                <button class="next1 btn" >Imagens</button>    <button class="next1 btn">Descrição</button>  <button class="next1 btn" >Localização</button>    <button class="next1 btn">Documentos</button>
                 </div>
                 
               
               
-                <form action="{{route('user.casa.store')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('user.carro.store')}}" method="POST" enctype="multipart/form-data">
                   @csrf
                     <div class="row">
                       <div class="step" id="step-1">
@@ -70,7 +70,6 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                           id="vc_path"
                           class="form-control"
                           value="{{ old('vc_path') }}"
-                          required
                           style="display: none"
                           />
                       </div>
@@ -82,115 +81,52 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                     <div class="step" id="step-1">
                       <h1>Descricão</h1>
                       <div class="row">
-                        <div class="col-8 mb-3">
-                          <label for="">Preço da Renda</label>
+                        <div class="col-6 mb-3">
+                          <label for="">Marca</label>
                             <input
-                            type="number"
+                            type="text"
                             class="form-control"
-                            name="preco"
-                            id="preco"
-                            value="{{ old('preco') }}"
-                            placeholder="Preço da Renda"
+                            name="marca"
+                            id="marca"
+                            value="{{ old('marca') }}"
+                            placeholder="Marca"
                             required min="0"
                             />
                         </div>
-                        <div class="col-4 mb-3">
-                          <label for="">Frequêcia</label>
-                          <select class="form-control" name="id_unidade" id="id_unidade">
-                            @foreach ($unidades as $unidade)
-                            <option style="align-content: center" value="{{ $unidade->id }} {{ old('id_unidade')==$unidade->id? 'selected' :'' }}">/{{$unidade->name}}</option>
-                            @endforeach
-                          </select>
-                        </div>
+                     
+                          <div class="col-6 mb-3">
+                            <label for="">Modelo</label>
+                              <input
+                              type="text"
+                              class="form-control"
+                              name="modelo"
+                              id="modelo"
+                              value="{{ old('modelo') }}"
+                              placeholder="Modelo"
+                              required min="0"
+                              />
+                          </div>
                         <div class="col-12 mb-3">
                           <label for="">Categoria</label>
                           <select class="form-control" name="id_categoria" id="">
                             <option style="align-content: center" value="">Categoria</option>
-                            @foreach($categorias as $categoria)
-                            <option value="{{$categoria->id}} {{ old('id_categoria')==$categoria->id? 'selected':'' }}">{{ $categoria->name }}</option>
-                            @endforeach
-                            
+                            <option style="align-content: center" value="">Pesado</option>
+                            <option style="align-content: center" value="">Ligeiro</option>
                           </select>
                         </div>
+                       
                         <div class="col-12 mb-3">
-                          Subcategoria
-                          <select class="form-control" name="id_sub_categoria" id="">
-                            <option style="align-content: center" value="">Subcategoria</option>
-                            @foreach($sub_categorias as $sub)
-                            <option value="{{ $sub->id }} {{ old('id_sub_categotia')==$sub->id? 'selected':'' }}">{{$sub->name}}</option>
-                            @endforeach
-                          </select>
-                        </div>
-                        <div class="col-6 mb-3">
-                          <label for="">Quartos</label>
+                          <label for="">Lugares</label>
                           <input
                           type="number"
                           class="form-control"
-                          name="quartos"
-                          id="quartos"
-                          value="{{ old('quartos') }}"
-                          placeholder="Quartos"
+                          name="lugares"
+                          id="lugares"
+                          value="{{ old('lugares') }}"
+                          placeholder="Lugares"
                           required min="0"
                           />
                       </div>
-                      <div class="col-6 mb-3">
-                        <label for="">Casas de banho</label>
-                        <input
-                        type="number"
-                        class="form-control"
-                        name="casa_de_banho"
-                        id="casa_de_banho"
-                        value="{{ old('casa_de_banho') }}"
-                        placeholder="Casas de banho"
-                        required min="0"
-                        />
-                    </div>
-                    <div class="col-6 mb-3">
-                      <label for="">Cozinhas</label>
-                      <input
-                      type="number"
-                      class="form-control"
-                      name="cozinha"
-                      id="cozinha"
-                      value="{{ old('cozinha') }}"
-                      placeholder="Cozinhas"
-                      required min="0"
-                      />
-                  </div>
-                        <div class="col-6 mb-3">
-                          <label for="">Salas</label>
-                            <input
-                            type="number"
-                            name="sala"
-                            id="sala"
-                            class="form-control"
-                            value="{{ old('sala') }}"
-                            placeholder="Salas"
-                            required min="0"
-                            />
-                        </div>
-                        
-                        <div class="col-12 mb-3">
-                          <label for="">Detalhes</label>
-                            <textarea
-                            name="descricao"
-                            id="descricao   "
-                            cols="30"
-                            rows="7"
-                            class="form-control"
-                            style="text-align: start"
-                            placeholder=""
-                            required
-                           
-                            >
-@if(old('descricao')!= '')
-{{ old('descricao') }}
-@else
-Detalhes
-@endif                         
-                        </textarea>
-                        </div>
-
                        
 
                       </div>
@@ -208,7 +144,7 @@ Detalhes
                           <select class="form-control" name="provincia" id="provincia">
                             <option style="align-content: center" value="">Provincia</option>
                             @foreach($provincias as $provincia)
-                            <option value="{{ $provincia->id }} {{ old('provincia')==$provincia->id? 'selected':'' }} {{ $provincia->id == 'selected'? $filtro_municipio=$provincia->id : false }}">{{ $provincia->name }}</option>
+                            <option value="{{ $provincia->id }} {{ old('provincia')==$provincia->id? 'selected':'' }}">{{ $provincia->name }}</option>
                             @endforeach
                           </select>
                         </div>
@@ -217,13 +153,9 @@ Detalhes
                           <select class="form-control" name="municipio" id="municipio">
                             <option style="align-content: center" value="">Município</option>
                              @foreach($municipios as $municipio)
-                             @if($filtro_municipio != 0)
-                              @if($municipio->id_provincia == $filtro_municipio)
+                          
                              <option value="{{ $municipio->id }} {{ old('municipio')==$municipio->id? 'selected':'' }}">{{ $municipio->name }}</option>
-                             @endif
-                             @else
-                            <option value="{{ $municipio->id }} {{ old('municipio')==$municipio->id? 'selected':'' }}">{{ $municipio->name }}</option>
-                             @endif
+                           
                              @endforeach
                           </select>
                         </div>
@@ -260,17 +192,7 @@ Detalhes
                   <div class="step" id="step-1">
                     <h1>Documentos</h1>
                     <div class="row">
-                      <div class="col-12 mb-3">
-                        <label for="">Planta(Opcional)</label>
-                        <input
-                        type="file"
-                        name="planta"
-                        id="planta"
-                        class="form-control"
-                        value="{{ old('planta') }}"
-                        
-                        />
-                    </div>
+                      
                     <div class="col-12 mb-3">
                       <label for="">Propriedade</label>
                       <input
@@ -285,145 +207,10 @@ Detalhes
 
                     </div>
                     <button type="button" class="prev btn btn-primary">Anterior</button>
-                    <button type="button" class="next btn btn-success">Próximo</button>
+                    <button type="submit" class="next btn btn-success">Cadastrar</button>
                    
                   </div>
-
-                  <div class="step" id="step-1">
-                    <div class="row">
-                      <h1>Escolha um plano</h1>
-                      <div class="col-lg-4 mb-3">   
-                        <input type="radio" class="plano" id="plano1" name="plano" value="free" placeholder="Plano">
-                        <label for="plano1">
-                          <div class="btn btn-success">
-                            <h4 style="text-align: center">Free</h4>
-                            <hr>
-                            <div>
-                              <h5>1 semana</h5>
-                               
-                              <ul>
-                                <li></li>
-                              </ul>
-                              <hr>
-                              <p>Preço: 00.00kz</p>
-                            </div>
-                          </div>
-                      </label>
-                      </div>
-                      <div class="col-lg-4 mb-3">
-                        <input type="radio" class="plano" id="plano2" name="plano" value="2" placeholder="Plano">
-                        <label for="plano2">
-                          <div class="btn btn-warning" >
-                            <h4 style="text-align: center">Fácil</h4>
-                            <hr>
-                            <div>
-                              <h5>2 meses</h5>
-                               
-                              <ul>
-                                <li></li>
-                              </ul>
-                              <hr>
-                              <p>Preço: 1.000kz</p>
-                            </div>
-                          </div>
-                      </label>
-                      </div>
-                      <div class="col-lg-4 mb-3">
-                        <input type="radio" id="plano3" class="plano" name="plano" value="3" placeholder="Plano">
-                        <label for="plano3">
-                          <div class="btn btn-primary" for="plano3" style="">
-                            <h4 style="text-align: center">Prático</h4>
-                            <hr>
-                            <div>
-                              
-                                <h5>3 meses</h5>
-                              
-                                <ul>
-                                  <li></li>
-                                </ul>
-                                <hr>
-                              <p>Preço: 1.800kz</p>
-                            </div>
-                          </div>
-                      </label>
-                      </div>
-                    
-
-                    </div>
-                    <button type="button" class="prev btn btn-primary">Anterior</button>
-                    <button type="button" class="next btn btn-success">Próximo</button>
-                   
-                  </div>
-
-                  <div class="step" id="step-1">
-                    
-                      <h1>Pagamento</h1>
-
-                      <div class="free" style="height: 100px; display: none;">
-                        <h3>Seu plano é gratuito!</h3>
-
-                      </div>
-                      <div class="escolha" style="height: 100px">
-                        <h3>Escolha um plano!</h3>
-
-                      </div>
-                      <div class="row pagamento" style="display: none;" >
-                        <div class="col-12 mb-3">
-                          <label for="">IBAN</label>
-                          <input
-                          type="text"
-                          name="i"
-                          id="i"
-                          class="form-control"
-                          value="A060002229449848322909"
-                          readonly
-                          required
-                          />
-                      </div>
-                      <div class="col-12 mb-3">
-                        <label for="">Titular</label>
-                        <input
-                        type="text"
-                        name="t"
-                        id="t"
-                        class="form-control"
-                        value="Administrador do Sistema"
-                        required
-                        readonly
-                        />
-                    </div>
-                    <div class="col-12 mb-3">
-                      <label for="">Valor a transferir</label>
-                      <input
-                      type="text"
-                      name="v"
-                      id="v"
-                      class="form-control"
-                      value=""
-                      readonly
-                    
-                      />
-                  </div>
-                    <div class="col-12 mb-3">
-                      <label for="">Comprovativo</label>
-                      <input
-                      type="file"
-                      name="comprovativo"
-                      id="c"
-                      class="form-control"
-                      value=""
-                      required
-                      
-                      />
-                  </div>
-  
-
-                    </div>
-                    <button type="button" class="prev btn btn-primary">Anterior</button>
-                    <button class="btn btn-success" id="botao" disabled>Cadastrar casa</button>
-                   
-                  </div>
-                        
+       
                     </div>
                   
                   </div>

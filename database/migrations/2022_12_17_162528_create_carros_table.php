@@ -16,15 +16,14 @@ class CreateCarrosTable extends Migration
         Schema::create('carros', function (Blueprint $table) {
             $table->id();
             $table->string('modelo');
-            $table->string('vc_path')->nullable();
+            $table->string('vc_path');
             $table->string('marca');
             $table->integer('estrelas')->nullable();
             $table->string('combustivel')->nullable();
-            $table->float('preco');
-            $table->float('estado');
-            $table->float('documento');
-            $table->integer('lugares');
-            $table->integer('espaco');
+            $table->string('estado')->default('pedente');
+            $table->string('propriedade');
+            $table->integer('lugares')->nullable();
+            $table->integer('espaco')->nullable();
             $table->unsignedBigInteger('id_user')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->timestamps();
         });

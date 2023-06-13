@@ -17,7 +17,7 @@
               <center>
               <div style="display:flex;" class="mb-4"> 
                
-              <button class="next1 btn">Reserva</button>  <button class="next1 btn" >Encontrar carro</button>   <button class="next1 btn" >Finalizar</button>  
+              <button class="next1 btn">Reserva</button>  <button class="next1 btn" >Trajetória</button>  
               
                 </div>
               </center>
@@ -78,162 +78,20 @@
 
                     </div>
                     <button type="button" class="prev btn btn-primary">Anterior</button>
-                    <button type="button" class="next btn btn-success">Fazer reserva</button>
+                    <button type="button" class="next btn btn-success">Próximo</button>
                    
                   </div>
                   <div class="step" id="step-1">
-                    <h1>Encontrar carro</h1>
+                    <h1>Trajetória</h1>
                    
                         <div id="map"></div>
                       
                     <button type="button" class="prev btn btn-primary">Anterior</button>
-                    <button type="button" class="next btn btn-success">Próximo</button>
+                    <button type="submit" class="next btn btn-success">Fazer reserva</button>
                    
                   </div>
 
-                  <div class="step" id="step-1">
-                    <div class="row">
-                      <h1>Escolha um plano</h1>
-                      <div class="col-lg-4 mb-3">   
-                        <input type="radio" class="plano" id="plano1" name="plano" value="free" placeholder="Plano">
-                        <label for="plano1">
-                          <div class="btn btn-success">
-                            <h4 style="text-align: center">Free</h4>
-                            <hr>
-                            <div>
-                              <h5>1 semana</h5>
-                               
-                              <ul>
-                                <li></li>
-                              </ul>
-                              <hr>
-                              <p>Preço: 00.00kz</p>
-                            </div>
-                          </div>
-                      </label>
-                      </div>
-                      <div class="col-lg-4 mb-3">
-                        <input type="radio" class="plano" id="plano2" name="plano" value="2" placeholder="Plano">
-                        <label for="plano2">
-                          <div class="btn btn-warning" >
-                            <h4 style="text-align: center">Fácil</h4>
-                            <hr>
-                            <div>
-                              <h5>2 meses</h5>
-                               
-                              <ul>
-                                <li></li>
-                              </ul>
-                              <hr>
-                              <p>Preço: 1.000kz</p>
-                            </div>
-                          </div>
-                      </label>
-                      </div>
-                      <div class="col-lg-4 mb-3">
-                        <input type="radio" id="plano3" class="plano" name="plano" value="3" placeholder="Plano">
-                        <label for="plano3">
-                          <div class="btn btn-primary" for="plano3" style="">
-                            <h4 style="text-align: center">Prático</h4>
-                            <hr>
-                            <div>
-                              
-                                <h5>3 meses</h5>
-                              
-                                <ul>
-                                  <li></li>
-                                </ul>
-                                <hr>
-                              <p>Preço: 1.800kz</p>
-                            </div>
-                          </div>
-                      </label>
-                      </div>
                     
-
-                    </div>
-                    <button type="button" class="prev btn btn-primary">Anterior</button>
-                    <button type="button" class="next btn btn-success">Próximo</button>
-                   
-                  </div>
-
-                  <div class="step" id="step-1">
-                    
-                      <h1>Pagamento</h1>
-
-                      <div class="free" style="height: 100px; display: none;">
-                        <h3>Seu plano é gratuito!</h3>
-
-                      </div>
-                      <div class="escolha" style="height: 100px">
-                        <h3>Escolha um plano!</h3>
-
-                      </div>
-                      <div class="row pagamento" style="display: none;" >
-                        <div class="col-12 mb-3">
-                          <label for="">IBAN</label>
-                          <input
-                          type="text"
-                          name="i"
-                          id="i"
-                          class="form-control"
-                          value="A060002229449848322909"
-                          readonly
-                          required
-                          />
-                      </div>
-                      <div class="col-12 mb-3">
-                        <label for="">Titular</label>
-                        <input
-                        type="text"
-                        name="t"
-                        id="t"
-                        class="form-control"
-                        value="Administrador do Sistema"
-                        required
-                        readonly
-                        />
-                    </div>
-                    <div class="col-12 mb-3">
-                      <label for="">Valor a transferir</label>
-                      <input
-                      type="text"
-                      name="v"
-                      id="v"
-                      class="form-control"
-                      value=""
-                      readonly
-                    
-                      />
-                  </div>
-                    <div class="col-12 mb-3">
-                      <label for="">Comprovativo</label>
-                      <input
-                      type="file"
-                      name="comprovativo"
-                      id="c"
-                      class="form-control"
-                      value=""
-                      required
-                      
-                      />
-                  </div>
-  
-
-                    </div>
-                    <button type="button" class="prev btn btn-primary">Anterior</button>
-                    <button class="btn btn-success" id="botao" disabled>Cadastrar casa</button>
-                   
-                  </div>
-                        
-                    </div>
-                  
-                  </div>
-                  <div class="col-lg-2">
-                   {{-- <img src="imagens/casa2.jpg" style="height: 60vh; width:56vh" alt="item image">--}}
-                  </div>
-                 </div>
-                  
                    
                  
                    <div class="col-1"></div>

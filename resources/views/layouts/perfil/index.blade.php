@@ -17,9 +17,9 @@
     <meta name="keywords" content="">
     <meta name="author" content="Phoenixcoded" />
     <!-- Favicon icon -->
-    <link rel="icon" href="imagens/logo.png" type="image/x-icon">
+    <link rel="icon" href="{{asset('imagens/logo.png')}}" type="image/x-icon">
     <!--Google maps-->
-    <link rel="stylesheet" href="css/googlemaps.css">
+    <link rel="stylesheet" href="{{asset('css/googlemaps.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,7 +27,7 @@
       href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="https://maps.googleapis.com/maps/api/directions/json
     ?destination=Montreal
     &origin=Luanda
@@ -42,7 +42,7 @@
 
 
     <!-- vendor css -->
-    <link rel="stylesheet" href="tmp/dist/assets/css/style.css">
+    <link rel="stylesheet" href="{{asset('tmp/dist/assets/css/style.css')}}">
     <script src="{{ asset('js/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
     
     
@@ -66,16 +66,16 @@
 
 
     <!-- Required Js -->
-    <script src="tmp/dist/assets/js/vendor-all.min.js"></script>
-    <script src="tmp/dist/assets/js/plugins/bootstrap.min.js"></script>
-    <script src="tmp/dist/assets/js/pcoded.min.js"></script>
+    <script src="{{asset('tmp/dist/assets/js/vendor-all.min.js')}}"></script>
+    <script src="{{asset('tmp/dist/assets/js/plugins/bootstrap.min.js')}}"></script>
+    <script src="{{asset('tmp/dist/assets/js/pcoded.min.js')}}"></script>
 
     <!-- Apex Chart -->
-    <script src="tmp/dist/assets/js/plugins/apexcharts.min.js"></script>
+    <script src="{{asset('tmp/dist/assets/js/plugins/apexcharts.min.js')}}"></script>
 
 
     <!-- custom-chart js -->
-    <script src="tmp/dist/assets/js/pages/dashboard-main.js"></script>
+    <script src="{{asset('tmp/dist/assets/js/pages/dashboard-main.js')}}"></script>
    
     
    

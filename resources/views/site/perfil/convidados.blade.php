@@ -3,7 +3,7 @@
 <!--HEADER START-->
 <div
 class="hero page-inner overlay mb-5"
-style="background-image: url('tamplate/images/hero_bg_1.jpg')"
+style="background-image: url('{{asset('tamplate/images/hero_bg_1.jpg')}}')"
 >
 
 <div class="container">

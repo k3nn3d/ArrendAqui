@@ -4,7 +4,7 @@
 <!--HEADER START-->
 <div
 class="hero page-inner overlay"
-style="background-image: url('tamplate/images/hero_bg_1.jpg')"
+style="background-image: url('{{asset('tamplate/images/hero_bg_1.jpg')}}')"
 >
 
 <div class="container">
@@ -45,7 +45,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
         <div class="col-lg-3 mb-4">
           <div style="position: relative;
                 display: inline-block;">
-                <img src="{{ Auth::user()->vc_path }}" alt="user-image" style="width: 200px; height:200px;border-radius:50%">
+                <img src="{{ asset(Auth::user()->vc_path) }}" alt="user-image" style="width: 200px; height:200px;border-radius:50%">
                 <label for="vc_path">
                 <img style="position: absolute;
                 top: 170px;
@@ -53,7 +53,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                 width: 25px;
                 height: 25px;
                 border-radius: 50%;
-              " src="imagens/camera.png">
+              " src="{{asset('imagens/camera.png')}}">
               </label>
                 </div>
 		
@@ -137,7 +137,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                         name="username"
                         id="username"
                         placeholder="Nome de usuário"
-                        required min="0"
+                        required min="21"
 						value="{{ Auth::user()->username }}"
                         />
                        </div>
@@ -150,7 +150,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                         name="lastname"
                         id="lastname"
                         placeholder="IBAN"
-                        required min="0"
+                         min="21"
             value="{{ Auth::user()->iban }}"
                         />
                     </div>

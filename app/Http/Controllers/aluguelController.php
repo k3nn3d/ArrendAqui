@@ -35,7 +35,7 @@ class aluguelController extends Controller
            'id_user'=>$user_id,
            'id_casa'=>$id 
         ]);
-        return redirect()->back()->with('reservado',1);
+        return redirect()->route('user.aluguel')->with('reservado',1);
     }
     public function update($id){
         aluguel::where('id',$id)->update([
@@ -49,12 +49,22 @@ class aluguelController extends Controller
         return redirect()->back()->with('reservado_eliminada',1);
     }
     public function reservar_carro($id, $id_casa){
+
         $carros=Carro::get();
         return view('site.carro.reservar',compact('carros'));
 
     }
     public function n_reservar_carro($id){
+        
         return redirect()->back();
         
+    }
+
+    public function recusar($id){
+        aluguel::where('id',$id)->update([
+            'estado'=>'Recusado'
+         ]);
+         return redirect()->back()->with('recusado',1);   
+
     }
 }

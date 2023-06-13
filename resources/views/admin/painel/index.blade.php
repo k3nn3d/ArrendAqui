@@ -181,9 +181,9 @@
   new Chart(ctx2, {
     type: 'pie',
     data: {
-      labels: ['{{   $cat_name  }}'],
+      labels: ['{{ $cat_name }}'],
       datasets: [{
-        label: [{!! $casaLabel !!},],
+        label: ["{{ $casaLabel }}"],
         data: [{{ $casa_total }}],
         backgroundColor: [
       'rgba(255, 99, 132, 0.2)',

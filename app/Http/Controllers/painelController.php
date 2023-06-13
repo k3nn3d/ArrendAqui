@@ -63,19 +63,21 @@ class painelController extends Controller
          ->orderBy('categorias.id')
          ->get();
 
-         $cat_name[]=0;
-         $casa_total[]=0;
+         $cat_name[]=null;
+         $casa_total[]=null;
          
          foreach($casaData as $casa){
-            $cat_name[]=$casa->cat_name;
+            $cat_name[]=  $casa->cat_name ;
             $casa_total[]=$casa->casa_total;
-          
+          //dd($cat_name);
          
          }
 
-         $casaLabel="'Comparativo de casas mais arrendadas consoante a categoria'";
-         $cat_name=implode(',',$cat_name);
-         $casa_total=implode(',',$casa_total);
+         $casaLabel='Comparativo de casas mais arrendadas consoante a categoria';
+         //dd($casaLabel);
+         $cat_name=implode(",", $cat_name);
+        // dd($cat_name);
+         $casa_total=implode(',',  $casa_total);
          
        
 

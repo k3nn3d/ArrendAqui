@@ -8,7 +8,7 @@
                 
                 <div style="position: relative;
                 display: inline-block;">
-                <img src="{{$user_2->vc_path}}" alt="user-image" style="width: 40px; height:40px;border-radius:20px">
+                <img src="{{asset($user_2->vc_path)}}" alt="user-image" style="width: 40px; height:40px;border-radius:20px">
                 @if($user_2->ativo ==1)
                 <div style="position: absolute;
                 top: 30px;
@@ -134,56 +134,6 @@
 
 
 
-  {{-- Cadastrar user --}}
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{$casa->name}}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            <div>
-                <span style="font-size: 2rem; font-weight:600;padding:1rem">  Você vai arrendar esta casa?</span>
-            </div>
-            <div style="width:900px; padding:1.5rem ">
-            <img src="{{$casa->vc_path}}" alt="casa-image" style="width:100%" >
-            </div>
-            <div style="padding-left:2rem; width:500px">
-                <p>Quartos:{{$casa->quartos}}</p>
-                <hr>
-                <p>Cozinha:{{$casa->cozinha}}</p>
-                <hr>
-                <p>Sala:{{$casa->sala}}</p>
-                <hr>
-                <p></p>
-                <hr>
-                <p></p>
-                <hr>
-                <p></p>
-
-                <!--Google maps-->
-                <div style="width: 100%; height:300px">
-                    <div id="map"></div>
-                </div>
-                <!--Google maps end-->
-            </div>
-           
-            <div class="modal-body">
-               
-                <form action="{{route('user.aluguel.store',$casa->id)}}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    
-                    <div class="modal-footer">
-                        <button type="button" class="btn  btn-secondary" data-dismiss="modal">Não</button>
-                        <button  class="btn  btn-primary" id="ajaxSubmit" >Sim</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-  </div>
-
-
 
 
 
@@ -203,37 +153,8 @@
             <div class="property-slider">
            
                 
-              <div class="property-item">
-                <a href="property-single.html" class="img">
-                  <img src="{{$casa->vc_path}}" alt="Image" class="img-fluid" style="width: 600px; height:300px" />
-                </a>
-  
-                <div class="property-content">
-                  <div class="price mb-2"><span>{{$casa->preco}}kz/{{$casa->unidade_name}}</span></div>
-                  <div>
-                    <span class="d-block mb-2 text-black-50"
-                      >{{$casa->user_name}} {{$casa->lastname_user}}</span
-                    >
-                    <span class="city d-block mb-3">{{$casa->provincia}}, {{$casa->municipio}} </span>
-  
-                    <div class="specs d-flex mb-4">
-                      <span class="d-block d-flex align-items-center me-3">
-                        <span class="icon-bed me-2"></span>
-                        <span class="caption">{{$casa->quartos}} quarto(s)</span>
-                      </span>
-                      <span class="d-block d-flex align-items-center">
-                        <span class="icon-bath me-2"></span>
-                        <span class="caption"> {{$casa->casa_de_banho}} casa(s) de banho</span>
-                      </span>
-                    </div>
-  
-                    @if($casa->plano != 'free')
-                    <div style="padding: 0.4rem 0.5rem">
-                        <i class="icon-star text-warning"></i>  Patrocinado
-                    </div>
-                    @endif
                     <a
-                      href="{{route('casa.show', $casa->id)}}"
+                      href="{{route('user.reservar.carro', $casa->id)}}"
                       class="btn btn-primary py-2 px-3"
                       >Alugar um carro</a
                     >

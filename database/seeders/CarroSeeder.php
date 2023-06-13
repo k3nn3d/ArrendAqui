@@ -20,7 +20,7 @@ class CarroSeeder extends Seeder
             'marca'=>"Toyota",
             'id_user'=>3,
             'lugares' => "2",
-            'preco'=>"1000",
+          
             'espaco'=>"5x6",
             'vc_path' => "imagens/carro.3.jpeg",
           
@@ -32,7 +32,6 @@ class CarroSeeder extends Seeder
             'marca'=>"Toyota",
             'id_user'=>5,
             'lugares' => "3",
-            'preco'=>"2000",
             'espaco'=>"6x9",
             'vc_path' => "imagens/carro.2.jpeg",
           
@@ -44,7 +43,6 @@ class CarroSeeder extends Seeder
             'marca'=>"Toyota",
             'id_user'=>5,
             'lugares' => "2",
-            'preco'=>"1000",
             'espaco'=>"5x6",
             'vc_path' => "imagens/carro.4.jpeg",
           
@@ -56,7 +54,6 @@ class CarroSeeder extends Seeder
             'marca'=>"Toyota",
             'id_user'=>4,
             'lugares' => "4",
-            'preco'=>"1000",
             'espaco'=>"4x6",
             'vc_path' => "imagens/carro.jpeg",
           
@@ -69,7 +66,6 @@ class CarroSeeder extends Seeder
             'marca'=>"Toyota",
             'id_user'=>3,
             'lugares' => "2",
-            'preco'=>"1000",
             'espaco'=>"5x6",
             'vc_path' => "imagens/carro.3.jpeg",
           
@@ -81,7 +77,6 @@ class CarroSeeder extends Seeder
             'marca'=>"Toyota",
             'id_user'=>5,
             'lugares' => "2",
-            'preco'=>"1000",
             'espaco'=>"5x6",
             'vc_path' => "imagens/carro.2.jpeg",
         ]);
@@ -92,7 +87,6 @@ class CarroSeeder extends Seeder
             'marca'=>"Toyota",
             'id_user'=>3,
             'lugares' => "3",
-            'preco'=>"1000",
             'espaco'=>"5x6",
             'vc_path' => "imagens/carro.jpeg",
           

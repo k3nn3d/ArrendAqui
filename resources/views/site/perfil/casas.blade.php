@@ -4,7 +4,7 @@
 <!--HEADER START-->
 <div
 class="hero page-inner overlay"
-style="background-image: url('tamplate/images/hero_bg_1.jpg')"
+style="background-image: url('{{asset('tamplate/images/hero_bg_1.jpg')}}')"
 >
 
 <div class="container">
@@ -84,7 +84,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                         <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                         <div class="property-item">
                           <a href="property-single.html" class="img">
-                            <img src="{{$casa->vc_path}}" alt="Image" class="img-fluid" style="width: 600px; height:300px" />
+                            <img src="{{asset($casa->vc_path)}}" alt="Image" class="img-fluid" style="width: 600px; height:300px" />
                           </a>
           
                           <div class="property-content">

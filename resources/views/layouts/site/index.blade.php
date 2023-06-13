@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Untree.co" />
-    <link rel="shortcut icon" href="imagens/logo.png" />
+    <link rel="shortcut icon" href="{{asset('imagens/logo.png')}}" />
 
     <meta name="description" content="" />
     <meta name="keywords" content="bootstrap, bootstrap5" />
@@ -16,12 +16,12 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="tamplate/fonts/icomoon/style.css" />
-    <link rel="stylesheet" href="tamplate/fonts/flaticon/font/flaticon.css" />
-    <link rel="stylesheet" href="tamplate/css/tiny-slider.css" />
-    <link rel="stylesheet" href="tamplate/css/aos.css" />
-    <link rel="stylesheet" href="tamplate/css/style.css" />
-    <link rel="stylesheet" href="css/googlemaps.css">
+    <link rel="stylesheet" href="{{asset('tamplate/fonts/icomoon/style.css')}}" />
+    <link rel="stylesheet" href="{{asset('tamplate/fonts/flaticon/font/flaticon.css')}}" />
+    <link rel="stylesheet" href="{{asset('tamplate/css/tiny-slider.css')}}" />
+    <link rel="stylesheet" href="{{asset('tamplate/css/aos.css')}}" />
+    <link rel="stylesheet" href="{{asset('tamplate/css/style.css')}}" />
+    <link rel="stylesheet" href="{{asset('css/googlemaps.css')}}">
 
     
     <link rel="stylesheet" href="https://maps.googleapis.com/maps/api/directions/json

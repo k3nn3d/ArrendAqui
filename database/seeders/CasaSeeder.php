@@ -19,17 +19,17 @@ class CasaSeeder extends Seeder
 
         Casa::create([
             "id" => 1,
-            'bairro' => "Casa no Benfica",
+            'bairro' => "Benfica",
             'id_user'=>6,
             'preco'=>15000,
             'descricao' => "4 quartos, uma casa de banho, uma sala, uma cozinha",
-            'vc_path' => "imagens/casas/casa.jpg",
+            'vc_path' => "imagens/casas/armazem_1(3).jpg",
             'id_provincia'=>1394, //Luanda
             'id_municipio'=>86, //Viana
             'quartos'=> 4,
             'cozinha'=>1,
             'casa_de_banho'=>1,
-            'id_categoria'=>1,
+            'id_categoria'=>2,
             'id_unidade'=>4,
             'plano'=>3,
             'estado'=>'pendente',
@@ -46,11 +46,11 @@ class CasaSeeder extends Seeder
             'id_user'=>7,
             'preco'=>15000,
             'descricao' => "7 quartos, uma casa de banho, uma sala, uma cozinha",
-            'vc_path' => "imagens/casas/casa4.jpeg",
+            'vc_path' => "imagens/casas/casa_2(6).jpg",
             'id_provincia'=> 1402, //Bengo
             'id_municipio'=>4, //Nambuangongo
             'quartos'=> 7,
-            'id_categoria'=>3,
+            'id_categoria'=>1,
             'cozinha'=>1,
             'id_unidade'=>3,
             'casa_de_banho'=>1,
@@ -70,7 +70,7 @@ class CasaSeeder extends Seeder
             'id_categoria'=>1,
             'preco'=>16000,
             'descricao' => "5 quartos, uma casa de banho, uma sala, uma cozinha",
-            'vc_path' => "imagens/casas/casa5.jpeg",
+            'vc_path' => "imagens/casas/casa_7(1).jpg",
             'id_provincia'=> 1402, //Bengo
             'id_municipio'=>2, // Ambriz
             'quartos'=> 5,
@@ -94,7 +94,7 @@ class CasaSeeder extends Seeder
             'id_categoria'=>2,
             'preco'=>10000,
             'descricao' => "1 quarto, uma casa de banho, uma sala, uma cozinha",
-            'vc_path' => "imagens/casas/casa8.jpeg",
+            'vc_path' => "imagens/casas/armazem_3(7).jpg",
             'id_provincia'=>1394, //Luanda
             'id_municipio'=> 83, //Cazenga
             'quartos'=> 1,
@@ -116,11 +116,11 @@ class CasaSeeder extends Seeder
             'id_user'=>9,
             'preco'=>25000,
             'descricao' => "3 quartos, uma casa de banho, uma sala, uma cozinha",
-            'vc_path' => "imagens/casas/casa2.jpg",
+            'vc_path' => "imagens/casas/casa_10(6).jpg",
             'id_provincia'=>1394, //Luanda
             'id_municipio'=>85, //Luanda
             'quartos'=> 3,
-            'id_categoria'=>2,
+            'id_categoria'=>1,
             'cozinha'=>1,
             'casa_de_banho'=>1,
             'id_unidade'=>4,
@@ -142,7 +142,7 @@ class CasaSeeder extends Seeder
             'preco'=>14000,
             'id_categoria'=>3,
             'descricao' => "2 quartos, uma casa de banho, uma sala, uma cozinha",
-            'vc_path' => "imagens/casas/casa7.jpeg",
+            'vc_path' => "imagens/casas/escritorio_2(4).jpg",
             'id_provincia'=> 1402, //Bengo
             'id_municipio'=>4, //Nambuangongo
             'quartos'=> 2,
@@ -163,9 +163,9 @@ class CasaSeeder extends Seeder
             'bairro' => "Casa para alugar",
             'id_user'=>7,
             'preco'=>15000,
-            'id_categoria'=>2,
+            'id_categoria'=>5,
             'descricao' => "4 quartos, uma casa de banho, uma sala, uma cozinha",
-            'vc_path' => "imagens/casas/casa3.jpg",
+            'vc_path' => "imagens/casas/loja_2(1).jpg",
             'id_provincia'=>1394, //Luanda
             'id_municipio'=>85, //Luanda
             'quartos'=> 4,
@@ -185,9 +185,9 @@ class CasaSeeder extends Seeder
             'bairro' => "Casa no Camama",
             'id_user'=>8,
             'preco'=>12000,
-            'id_categoria'=>1,
+            'id_categoria'=>5,
             'descricao' => "4 quartos, uma casa de banho, uma sala, uma cozinha",
-            'vc_path' => "imagens/casas/casa6.jpeg",
+            'vc_path' => "imagens/casas/loja_3(5).jpg",
             'id_provincia'=> 1402, //Bengo
             'id_municipio'=>2, // Ambriz
             'quartos'=> 4,
@@ -209,9 +209,9 @@ class CasaSeeder extends Seeder
             'bairro' => "Camama",
             'id_user'=>8,
             'preco'=>30000,
-            'id_categoria'=>1,
+            'id_categoria'=>3,
             'descricao' => "4 quartos, uma casa de banho, uma sala, uma cozinha",
-            'vc_path' => "imagens/casas/casa9.jpeg",
+            'vc_path' => "imagens/casas/escritorio_3(1).jpg",
             'id_provincia'=> 1402, //Bengo
             'id_municipio'=>2, // Ambriz
             'quartos'=> 4,
@@ -221,6 +221,75 @@ class CasaSeeder extends Seeder
             'plano'=>1,
             'estado'=>'publicado',
             'latitude'=>-7.877110015217037,
+            'longitude'=>13.128188707334752,
+            'planta'=>'pdf/casa/planta/document.pdf',
+            'propriedade'=>'pdf/casa/propriedade/document.pdf'
+          
+        ]);
+
+        Casa::create([
+            "id" => 10,
+            'bairro' => "Camama",
+            'id_user'=>8,
+            'preco'=>30000,
+            'id_categoria'=>5,
+            'descricao' => "4 quartos, uma casa de banho, uma sala, uma cozinha",
+            'vc_path' => "imagens/casas/loja_4(3).jpg",
+            'id_provincia'=> 1402, //Bengo
+            'id_municipio'=>2, // Ambriz
+            'quartos'=> 4,
+            'cozinha'=>1,
+            'id_unidade'=>1,
+            'casa_de_banho'=>1,
+            'plano'=>1,
+            'estado'=>'publicado',
+            'latitude'=>-7.877110015217039,
+            'longitude'=>13.128188707334752,
+            'planta'=>'pdf/casa/planta/document.pdf',
+            'propriedade'=>'pdf/casa/propriedade/document.pdf'
+          
+        ]);
+
+        Casa::create([
+            "id" => 11,
+            'bairro' => "Camama",
+            'id_user'=>8,
+            'preco'=>30000,
+            'id_categoria'=>1,
+            'descricao' => "4 quartos, uma casa de banho, uma sala, uma cozinha",
+            'vc_path' => "imagens/casas/casa_11(7).jpg",
+            'id_provincia'=> 1402, //Bengo
+            'id_municipio'=>2, // Ambriz
+            'quartos'=> 4,
+            'cozinha'=>1,
+            'id_unidade'=>1,
+            'casa_de_banho'=>1,
+            'plano'=>1,
+            'estado'=>'publicado',
+            'latitude'=>-7.877110015217037,
+            'longitude'=>13.128188707334752,
+            'planta'=>'pdf/casa/planta/document.pdf',
+            'propriedade'=>'pdf/casa/propriedade/document.pdf'
+          
+        ]);
+
+        Casa::create([
+            "id" => 12,
+            'bairro' => "Camama",
+            'id_user'=>8,
+            'preco'=>30000,
+            'id_categoria'=>4,
+            'descricao' => "4 quartos, uma casa de banho, uma sala, uma cozinha",
+            'vc_path' => "imagens/casas/festa_1(2).jpg",
+            'id_provincia'=> 1402, //Bengo
+            'id_municipio'=>2, // Ambriz
+            'quartos'=> 4,
+            'cozinha'=>1,
+            'id_unidade'=>1,
+            'casa_de_banho'=>1,
+            'plano'=>1,
+            'estado'=>'publicado',
+            'latitude'=>-7.877110015217035,
             'longitude'=>13.128188707334752,
             'planta'=>'pdf/casa/planta/document.pdf',
             'propriedade'=>'pdf/casa/propriedade/document.pdf'

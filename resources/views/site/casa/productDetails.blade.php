@@ -3,7 +3,7 @@
  <!--================Single Product Area =================-->
  <div
       class="hero page-inner overlay"
-      style="background-image: url('{{ $casa1->vc_path }}')"
+      style="background-image: url('{{ asset($casa1->vc_path) }}')"
     >
       <div class="container">
         <div class="row justify-content-center align-items-center">
@@ -41,10 +41,11 @@
           <div class="col-lg-7">
             <div class="img-property-slide-wrap">
               <div class="img-property-slide" >
-                <img style="height: 600px;" src="{{$casa1->vc_path}}" alt="Image" class="img-fluid" />
-                <img style="height: 600px;" src="{{$casa1->vc_path}}" alt="Image" class="img-fluid" />
-                <img style="height: 600px;" src="{{$casa1->vc_path}}" alt="Image" class="img-fluid" />
-              </div>
+                <img style="height: 600px;" src="{{asset($casa1->vc_path)}}" alt="Image" class="img-fluid" />
+                @forEach($galeria as $foto)
+                <img style="height: 600px;" src="{{asset($foto->vc_path)}}" alt="Image" class="img-fluid" />
+                @endforeach
+                </div>
             </div>
 <!--Google maps-->
 <div style="width: 100%; height:600px">
@@ -102,7 +103,7 @@
             <div class="d-block agent-box p-5">
               <div class="img mb-4">
                 <img
-                  src="{{ $casa1->foto_user }}"
+                  src="{{ asset($casa1->foto_user) }}"
                   alt="Image"
                   class="img-fluid"
                 />
@@ -123,24 +124,46 @@
           <a href="{{route('user.user.perfil',Auth::user()->id)}}" class="btn btn-primary text-white py-3 px-4"><i class="icon-massage"></i>Perfil</a>
           @else
           
-          @foreach($aluguels as $alu)
-          @if($alu->id_user==Auth::user()->id && $alu->id_casa== $casa1->id )
+          
+          @if($casa1->id_user === Auth::user()->id && $casa1->plano != 'free')
           <a
-          href="{{ route('user.aluguel.delete',$alu->id) }}"
-          class="btn btn-danger py-2 px-3"
-          >Cancelar reserva</a
+          href="{{route('user.promover', $casa->id)}}"
+          class="btn btn-warning py-2 px-3"
+          >Editar</a
         >
-         @endif
-
-        @endforeach
-        @empty($alu)
-        <a
-          href="{{ route('user.aluguel.store',$casa1->id) }}"
+          @else
+          @if($casa1->id_user === Auth::user()->id && $casa1->plano == 'free')
+          <a
+          href="{{route('user.promover', $casa1->id)}}"
           class="btn btn-success py-2 px-3"
-          >Reservar</a
+          >Promover</a
         >
-        @endempty
+        @else
+        @if($casa1->reserva->where('id_user',Auth::user()->id)->isNotEmpty())
+       @if($casa1->reserva->where('id_user', Auth::user()->id)->first()->estado =='Pendente')
+        <a href="{{ route('user.aluguel.delete', $casa1->reserva->where('id_user', Auth::user()->id)->first()->id) }}"
+           class="btn btn-danger py-2 px-3">Não reservar
+          </a>
+          @else
+          @if($casa1->reserva->where('id_user', Auth::user()->id)->first()->estado=='Reservado')
        
+          <button class="btn btn-success py-2 px-3" disabled>Reservado</button>
+          @else
+          <button class="btn btn-danger py-2 px-3" disabled>Recusado</button>
+          @endif
+          @endif
+    
+      @else
+     
+      <a
+      href="{{ route('user.aluguel.store',$casa1->id) }}"
+      class="btn btn-success py-2 px-3"
+      >Reservar</a
+    >
+    @endif
+       
+         @endif
+         @endif
           
           @endif
           @else
@@ -186,7 +209,7 @@
                  
                 <div class="property-item">
                   <a href="property-single.html" class="img">
-                    <img src="{{$casa->vc_path}}" alt="Image" class="img-fluid" style="width: 600px; height:300px" />
+                    <img src="{{asset($casa->vc_path)}}" alt="Image" class="img-fluid" style="width: 600px; height:300px" />
                   </a>
     
                   <div class="property-content">

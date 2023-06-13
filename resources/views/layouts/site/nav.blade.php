@@ -16,7 +16,7 @@
           <ul
             class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end"
           >
-          <li><img src="imagens/logo.png" alt="logo" style="width: 55px"></li>
+          <li><img src="{{asset('imagens/logo.png')}}" alt="logo" style="width: 55px"></li>
             <li class="active"><a href="{{ route('home') }}">Home</a></li>
             <li class="has-children">
               <a href="#">Bens</a>
@@ -27,7 +27,7 @@
                 <li><a href="{{ route('site.casa.create') }}">Publicar imóvel</a></li>
                 @endif
                 @if(Auth::user()->vc_tipo_utilizador==3)
-                <li><a href="{{ route('site.casa.create') }}">Publicar carro</a></li>
+                <li><a href="{{ route('site.carro.create') }}">Publicar carro</a></li>
                 @endif
                 @endauth
               </ul>
@@ -52,7 +52,7 @@
             @auth
         
           <li class="has-children">
-            <a> <img style="width: 24px; heigtht:20px; border-radius:50%;" src="{{Auth::user()->vc_path}}" alt=""> </a>
+            <a> <img style="width: 24px; heigtht:20px; border-radius:50%;" src="{{asset(Auth::user()->vc_path)}}" alt=""> </a>
             <ul class="dropdown" style="border-radius: 8px">
               <li><span style="margin-left: 20px;">@_{{Auth::user()->username}}</span></li>
               <hr>
@@ -75,9 +75,9 @@
                 @break
                 @endswitch
               <li >
-                <a  href="{{ route('user.aluguel') }}"><i class="ti-home"></i> @if(Auth::user()->vc_tipo_utilizador==3)Reservas @else Arrendamentos @endif</a>
+                <a  href="{{ route('user.aluguel') }}"><i class="ti-home"></i>Reservas</a>
               </li>
-              <li >
+              <li>
                 <a  href="{{ route('user.pagemento.index') }}"><i class="ti-home"></i>Pagamentos</a>
               </li>
               <li >

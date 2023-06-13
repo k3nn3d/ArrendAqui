@@ -20,7 +20,7 @@
     <!-- Favicon icon -->
     <link rel="icon" href="imagens/logo.png" type="image/x-icon">
     <!-- vendor css -->
-    <link rel="stylesheet" href="tmp/dist/assets/css/style.css">
+    <link rel="stylesheet" href="{{asset('tmp/dist/assets/css/style.css')}}">
     <script src="{{ asset('js/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -47,8 +47,7 @@
     @include('layouts.admin.nav')
     @include('layouts.admin.header')
     @yield('conteudo')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js" integrity="sha512-v3ygConQmvH0QehvQa6gSvTE2VdBZ6wkLOlmK7Mcy2mZ0ZF9saNbbk19QeaoTHdWIEiTlWmrwAL4hS8ElnGFbA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js" integrity="sha512-v3ygConQmvH0QehvQa6gSvTE2VdBZ6wkLOlmK7Mcy2mZ0ZF9saNbbk19QeaoTHdWIEiTlWmrwAL4hS8ElnGFbA==" crossorigin="anonymous" referrerpolicy="no-referrer"> 
     </script>
 
 
@@ -56,21 +55,22 @@
 
 
     <!-- Required Js -->
-    <script src="tmp/dist/assets/js/vendor-all.min.js"></script>
-    <script src="tmp/dist/assets/js/plugins/bootstrap.min.js"></script>
-    <script src="tmp/dist/assets/js/pcoded.min.js"></script>
+    <script src="{{asset('tmp/dist/assets/js/vendor-all.min.js')}}"></script>
+    <script src="{{asset('tmp/dist/assets/js/plugins/bootstrap.min.js')}}"></script>
+    <script src="{{asset('tmp/dist/assets/js/pcoded.min.js')}}"></script>
 
     <!-- Apex Chart -->
-    <script src="tmp/dist/assets/js/plugins/apexcharts.min.js"></script>
+    <script src="{{asset('tmp/dist/assets/js/plugins/apexcharts.min.js')}}"></script>
 
 
     <!-- custom-chart js -->
-    <script src="tmp/dist/assets/js/pages/dashboard-main.js"></script>
+    <script src="{{asset('tmp/dist/assets/js/pages/dashboard-main.js')}}"></script>
    
     
      
-      <!-- Biblioteca jQuery -->
+      <!-- Biblioteca jQuery 
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      -->
    
       <!-- Script do DataTable -->
       <script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>

@@ -4,13 +4,13 @@
  <!--HEADER START-->
  <div
  class="hero page-inner overlay"
- style="background-image: url('tamplate/images/hero_bg_1.jpg')"
+ style="background-image: url('{{asset('tamplate/images/hero_bg_1.jpg')}}')"
  >
  
  <div class="container">
    <div class="row justify-content-center align-items-center">
      <div class="col-lg-9 text-center mt-5">
-        <img src="{{Auth::user()->vc_path}}" alt="user" style="border-radius: 70px; height:120px; width:120px">
+        <img src="{{asset(Auth::user()->vc_path)}}" alt="user" style="border-radius: 70px; height:120px; width:120px">
        <h1 class="heading" data-aos="fade-up">{{Auth::user()->name}} {{Auth::user()->lastname}}</h1>
        <span style="color:#fff; font-size: 0.9rem; font-weight:500">@_{{Auth::user()->username}}</span>
  

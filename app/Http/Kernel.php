@@ -73,6 +73,7 @@ class Kernel extends HttpKernel
         'banido_acesso' =>\App\Http\Middleware\banido_acessoMiddleware::class,
         'banido_acesso2'=> \App\Http\Middleware\banido_acesso2Middleware::class,
         'acesso_site'=> \App\Http\Middleware\AcessoSiteMiddleware::class,
-        'redirect_login'=> \App\Http\Middleware\redirectloginMiddleware::class
+        'redirect_login'=> \App\Http\Middleware\redirectloginMiddleware::class,
+        'controle'=> \App\Http\Middleware\controleMiddleware::class,
     ];
 }

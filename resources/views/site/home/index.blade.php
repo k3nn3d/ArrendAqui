@@ -117,8 +117,8 @@
                      
                  
                 <div class="property-item">
-                  <a href="property-single.html" class="img">
-                    <img src="{{$casa->vc_path}}" alt="Image" class="img-fluid" style="width: 600px; height:300px" />
+                  <a href="{{route('casa.show', $casa->id)}}" class="img">
+                    <img src="{{asset($casa->vc_path)}}" alt="Image" class="img-fluid" style="width: 600px; height:300px" />
                   </a>
 
                   <div class="property-content">
@@ -151,28 +151,46 @@
                         >Ver detalhes</a
                       >
                     
-                    @auth
-                    @if($casa->id_user === Auth::user()->id)
-                    <a
-                    href="{{route('user.promover', $casa->id)}}"
-                    class="btn btn-warning py-2 px-3"
-                    >Editar</a
-                  >
+                      @if(Route::has('login'))
+                      @auth
+                      @if($casa->id_user === Auth::user()->id && $casa->plano != 'free')
+                      <a
+                      href="{{route('user.promover', $casa->id)}}"
+                      class="btn btn-warning py-2 px-3"
+                      >Editar</a
+                    >
+                      @else
+                      @if($casa->id_user === Auth::user()->id && $casa->plano == 'free')
+                      <a
+                      href="{{route('user.promover', $casa->id)}}"
+                      class="btn btn-success py-2 px-3"
+                      >Promover</a
+                    >
+                    @else
+                    @if($casa->reserva->where('id_user',Auth::user()->id)->isNotEmpty())
+                   @if($casa->reserva->where('id_user', Auth::user()->id)->first()->estado =='Pendente')
+                    <a href="{{ route('user.aluguel.delete', $casa->reserva->where('id_user', Auth::user()->id)->first()->id) }}"
+                       class="btn btn-danger py-2 px-3">Não reservar
+                      </a>
+                      @else
+                           @endif
+                
                   @else
+                 
                   <a
-                  href="{{ route('site.chat.index',['id'=>$casa->user_id,'id_casa'=>$casa->id]) }}"
+                  href="{{ route('user.aluguel.store',$casa->id) }}"
                   class="btn btn-success py-2 px-3"
                   >Reservar</a
                 >
-                  @endif
-                  @else
-                  <a
-                  href="{{ route('site.chat.index',['id'=>$casa->user_id,'id_casa'=>$casa->id]) }}"
-                  class="btn btn-success py-2 px-3"
-                  >Reservar</a
-                >
-                  @endauth
-                  
+                @endif
+                   
+                     @endif
+                     @endif
+                     
+                   
+                    @endauth
+                   
+                    @endif
                 
 
                  
@@ -582,7 +600,8 @@
     
     Swal.fire(
     'Parabéns!',
-    'Sua conta foi criada com sucesso',
+    "Sua conta foi criada com sucesso.                      Termos e condições",
+    
     'success'
   )
   </script>

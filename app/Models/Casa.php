@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\aluguel;
 
 class Casa extends Model
 {
     use HasFactory;
+    protected $table='casas';
     protected $fillable = [
                 'name',
                 'rua',
@@ -27,4 +29,9 @@ class Casa extends Model
                 'longitude',
                 'estado',
     ];
+
+    public function reserva()
+    {
+        return $this->hasMany(aluguel::class,'id_casa');
+    }
 }

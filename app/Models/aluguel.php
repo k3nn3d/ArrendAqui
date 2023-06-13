@@ -8,9 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class aluguel extends Model
 {
     use HasFactory;
+    protected $table= 'aluguels';
     protected $fillable=[
         'id_user',
         'id_casa',
         'estado',
      ];
+     public function imovel()
+    {
+        return $this->belongsTo(Casa::class,'id');
+    }
 }

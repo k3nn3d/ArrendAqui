@@ -108,7 +108,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
     <div class="row mb-5 align-items-center">
       <div class="col-lg-12">
         <h2 class="font-weight-bold text-primary heading" style="text-align: center">
-          Casas em Destaque
+          Imóveis em Destaque
         </h2>
       </div>
      
@@ -120,8 +120,8 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
              @foreach ($casas_destaque as $casa)
               
             <div class="property-item">
-              <a href="property-single.html" class="img">
-                <img src="{{$casa->vc_path}}" alt="Image" class="img-fluid" style="width: 600px; height:300px" />
+              <a href="{{route('casa.show', $casa->id)}}" class="img">
+                <img src="{{asset($casa->vc_path)}}" alt="Image" class="img-fluid" style="width: 600px; height:300px" />
               </a>
 
               <div class="property-content">
@@ -130,8 +130,8 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                   <span class="d-block mb-2 text-black-50"
                     >{{$casa->user_name}} {{$casa->lastname_user}}</span
                   >
-                  <span class="city d-block mb-3">{{$casa->provincia}}, {{$casa->municipio}} </span>
-
+                  <span class="city d-block">{{$casa->provincia}}, {{$casa->municipio}} </span>
+                  <span class="mb-3">{{$casa->cat_name}}</span>
                   <div class="specs d-flex mb-4">
                     <span class="d-block d-flex align-items-center me-3">
                       <span class="icon-bed me-2"></span>
@@ -153,66 +153,52 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                     class="btn btn-primary py-2 px-3"
                     >Ver detalhes</a
                   >
+                  @if(Route::has('login'))
                   @auth
-                  @if($casa->id_user === Auth::user()->id)
+                  @if($casa->id_user === Auth::user()->id && $casa->plano != 'free')
                   <a
                   href="{{route('user.promover', $casa->id)}}"
                   class="btn btn-warning py-2 px-3"
                   >Editar</a
                 >
+                  @else
+                  @if($casa->id_user === Auth::user()->id && $casa->plano == 'free')
+                  <a
+                  href="{{route('user.promover', $casa->id)}}"
+                  class="btn btn-success py-2 px-3"
+                  >Promover</a
+                >
                 @else
-                @foreach($aluguels as $alu)
-                @if($alu->id_user==Auth::user()->id && $alu->id_casa== $casa->id )
-                <a
-                href="{{ route('user.aluguel.delete',$alu->id) }}"
-                class="btn btn-danger py-2 px-3"
-                >Não reservar</a
-              >
+                @if($casa->reserva->where('id_user',Auth::user()->id)->isNotEmpty())
+               @if($casa->reserva->where('id_user', Auth::user()->id)->first()->estado =='Pendente')
+                <a href="{{ route('user.aluguel.delete', $casa->reserva->where('id_user', Auth::user()->id)->first()->id) }}"
+                   class="btn btn-danger py-2 px-3">Não reservar
+                  </a>
+                  @else
+                  @if($casa->reserva->where('id_user', Auth::user()->id)->first()->estado=='Reservado')
+               
+                  <button class="btn btn-success py-2 px-3" disabled>Reservado</button>
+                  @else
+                  <button class="btn btn-danger py-2 px-3" disabled>Recusado</button>
+                  @endif
+                  @endif
+            
               @else
+             
               <a
               href="{{ route('user.aluguel.store',$casa->id) }}"
               class="btn btn-success py-2 px-3"
               >Reservar</a
             >
-               @endif
-      
-              @endforeach
-              @empty($alu)
-              <a
-                href="{{ route('user.aluguel.store',$casa->id) }}"
-                class="btn btn-success py-2 px-3"
-                >Reservar</a
-              >
-              @endempty
-             
-                @endif
-                
-                @foreach($aluguels as $alu)
-                @if($alu->id_user==Auth::user()->id && $alu->id_casa== $casa->id )
-                <a
-                href="{{ route('user.aluguel.delete',$alu->id) }}"
-                class="btn btn-danger py-2 px-3"
-                >Cancelar reserva</a
-              >
-              @else
-              <a
-              href="{{ route('user.aluguel.store',$casa->id) }}"
-              class="btn btn-success py-2 px-3"
-              >Reservar</a
-            >
-               @endif
-      
-              @endforeach
-              @empty($alu)
-              <a
-                href="{{ route('user.aluguel.store',$casa->id) }}"
-                class="btn btn-success py-2 px-3"
-                >Reservar</a
-              >
-              @endempty
-             
-              @endauth
-                </div>
+            @endif
+               
+                 @endif
+                 @endif
+                 
+               
+                @endauth
+               
+                @endif</div>
               </div>
             </div>
             @endforeach
@@ -291,11 +277,12 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                 </h2>
               </div>
               @foreach ($casas as $casa)
-                     
+              @if($casa->reserva->where('estado','Reservado')->isNotEmpty())
+              @else     
               <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
               <div class="property-item">
-                <a href="property-single.html" class="img">
-                  <img src="{{$casa->vc_path}}" alt="Image" class="img-fluid" style="width: 600px; height:300px" />
+                <a href="{{route('casa.show', $casa->id)}}" class="img">
+                  <img src="{{asset($casa->vc_path)}}" alt="Image" class="img-fluid" style="width: 600px; height:300px" />
                 </a>
 
                 <div class="property-content">
@@ -304,8 +291,9 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                     <span class="d-block mb-2 text-black-50"
                       >{{$casa->user_name}} {{$casa->lastname_user}}</span
                     >
-                    <span class="city d-block mb-3">{{$casa->provincia}}, {{$casa->municipio}} </span>
-
+                    <span class="city d-block">{{$casa->provincia}}, {{$casa->municipio}} </span>
+                    <span class="mb-4">{{$casa->cat_name}}</span>
+                    <br>
                     <div class="specs d-flex mb-4">
                       <span class="d-block d-flex align-items-center me-3">
                         <span class="icon-bed me-2"></span>
@@ -349,31 +337,28 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                     >Promover</a
                   >
                   @else
-                  @foreach($aluguels as $alu)
-                  @if($alu->id_user==Auth::user()->id and $alu->id_casa== $casa->id )
-                  <a
-                  href="{{ route('user.aluguel.delete',$alu->id) }}"
-                  class="btn btn-danger py-2 px-3"
-                  >Cancelar reserva</a
-                >
+                  @if($casa->reserva->where('id_user',Auth::user()->id)->isNotEmpty())
+                 @if($casa->reserva->where('id_user', Auth::user()->id)->first()->estado =='Pendente')
+                  <a href="{{ route('user.aluguel.delete', $casa->reserva->where('id_user', Auth::user()->id)->first()->id) }}"
+                     class="btn btn-danger py-2 px-3">Não reservar
+                    </a>
+                    @else
+                    @if($casa->reserva->where('id_user', Auth::user()->id)->first()->estado=='Reservado')
+                 
+                    <button class="btn btn-success py-2 px-3" disabled>Reservado</button>
+                    @else
+                    <button class="btn btn-danger py-2 px-3" disabled>Recusado</button>
+                    @endif
+                    @endif
+              
                 @else
-                @if(!($alu->id_user==Auth::user()->id && $alu->id_casa== $casa->id) )
+               
                 <a
                 href="{{ route('user.aluguel.store',$casa->id) }}"
                 class="btn btn-success py-2 px-3"
                 >Reservar</a
               >
               @endif
-                 @endif
-        
-                @endforeach
-                @empty($alu)
-                <a
-                  href="{{ route('user.aluguel.store',$casa->id) }}"
-                  class="btn btn-success py-2 px-3"
-                  >Reservar</a
-                >
-                @endempty
                  
                    @endif
                    @endif
@@ -387,7 +372,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
               </div>
             </div>
           
-           
+           @endif
               @endforeach
             {{--  {{$casas->toJson()}} --}}
               @empty($casa)
@@ -432,17 +417,6 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
   Swal.fire(
   'SUCESSO',
   'Informações editadas com sucesso',
-  'success'
-)
-</script>
-@endif
-@if(session('reservado'))
-
-<script type="text/javascript">
-  
-  Swal.fire(
-  'SUCESSO',
-  'Casa reservada com sucesso. Você será notificado caso o senhorio confirme sua reserva',
   'success'
 )
 </script>

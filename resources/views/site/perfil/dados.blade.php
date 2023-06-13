@@ -2,7 +2,7 @@
 @section('conteudo')
 
 <!-- [ Main Content ] start -->
-<div class="pcoded-main-container" style="background: url('tamplate/images/hero_bg_1.jpg') no-repeat;" >
+<div class="pcoded-main-container" style="background: url('{{asset('tamplate/images/hero_bg_1.jpg')}}') no-repeat;" >
     <div class="pcoded-content" >
         <!-- [ breadcrumb ] start -->
         <div class="page-header">

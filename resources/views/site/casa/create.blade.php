@@ -55,9 +55,9 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                       <div class="step" id="step-1">
                         <h1>Images</h1>
                         <div class="row">
-                        <div class="col-12 mb-3">
-                          <label for="vc_path" onclick="addDuplicateElement()">
-                            Adicionar
+                        <div class="col-3 mb-3" >
+                          <label for="vc_path" onclick="addDuplicateElement()" >
+                    
                           <br>
                           <div  style="width: 120px;cursor:pointer;padding:5px; height:120px; border-radius:20px; border:5px solid gray;" >
                             <img  alt="" src="imagens/camera.png"  style="width: 100%; height:100%;" id="image-preview">
@@ -650,27 +650,27 @@ URL.revokeObjectURL(url);
 <script>
   let counter = 1;
   function addDuplicateElement() {
-   
     // Obtém o elemento pai
     const parentElement = document.getElementById('vc_path').parentNode;
   
     // Cria uma cópia do elemento pai e seus filhos
     const duplicateElement = parentElement.cloneNode(true);
-     // Gera um novo nome único para o elemento duplicado
-     const newName = `vc_path[${counter}]`;
-//alert(newName);
-     counter += 1;
-
-// Atualiza o atributo "name" do elemento duplicado
-duplicateElement.querySelector('input').setAttribute('name', newName);
-
-// Incrementa o contador para gerar um novo nome único para a próxima duplicação
-counter++;
+    
+    // Gera um novo nome único para o elemento duplicado
+    const newName = `vc_path[${counter}]`;
+    
+    // Atualiza o atributo "name" do elemento duplicado
+    duplicateElement.querySelector('input').setAttribute('name', newName);
+    
+    // Incrementa o contador para gerar um novo nome único para a próxima duplicação
+    counter++;
+    
     // Adiciona uma classe ao novo elemento para exibi-lo horizontalmente
     duplicateElement.classList.add('duplicate-element');
   
     // Adiciona a cópia como um novo elemento no DOM
     parentElement.parentNode.insertBefore(duplicateElement, parentElement.nextSibling);
   }
-  </script>
+</script>
+
 @endsection

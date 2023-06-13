@@ -39,7 +39,9 @@ class AuthenticatedSessionController extends Controller
             'mensagem'=> "O usuário $request->username fez login"
 
         ]);
-
+        $user=User::where('username',$request->username)->update([
+            'ativo'=>1,
+        ]);
         $user=User::where('username',$request->username)->first();
         if($user->vc_tipo_utilizador== 1 || $user->vc_tipo_utilizador== 2){
             return redirect()->route('admin.painel');
@@ -72,6 +74,10 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+        
+        $user=User::where('username',$request->username)->update([
+            'ativo'=>0,
+        ]);
 
         return redirect('/login');
     }
