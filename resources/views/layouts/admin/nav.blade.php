@@ -5,7 +5,7 @@
       
       <div class="">
         <div class="main-menu-header">
-          <img class="img-radius" src="tamplate/images/person11.jpg" alt="User-Profile-Image">
+          <img class="img-radius" src="{{asset(Auth::user()->vc_path)}}" alt="User-Profile-Image">
           <div class="user-details">
             <span>{{Auth::user()->name}}</span>
             <div id="more-details">@switch(Auth::user()->vc_tipo_utilizador)

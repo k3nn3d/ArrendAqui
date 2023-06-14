@@ -67,7 +67,7 @@
                 
                 <div class="col-auto p-r-0" >
                     
-                    <img src="{{ $user_2->vc_path }}" alt="user image" class="img-radius wid-40">
+                    <img src="{{ asset($user_2->vc_path) }}" alt="user image" class="img-radius wid-40">
                 </div>
                 <div class="col">
                    
@@ -87,7 +87,7 @@
                     <p class="text-muted m-b-0"><i class="fa fa-clock-o m-r-10"></i>{{ $chat->created_at->format('h:i am ') }}</p>
                 </div>
                 <div class="col-auto p-l-0">
-                    <img src="{{Auth::user()->vc_path}}" alt="user image" class="img-radius wid-40">
+                    <img src="{{asset(Auth::user()->vc_path)}}" alt="user image" class="img-radius wid-40">
                 </div>
             </div>
             @endif
@@ -262,35 +262,54 @@
 
                 
             
-    function atualizarMensagem() {
-        $.ajax({
-            url: '{{ route("site.chat.actualizar", ["id" => Auth::user()->id, "id_casa" => $id_casa]) }}',
-            type: 'GET',
-            success: function(response) {
-                
-               // var mensagem = JSON.parse('{!! json_encode($mensagem) !!}');
-        //Percorrendo do valores do objecto convertido
-        
-       // mensagem.forEach( function(chat) {
-         //   alert(chat);
-           //});
-           
-                
-                // Atualiza o valor da variável $mensagem com os dados recebidos
-               $mensagem=JSON.stringify(response);
-               $mensagem=json_decode($mensagem);
+function atualizarInterface(mensagens) {
+    // Limpe o conteúdo atual da div
+    $('#div-atualizar').empty();
 
-              //$mensagem=response
-                //alert($mensagem);
-            },
-            error: function(xhr) {
-                console.log('Ocorreu um erro:', xhr.status);
-            }
-        });
-    }
+    // Percorra as mensagens recebidas e adicione-as à div
+    mensagens.forEach(function(mensagem) {
+        if (mensagem.id_mensagem == Auth::user().id) {
+            // Mensagem enviada pelo usuário atual
+            var mensagemHTML = '<div class="row m-b-20 send-chat">' +
+                '<div class="col">' +
+                '<div class="msg">' +
+                '<p class="m-b-0">' + mensagem.mensagem + '</p>' +
+                '</div>' +
+                '<p class="text-muted m-b-0"><i class="fa fa-clock-o m-r-10"></i>' + mensagem.created_at + '</p>' +
+                '</div>' +
+                '<div class="col-auto p-l-0">' +
+                '<img src="' + mensagem.vc_path + '" alt="user image" class="img-radius wid-40">' +
+                '</div>' +
+                '</div>';
 
-    // Chama a função para atualizar a mensagem a cada 5 segundos (ou outro intervalo de tempo desejado)
-    setInterval(atualizarMensagem, 1000); // 5000 milissegundos = 5 segundos
+            $('#div-atualizar').append(mensagemHTML);
+        } else {
+            // Mensagem recebida de outro usuário
+            var mensagemHTML = '<div class="row m-b-20 received-chat">' +
+                '<div class="col-auto p-r-0">' +
+                '<img src="' + mensagem.vc_path + '" alt="user image" class="img-radius wid-40">' +
+                '</div>' +
+                '<div class="col">' +
+                '<div class="msg">' +
+                '<p class="m-b-0">' + mensagem.mensagem + '</p>' +
+                '</div>' +
+                '<p class="text-muted m-b-0"><i class="fa fa-clock-o m-r-10"></i>' + mensagem.created_at + '</p>' +
+                '</div>' +
+                '</div>';
+
+            $('#div-atualizar').append(mensagemHTML);
+        }
+    });
+
+    // Role a div para a última mensagem
+    var divAtualizar = document.getElementById('div-atualizar');
+    divAtualizar.scrollTop = divAtualizar.scrollHeight;
+}
+success: function(response) {
+    // Chame a função para atualizar a interface
+    atualizarInterface(response);
+},
+
 </script>
   
 @endsection

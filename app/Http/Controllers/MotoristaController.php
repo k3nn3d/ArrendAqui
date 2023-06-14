@@ -16,19 +16,19 @@ class MotoristaController extends Controller
 
     public function index(){ 
         $users=User::where('users.vc_tipo_utilizador',3)
-        ->where('aluguels.estado','reservado')
+        ->where('pedidos.estado','Aceite')
         ->join('carros','carros.id_user','users.id')
-        ->join('aluguels','aluguels.id_carro','carros.id')
-        ->select('users.*',DB::raw('SUM(carros.preco) as carroPreco'))
+        ->join('pedidos','pedidos.id_carro','carros.id')
+        ->select('users.*',DB::raw('SUM(pedidos.preco) as carroPreco'))
         ->groupBy('users.id')
         ->get();
 
         $users2=User::where('users.vc_tipo_utilizador',3)
-        ->where('aluguels.estado','reservado')
+        ->where('pedidos.estado','Aceite')
         ->join('carros','carros.id_user','users.id')
-        ->join('aluguels','aluguels.id_carro','carros.id')
+        ->join('pedidos','pedidos.id_carro','carros.id')
         ->join('pagamentos','pagamentos.id_user','users.id')
-        ->select('users.*','pagamentos.valor as valorPago','pagamentos.estado as estadoPago','pagamentos.comprovativo as comprovativoPagamento',DB::raw('SUM(carros.preco) as carroPreco'))
+        ->select('users.*','pagamentos.valor as valorPago','pagamentos.estado as estadoPago','pagamentos.comprovativo as comprovativoPagamento',DB::raw('SUM(pedidos.preco) as carroPreco'))
         ->groupBy('users.id')
         ->orderBy('users.id','desc')
         ->get();

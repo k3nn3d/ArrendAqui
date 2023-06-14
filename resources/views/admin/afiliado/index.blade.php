@@ -188,8 +188,8 @@
                             {{ $user2->valorPago}}kz
                            </td>
                            <td>
-                            <img src="{{ $user2->comprovativoPagamento}}" alt="" style="width: 50px; height:50px;">
-                            <embed src="{{ $user2->comprovativoPagamento}}" type="" style="width: 50px; height:50px;">
+                            <img src="{{ asset($user2->comprovativoPagamento)}}" alt="" style="width: 50px; height:50px;">
+                            <embed src="{{ asset($user2->comprovativoPagamento)}}" type="" style="width: 50px; height:50px;">
                            </td>
                             <td>
                               <a class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ações</a>

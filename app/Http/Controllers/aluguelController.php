@@ -48,14 +48,14 @@ class aluguelController extends Controller
         aluguel::where('id',$id)->delete();
         return redirect()->back()->with('reservado_eliminada',1);
     }
-    public function reservar_carro($id, $id_casa){
+    public function reservar_carro($id_casa){
 
         $carros=Carro::get();
         return view('site.carro.reservar',compact('carros'));
 
     }
     public function n_reservar_carro($id){
-        
+
         return redirect()->back();
         
     }

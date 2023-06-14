@@ -309,7 +309,7 @@
         //  alert({{$casa1->latitude}}+'|====|'+{{$casa1->longitude}})
           function AddMarker(lat,long,icon,content,click){
               var lating={'lat':lat,'lng':long}
-              var long={'lat':-23.204780,'lng':-45.904020}
+              //var long={'lat':-23.204780,'lng':-45.904020}
               var marker= new google.maps.Marker({
                   position: lating,
                   map: map,
@@ -338,7 +338,7 @@
            
             var conteudo2 = '<p style="color:black; font-size:13px; padding:10px; border-bottom:1px solid black">' + casa.provincia + ', ' + casa.municipio + ', ' + casa.rua + '</p>';
             //console.log('Nome: '+conteudo2);
-           AddMarker(casa.latitude,casa.longitude,'imagens/mapa/casa.png',conteudo2,true);
+           AddMarker(casa.latitude,casa.longitude,'{{asset("imagens/mapa/casa.png")}}',conteudo2,true);
         });
        
          

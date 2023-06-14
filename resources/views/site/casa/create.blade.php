@@ -3,7 +3,7 @@
 <!--HEADER START-->
 <div
 class="hero page-inner overlay"
-style="background-image: url('tamplate/images/hero_bg_1.jpg')"
+style="background-image: url('{{asset('tamplate/images/hero_bg_1.jpg')}}')"
 >
 
 <div class="container">
@@ -60,7 +60,7 @@ style="background-image: url('tamplate/images/hero_bg_1.jpg')"
                     
                           <br>
                           <div  style="width: 120px;cursor:pointer;padding:5px; height:120px; border-radius:20px; border:5px solid gray;" >
-                            <img  alt="" src="imagens/camera.png"  style="width: 100%; height:100%;" id="image-preview">
+                            <img  alt="" src="{{asset('imagens/camera.png')}}"  style="width: 100%; height:100%;" id="image-preview">
                           </div>
                          </label>
                           <input
@@ -243,8 +243,8 @@ Detalhes
                           <input
                           type="text"
                           class="form-control"
-                          name="bairro"
-                          id="bairro"
+                          name="rua"
+                          id="rua"
                           value="{{ old('rua') }}"
                           placeholder="Rua"
                           required 
@@ -494,6 +494,41 @@ Detalhes
   });
 </script>
 
+
+<script>
+
+document.getElementById('nextButton').addEventListener('click', function() {
+    var currentStep = document.querySelector('.step:not(.hidden)');
+    var nextStep = currentStep.nextElementSibling;
+    
+    // Realize a validação dos campos do passo atual usando AJAX
+    // Exemplo de uso do jQuery AJAX
+    $.ajax({
+        url: '/validar',
+        type: 'POST',
+        data: currentStep.getElementsByTagName('input'),
+        success: function(response) {
+            // Verifique se ocorreu algum erro de validação
+            if (response.errors) {
+                // Exiba a mensagem de erro para o passo atual
+                var errorMessage = response.errors[0];
+                var currentStepNumber = parseInt(currentStep.classList[1].split('-')[1]);
+                alert('Erro no passo ' + currentStepNumber + ': ' + errorMessage);
+            } else {
+                // Avance para o próximo passo
+                currentStep.classList.add('hidden');
+                nextStep.classList.remove('hidden');
+            }
+        },
+        error: function(xhr, status, error) {
+            // Manipule erros de requisição AJAX
+            console.log(xhr.responseText);
+        }
+    });
+});
+
+
+</script>
 
 
 <script>

@@ -30,13 +30,9 @@
               <div class="card">
                 
                 <div class="card-body">
-                    <div style="display: flex; justify-content:center; ">
-                        <div class="btn-primary" style="padding:0.5rem; width:50px; height:50px;border-radius:50%;">1</div>
-                        <div class="btn-primary" style="padding:0.1rem; width:100px; height:5px;"></div>
-                        <div class="btn-primary" style="padding:0.5rem; width:50px; height:50px;border-radius:50%;">2</div>
-                        <div class="btn-primary" style="padding:0.1rem; width:100px; height:5px;"></div>
-                        <div class="btn-primary" style="padding:0.5rem; width:50px; height:50px;border-radius:50%;">3</div>
-                    </div>
+                    <div style="display:flex;" class="mb-4"> 
+                        <button class="next1 btn" >Imagens</button>    <button class="next1 btn">Descrição</button>  <button class="next1 btn" >Localização</button>    <button class="next1 btn">Documentos</button> <button class="next1 btn" >Plano</button>  <button class="next1 btn" >Pagamento</button>  
+                        </div>
                   
                     
                     <div class="table-responsive">
@@ -46,13 +42,13 @@
                            <h3> As informações do senhorio são verdadeiras?</h3>
                            <div style="display:flex;">
                             <div style="width: 20rem; height:20rem;" class="col-4 ">
-                                <img src="{{ $casa->userFoto }}" alt="" style="width: 100%; height:100%;">
+                                <img src="{{ asset($casa->userFoto) }}" alt="" style="width: 100%; height:100%;">
                                 <h4>
                                     {{$casa->userName}} {{$casa->userLastname}}
                                 </h4>
                             </div>
                            <div style="width: 800px; height:600px; margin:1rem;" class="col-7 ">
-                            <embed src="{{ $casa->userBi }}" type="" style="width: 100%; height:100%;">
+                            <embed src="{{ asset($casa->userBi) }}" type="" style="width: 100%; height:100%;">
                             </div>
                             </div>
                          
@@ -70,13 +66,13 @@
                             <h3> Os documentos conferem?</h3>
                             <div style="display:flex;">
                                 <div style="width: 500px; height:500px; margin:1rem">
-                                <embed src="{{ $casa->planta }}" type="" style="width: 100%; height:100%;">
+                                <embed src="{{asset($casa->planta) }}" type="" style="width: 100%; height:100%;">
                                 </div>
                                 <div style="width: 500px; height:500px;margin:1rem">
-                                <embed src="{{ $casa->propriedade }}" type="" style="width: 100%; height:100%;">
+                                <embed src="{{asset($casa->propriedade) }}" type="" style="width: 100%; height:100%;">
                                 </div>
                                 <div style="width: 500px; height:500px;margin:1rem">
-                                    <embed src="{{ $casa->userBi }}" type="" style="width: 100%; height:100%;">
+                                    <embed src="{{ asset($casa->userBi) }}" type="" style="width: 100%; height:100%;">
                                 </div>
                             </div>
                             <input type="radio" name="comp_doc" value="1" id="o">
@@ -94,10 +90,10 @@
                             <h3> Está apto para ser publicado?</h3>
                             <div style="display:flex;">
                                 <div style="width: 500px; height:500px; margin:1rem">
-                                <img src="{{ $casa->vc_path }}" alt="" style="width: 100%; height:100%;">
+                                <img src="{{ asset($casa->vc_path) }}" alt="" style="width: 100%; height:100%;">
                                 </div>
                                 <div style="width: 500px; height:500px; margin:1rem">
-                                    <embed src="{{ $casa->planta }}" type="" style="width: 100%; height:100%;">
+                                    <embed src="{{ asset($casa->planta) }}" type="" style="width: 100%; height:100%;">
                                     </div>
                             </div>  
                             <div>

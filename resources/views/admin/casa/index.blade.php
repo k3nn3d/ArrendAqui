@@ -64,7 +64,7 @@
                  
                  
                   <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="myTable">
                       <thead>
                         <tr>
                           <th>#</th>
@@ -82,7 +82,7 @@
                         @foreach($casa as $casa)
                        <tr>
                           <td>{{ $casa->id }}</td>
-                          <td><img src="{{ $casa->vc_path }}" alt="" style="width: 60px; height:60px;"></td>
+                          <td><img src="{{ asset($casa->vc_path) }}" alt="" style="width: 60px; height:60px;"></td>
                           <td>{{ $casa->plano }}</td>
                           <td>{{ $casa->estado }}</td>
                           <td>{{ $casa->userName}} {{ $casa->userLastname}}</td>
@@ -426,5 +426,15 @@
                   </div>
               </div>
             </div>
-             
+
+
+
+            <script>
+              
+              $(document).ready(function() {
+                $('#myTable').DataTable({
+                });
+              });
+            </script>
+                  
 @endsection

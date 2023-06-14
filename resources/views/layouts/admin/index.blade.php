@@ -47,9 +47,11 @@
     @include('layouts.admin.nav')
     @include('layouts.admin.header')
     @yield('conteudo')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js" integrity="sha512-v3ygConQmvH0QehvQa6gSvTE2VdBZ6wkLOlmK7Mcy2mZ0ZF9saNbbk19QeaoTHdWIEiTlWmrwAL4hS8ElnGFbA==" crossorigin="anonymous" referrerpolicy="no-referrer"> 
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js" integrity="sha512-v3ygConQmvH0QehvQa6gSvTE2VdBZ6wkLOlmK7Mcy2mZ0ZF9saNbbk19QeaoTHdWIEiTlWmrwAL4hS8ElnGFbA==" crossorigin="anonymous" referrerpolicy="no-referrer"> 
+    </script>-->
+    <script src="{{asset('chart.js/Chart.min.js')}}">
+      
     </script>
-
 
 
 
@@ -64,7 +66,7 @@
 
 
     <!-- custom-chart js -->
-    <script src="{{asset('tmp/dist/assets/js/pages/dashboard-main.js')}}"></script>
+    <!--<script src="{{asset('tmp/dist/assets/js/pages/dashboard-main.js')}}"></script>-->
    
     
      
@@ -73,8 +75,10 @@
       -->
    
       <!-- Script do DataTable -->
-      <script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
-   
+    <!--  <script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>-->
+   <script src="{{ asset('datatables/jquery.dataTables.js') }}">
+
+   </script>
     
    
 </body>

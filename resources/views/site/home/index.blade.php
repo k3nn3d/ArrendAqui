@@ -9,28 +9,28 @@
       @auth
       <div
         class="img overlay"
-        style="background-image: url('tamplate/images/hero_bg_2.jpg')"
+        style="background-image: url('{{asset('tamplate/images/hero_bg_2.jpg')}}')"
       ></div>
       @endauth
       @endif
 
       <div
         class="img overlay"
-        style="background-image: url('tamplate/images/hero_bg_3.jpg')"
+        style="background-image: url('{{asset('tamplate/images/hero_bg_3.jpg')}}')"
       ></div>
       <div
         class="img overlay"
-        style="background-image: url('tamplate/images/hero_bg_2.jpg')"
+        style="background-image: url('{{asset('tamplate/images/hero_bg_2.jpg')}}')"
       ></div>
       <div
         class="img overlay"
-        style="background-image: url('tamplate/images/hero_bg_1.jpg')"
+        style="background-image: url('{{asset('tamplate/images/hero_bg_1.jpg')}}')"
       ></div>
     
     
   </div>
   <div class="container">
-    <div class="row justify-content-center align-items-center">
+    <div class="row justify-content-center align-items-center" style="border:1px red solid">
       <div class="col-lg-12 text-center">
         <h1 class="heading" data-aos="fade-up">
           Procure um imóvel perto de si
@@ -68,7 +68,7 @@
           style="border-radius: 25px; margin-right:5px"
           placeholder="Preço min..."
           id="pesquisa"
-          name="preco_min"
+          name="preco_mínimo"
           value="{{ old('preco_min') }}"
         />
       
@@ -76,7 +76,7 @@
         type="text"
         class="form-control px-4"
         style="border-radius: 25px; margin-right:5px"
-        placeholder="Preço máx..."
+        placeholder="Preço máximo"
         id="pesquisa"
         name="preco_max"
         value="{{ old('preco_max') }}"

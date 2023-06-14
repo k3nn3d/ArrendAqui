@@ -80,7 +80,7 @@
               
               <tr>
                 <td class="py-1">
-                  <img  style="max-width: 70px;" src="{{ $carro->vc_path }}" alt="image" />
+                  <img  style="max-width: 70px;" src="{{ asset($carro->vc_path) }}" alt="image" />
                 </td>
                
                <td>{{ $carro->marca }}</td>

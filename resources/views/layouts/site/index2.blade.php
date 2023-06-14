@@ -9,10 +9,7 @@
     <meta name="description" content="" />
     <meta name="keywords" content="bootstrap, bootstrap5" />
 
-   <link
-      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+   
 
     <link rel="stylesheet" href="{{asset('tamplate/fonts/icomoon/style.css')}}" />
     <link rel="stylesheet" href="{{asset('tamplate/fonts/flaticon/font/flaticon.css')}}" />
@@ -31,7 +28,7 @@
     <script src="{{ asset('js/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
   
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-Hy05vP8/nh+E/bq7E2W5/g+eD+81t3Az5tT1nRWK1nsa0sF6S+16XqU0zZFn3q7vQ8GZO1cRvFq5PDRJYQJFQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
@@ -64,7 +61,7 @@
          <script src="{{asset('bootstrap/bootstrap.js')}}"></script>
          <script src="{{asset('bootstrap/bootstrap.min.js')}}"></script>
          <script src="{{asset('bootstrap/bootstrap.bundle.min.js')}}"></script>
-        
+         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
          
 
 </body>

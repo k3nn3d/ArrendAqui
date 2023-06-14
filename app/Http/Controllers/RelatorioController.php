@@ -15,10 +15,22 @@ use App\Models\Comentario;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class RelatorioController extends Controller
 {
     //
+    //$validator = Validator::make($request->all(), [
+   //     'data' => 'required|date|before_or_equal:'.now(),
+   /* ], [
+        'data.required' => 'O campo data é obrigatório.',
+        'data.date' => 'O campo data deve ser uma data válida.',
+        'data.before_or_equal' => 'O campo data deve ser anterior ou igual à data atual.',
+    ]);
+
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
+    }*/
     public function gerar_relatorio_geral(){
         $num_casas_alugadas=Casa::join('aluguels','aluguels.id_casa','casas.id')->where('aluguels.estado','Reservado')->count();
         $num_casas=Casa::count();

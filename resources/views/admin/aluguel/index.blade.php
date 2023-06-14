@@ -72,7 +72,7 @@
               @foreach($arrendamentos as $arr)
               <tr>
                 <td class="py-1">
-                  <img  style="width: 70px; height:70px;" src="{{ $arr->casa }}" alt="image" />
+                  <img  style="width: 70px; height:70px;" src="{{asset( $arr->casa) }}" alt="image" />
                 </td>
                 <td> {{ $arr->cliente_p }} {{ $arr->cliente_u }}</td>
                 @foreach($users as $user)

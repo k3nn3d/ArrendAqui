@@ -68,7 +68,7 @@
                       
                       <tr>
                         <td class="py-1">
-                          <img  style="max-width: 50px; max-height:50px; border-radius:100%" src="{{$user->vc_path}}" alt="image" />
+                          <img  style="max-width: 50px; max-height:50px; border-radius:100%" src="{{asset($user->vc_path)}}" alt="image" />
                         </td>
                         <td>{{ $user->name }} {{ $user->lastname }}</td>
                         <td>{{ $user->username }}</td>
