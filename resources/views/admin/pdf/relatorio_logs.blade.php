@@ -79,51 +79,23 @@
     </header>
 
     <center>
-       
-        <h3>Casas</h3>
-        <table>
+        <h3>Usuários</h3>
+            <table>
             <thead>
                 <tr>
-                    <th>Este ano</th>
-                    
-                    <th>Este mês</th>
-                    
-                    <th>Esta semana</th>
-                    
-                    <th>Hoje</th>
-                    
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
-                </tr>
-            </tbody>
-           
-        </table>
-        <table>
-            <thead>
-                <tr>
-                    <th>Imóvel</th>
-                    <th>Descrição</th>
+                    <th>#</th>
+                    <th>Atividade</th>
+                    <th>Erro</th>
+                    <th>Rota</th>
+                    <th>Navegador</th>
+                    <th>ip</th>
                     <th>Localização</th>
-                    <th>Proprietário</th>
-                    <th>Preço</th>
-                    <th>Plano</th>
-                    <th>Registro no sistem</th>
+
                 </tr>
             </thead>
             <tbody>
                 <tr>
+                   
                     <td>f</td>
                     <td>f</td>
                     <td>f</td>
@@ -135,9 +107,10 @@
             </tbody>
            
         </table>
-        
 
-              </center>
+
+    
+        </center>
 
 </body>
 

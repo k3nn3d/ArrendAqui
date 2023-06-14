@@ -15,11 +15,11 @@ class CreatePedidosTable extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_carro')->references('id')->on('carros')->onDelete('CASCADE')->onUpdate('CASCADE')->nullable();
+            $table->unsignedBigInteger('id_motorista')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE')->nullable();
             $table->unsignedBigInteger('id_casa')->references('id')->on('casas')->onDelete('CASCADE')->onUpdate('CASCADE')->nullable();
             $table->unsignedBigInteger('id_user')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE')->nullable();
             $table->string('estado')->nullable();
-            $table->float('preco');
+            $table->string('preco');
             $table->string('data');
             $table->string('hora');
             $table->string('latitude');

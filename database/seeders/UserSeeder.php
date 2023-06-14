@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
             'email' => "admin@gmail.com",
             'vc_tipo_utilizador' => 1,
             'vc_path' => "imagens/user.png",
-            
+            'telefone'=>'937539143',
             'password' => Hash::make("12345678")
         ]);
 
@@ -50,17 +50,17 @@ class UserSeeder extends Seeder
             'email' => "doni@gmail.com",
             'vc_tipo_utilizador' => 2,
             'vc_path' =>"imagens/user.png",
-            
+            'telefone'=>'937539143',
             
             'password' => Hash::make("12345678")
         ]);
 
         User::create([
             "id" => 3,
-            'name' => "Cátia",
-            'lastname'=>"Faria",
-            'username'=>"cati",
-            'email' => "catia@gmail.com",
+            'name' => "Telma",
+            'lastname'=>"Damião",
+            'username'=>"telma",
+            'email' => "telma@gmail.com",
             'vc_tipo_utilizador' => 3,
             'vc_path' => "imagens/user.png",
             'telefone'=>'937539143',
@@ -70,10 +70,10 @@ class UserSeeder extends Seeder
 
         User::create([
             "id" => 4,
-            'name' => "António",
-            'lastname'=>"José",
-            'username'=>"toni",
-            'email' => "toni@gmail.com",
+            'name' => "Helder",
+            'lastname'=>"Cambuta",
+            'username'=>"helder",
+            'email' => "helder@gmail.com",
             'vc_tipo_utilizador' => 3,
             'telefone'=>'937539143',
             'vc_path' => "imagens/user.png",
@@ -83,10 +83,10 @@ class UserSeeder extends Seeder
 
         User::create([
             "id" => 5,
-            'name' => "Letícia",
-            'lastname'=>"Kawanda",
-            'username'=>"leti",
-            'email' => "leticia@gmail.com",
+            'name' => "Inácio",
+            'lastname'=>"Rodrigues",
+            'username'=>"inacio",
+            'email' => "inacio@gmail.com",
             'vc_tipo_utilizador' => 3,
             'telefone'=>'937539143',
             'vc_path' => "imagens/user.png",
@@ -96,9 +96,9 @@ class UserSeeder extends Seeder
 
         User::create([
             "id" => 6,
-            'name' => "António",
-            'lastname'=>"Cavunga",
-            'username'=>"tonio",
+            'name' => "Etiandra",
+            'lastname'=>"Dos Anjos",
+            'username'=>"etiandra",
             'email' => "antoni@gmail.com",
             'vc_tipo_utilizador' => 5,
             'vc_path' => "imagens/user.png",
@@ -110,10 +110,10 @@ class UserSeeder extends Seeder
 
         User::create([
             "id" => 7,
-            'name' => "Fiona",
-            'lastname'=>"Armando",
-            'username'=>"fiona",
-            'email' => "fiona@gmail.com",
+            'name' => "Sara",
+            'lastname'=>"Paulo",
+            'username'=>"sara",
+            'email' => "sara@gmail.com",
             'vc_tipo_utilizador' => 5,
             'telefone'=>'937539143',
             'vc_path' => "imagens/user.png",
@@ -123,10 +123,10 @@ class UserSeeder extends Seeder
         ]);
         User::create([
             "id" => 8,
-            'name' => "Ana",
-            'lastname'=>"Fontes",
-            'username'=>"ana",
-            'email' => "ana@gmail.com",
+            'name' => "Manuel",
+            'lastname'=>"Luvuvamo",
+            'username'=>"manuel",
+            'email' => "manuel@gmail.com",
             'vc_tipo_utilizador' => 5,
             'vc_path' => "imagens/user.png",
             'biografia'=>"Olá, estou no Arrend'Aqui",
@@ -136,9 +136,9 @@ class UserSeeder extends Seeder
         ]);
         User::create([
             "id" => 9,
-            'name' => "Filomeno",
-            'lastname'=>"Cavinte",
-            'username'=>"filo",
+            'name' => "Gomes",
+            'lastname'=>"Mateus",
+            'username'=>"gomes",
             'email' => "filomneno@gmail.com",
             'vc_tipo_utilizador' => 5,
             'biografia'=>'Arrende esta casa e ganhe muitos outros privilégios',
@@ -149,12 +149,13 @@ class UserSeeder extends Seeder
         ]);
         $user1= User::create([
             "id" => 10,
-            'name' => "Vicente",
-            'lastname'=>"Chiluango",
-            'username'=>"vic",
-            'email' => "vicente@gmail.com",
+            'name' => "Jilião",
+            'lastname'=>"Alberto",
+            'username'=>"juliao",
+            'email' => "juliao@gmail.com",
             'vc_tipo_utilizador' => 6,
             'pontos'=>700,
+            'telefone'=>'937539143',
             'vc_path' => "imagens/user.png",
             'convite'=>$this->gerarTokenUnico(),
             
@@ -165,10 +166,11 @@ class UserSeeder extends Seeder
         ]);
         $user2=User::create([
             "id" => 11,
-            'name' => "Leonel",
-            'lastname'=>"Kimpovi",
-            'username'=>"leo",
+            'name' => "Almiro",
+            'lastname'=>"Barata",
+            'username'=>"almiro",
             'link'=>'register/',
+            'telefone'=>'937539143',
             'email' => "leonel@gmail.com",
             'vc_tipo_utilizador' => 6,
             'vc_path' => "imagens/user.png",
@@ -184,6 +186,7 @@ class UserSeeder extends Seeder
             'lastname'=>"Generoso",
             'username'=>"ladi",
             'link'=>'register/',
+            'telefone'=>'937539143',
             'pontos'=>500,
             'email' => "ladislau@gmail.com",
             'vc_tipo_utilizador' => 6,

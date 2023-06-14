@@ -84,14 +84,19 @@ Route::post('/motorista/store', [App\Http\Controllers\UserController::class, 'mo
  
 
  //CRUD ARRENDAMENTOS 
+ Route::get('/reservas/carros', [App\Http\Controllers\perfilController::class, 'arrendamentos'])->name('user.reserva')->middleware('redirect_login');
  Route::get('/arrendamentos', [App\Http\Controllers\perfilController::class, 'arrendamentos'])->name('user.aluguel')->middleware('redirect_login');
  Route::any('/arrendamento/store{id}', [App\Http\Controllers\aluguelController::class, 'store'])->name('user.aluguel.store')->middleware('redirect_login');
  Route::any('/arrendamento/update{id}', [App\Http\Controllers\aluguelController::class, 'update'])->name('user.aluguel.update')->middleware('redirect_login');
  Route::get('/arrendamento/delete{id}', [App\Http\Controllers\aluguelController::class, 'delete'])->name('user.aluguel.delete')->middleware('redirect_login');
  Route::get('/arrendamento/recusar{id}', [App\Http\Controllers\aluguelController::class, 'recusar'])->name('user.aluguel.recusar')->middleware('redirect_login');
  //PEDIDO
- Route::get('/pedidos', [App\Http\Controllers\pedidoController::class, 'pedidos'])->name('user.pedido')->middleware('redirect_login');
- Route::get('/pedidos/store', [App\Http\Controllers\pedidoController::class, 'store'])->name('user.pedido.store')->middleware('redirect_login');
+ Route::get('/pedidos', [App\Http\Controllers\pedidoController::class, 'pedido'])->name('user.pedido')->middleware('redirect_login');
+ Route::get('/pedidos/ver{pedido:id}', [App\Http\Controllers\pedidoController::class, 'pedido_ver'])->name('user.pedido.ver')->middleware('redirect_login');
+ Route::get('/pedidos/aceitar{pedido:id}', [App\Http\Controllers\pedidoController::class, 'pedido_aceitar'])->name('user.pedido.aceitar')->middleware('redirect_login');
+ Route::get('/pedidos/recusar{pedido:id}', [App\Http\Controllers\pedidoController::class, 'recusar'])->name('user.pedido.recusar')->middleware('redirect_login');
+
+ Route::post('/pedidos/store', [App\Http\Controllers\pedidoController::class, 'store'])->name('user.pedido.store')->middleware('redirect_login');
  Route::get('/pedidos/delete', [App\Http\Controllers\pedidoController::class, 'delete'])->name('user.pedido.delete')->middleware('redirect_login');
 
 

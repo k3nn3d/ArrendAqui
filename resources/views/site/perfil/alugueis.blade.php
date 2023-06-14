@@ -68,39 +68,49 @@ style="background-image: url('{{asset('tamplate/images/hero_bg_1.jpg')}}')"
                              
                       <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                       <div class="property-item">
-                        <a href="property-single.html" class="img">
+                        <a href="{{ route('user.pedido.ver',$pedido->id)}}" class="img">
                           <img src="{{asset($pedido->vc_path)}}" alt="Image" class="img-fluid" style="width: 600px; height:300px" />
                         </a>
         
                         <div class="property-content">
-                          <div class="price mb-2"><span>{{$pedido->preco}}kz/{{$pedido->unidade_name}}</span></div>
+                          <div class="price mb-2"><span>{{$pedido->preco}}</span></div>
                           <div>
                               <h5>Cliente:</h5>
                             <h6 class="d-block mb-2 text-black-50"
                               >{{$pedido->user_name}} {{$pedido->lastname_user}}</h6
                             >
-                            <h5>Proposta:</h5>
+                            <h5>Preco:</h5>
                             <h6 class="d-block mb-2 text-black-50"
-                              >{{$pedido->preco}}kz/{{$pedido->unidade_name}}</h6
+                              >{{$pedido->preco}}kz</h6
                             >
                             <h5>Data:</h5>
                             <h6 class="d-block mb-2 text-black-50"
-                              >{{$pedido->aluguel_data}}</h6
+                              >{{$pedido->data}}</h6
+                            >
+                            <h5>Hora:</h5>
+                            <h6 class="d-block mb-2 text-black-50"
+                              >{{$pedido->hora}}</h6
                             >
                             <h5>Estado:</h5>
-                            <h6 class="d-block mb-2  @if($pedido->aluguel_estado == 'Recusado')btn btn-danger @endif  @if($pedido->aluguel_estado == 'Reservado')btn btn-success @endif  @if($pedido->aluguel_estado == 'Pendente')btn btn-warning @endif" 
-                              >{{$pedido->aluguel_estado}}</h6
+                            <h6 class="d-block mb-2  @if($pedido->estado == 'Recusado')btn btn-danger @endif  @if($pedido->estado == 'Reservado')btn btn-success @endif  @if($pedido->estado == 'Pendente')btn btn-warning @endif" 
+                              >{{$pedido->estado}}</h6
                             >
+                            <a
+                          href="{{ route('user.pedido.ver',$pedido->id)}}"
+                          class="btn btn-primary py-2 px-3"
+                          >Ver</a
+                        >
+                            @if($pedido->estado == 'Reservado')
                           <a
-                          href="{{ route('site.chat.index',['id'=>$pedido->aluguel_id_user,'id_casa'=>$pedido->id]) }}"
+                          href="{{ route('site.chat.index',['id'=>$pedido->id_user,'id_casa'=>$pedido->id]) }}"
                           class="btn btn-primary py-2 px-3"
                           >Mensagem</a
                         >
-                          @if($pedido->aluguel_estado == 'Reservado')
+                          
                           @else
                           @if($pedido->aluguel_estado != 'Recusado')
                           <a
-                          href="{{route('user.aluguel.update',$pedido->aluguel_id)}}"
+                          href="{{route('user.pedido.aceitar',$pedido->id)}}"
                           class="btn btn-primary py-2 px-3"
                           >Aceitar</a
                         >
@@ -108,9 +118,9 @@ style="background-image: url('{{asset('tamplate/images/hero_bg_1.jpg')}}')"
                         @endif
                             @if(Route::has('login'))
                             @auth
-                            @if($pedido->aluguel_estado != 'Recusado' && $pedido->aluguel_estado !='Reservado')
+                            @if($pedido->estado != 'Recusado' && $pedido->estado !='Reservado')
                             <a
-                            href="{{route('user.aluguel.recusar',$pedido->aluguel_id)}}"
+                            href="{{route('user.aluguel.recusar',$pedido->id)}}"
                             class="btn btn-danger py-2 px-3"
                             >Recusar</a
                           >

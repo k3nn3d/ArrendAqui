@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\aluguel;
 use App\Models\User;
 use App\Models\Carro;
+use App\Models\Casa;
+
 use Illuminate\Support\Facades\Auth;
 
 class aluguelController extends Controller
@@ -49,9 +51,9 @@ class aluguelController extends Controller
         return redirect()->back()->with('reservado_eliminada',1);
     }
     public function reservar_carro($id_casa){
-
-        $carros=Carro::get();
-        return view('site.carro.reservar',compact('carros'));
+         $casa=Casa::where('id',$id_casa)->first();   
+        
+        return view('site.carro.reservar',compact('casa'));
 
     }
     public function n_reservar_carro($id){

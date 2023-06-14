@@ -22,12 +22,6 @@
     <link rel="stylesheet" href="{{asset('tamplate/css/aos.css')}}" />
     <link rel="stylesheet" href="{{asset('tamplate/css/style.css')}}" />
     <link rel="stylesheet" href="{{asset('css/googlemaps.css')}}">
-
-    
-    <link rel="stylesheet" href="https://maps.googleapis.com/maps/api/directions/json
-    ?destination=Montreal
-    &origin=Luanda
-    &key=AIzaSyCtgPlK7U7uu9A-boT1BCd6k1ICOCyR_Q0">
     <script src="{{ asset('js/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script type="module" src="js/googlemaps/googlemaps.js"></script>

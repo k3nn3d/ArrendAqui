@@ -129,125 +129,25 @@
             </form>
         </div>
     </div>
-</div>
-</div>
-
-
-
-
-
-
-  <div class="section">
-    <div class="container">
-      <div class="row mb-5 align-items-center">
-        <div class="col-lg-12">
-          <h2 class="font-weight-bold heading" style="text-align: center">
-            Alugue um carro para levar suas coisas à sua nova morada!
-          </h2>
+    @if(Auth::user()->vc_tipo_utilizador)
+    <div style="background-color: #f4f4f4; padding: 20px; text-align: center;">
+        <div style="background-image: url('{{asset("imagens/carro.jpeg")}}'); background-size: cover; background-position: center; border-radius: 10px; padding: 40px; display: inline-block;">
+            <h1 style="color: green; font-size: 24px;">
+                Precisa de um carro para levar suas coisas?
+                <br>
+                <br>
+                <a href="{{route('user.reservar.carro', $casa->id)}}" class="btn btn-primary" style="color: #000; text-decoration: none; font-weight: bold;">Alug'aqui</a>
+            </h1>
         </div>
-       
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="property-slider-wrap">
-            <div class="property-slider">
-           
-                
-                    <a
-                      href="{{route('user.reservar.carro', $casa->id)}}"
-                      class="btn btn-primary py-2 px-3"
-                      >Alugar um carro</a
-                    >
-                  </div>
-                </div>
-              </div>
-            
-              <!-- .item -->
-              
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-  
+    @endif
+        
+</div>
+
+</div>
 
 
   
-    
-  <script type="module">
-
-    let lat;
-    let long;
-    
-    function success(pos){
-        lat=pos.coords.latitude;
-        long=pos.coords.longitude;
-    
-    }
-    
-    
-    function error(err){
-        console.log(err);
-    }
-    var wacthID=navigator.geolocation.watchPosition(success,error,{
-        enableHighAccuracy: true
-    });
-    
-    let map;
-    
-    async function initMap() {
-        //@ts-ignore
-        const { Map } = await google.maps.importLibrary("maps");
-    
-        map = new Map(document.getElementById("map"), {
-        center: { lat: {{$casa->latitude}}, lng: {{$casa->longitude}} },
-        zoom: 14,
-        });
-      //  alert({{$casa->latitude}}+'|====|'+{{$casa->longitude}})
-        function AddMarker(lat,long,icon,content,click){
-            var lating={'lat':lat,'lng':long}
-            var long={'lat':-23.204780,'lng':-45.904020}
-            var marker= new google.maps.Marker({
-                position: lating,
-                map: map,
-                icon: icon
-        
-            });
-            var infoWindow= new google.maps.InfoWindow({
-                content: content,
-                maxWidth:200,
-                pixelOffset: new google.maps.Size(0,20)
-            });
-            google.maps.event.addListener(marker,'click', function(){
-                infoWindow.open(map,marker);
-        
-            });
-        }
-        var conteudo='<p style="color:black; font-size:13px; padding:10px; border-bottom:1px solid black">Você está aqui</p>'
-        
-        AddMarker(lat,long,'',conteudo,true);
-        
-        //convertendo objecto php em objecto JS
-        var casas = JSON.parse('{!! json_encode($casas) !!}');
-        //Percorrendo do valores do objecto convertido
-        
-        casas.forEach( function(casa) {
-         
-          var conteudo2 = '<p style="color:black; font-size:13px; padding:10px; border-bottom:1px solid black">' + casa.provincia + ', ' + casa.municipio + ', ' + casa.rua + '</p>';
-          //console.log('Nome: '+conteudo2);
-         AddMarker(casa.latitude,casa.longitude,'imagens/mapa/casa.png',conteudo2,true);
-      });
-     
-       
-    }
-    
-    
-    initMap();
-  
-   
-    
-    </script>
-
     <script>
         window.addEventListener('DOMContentLoaded', function() {
         var cardBody = document.querySelector('.card-body');

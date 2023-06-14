@@ -43,7 +43,15 @@
           <ul class="list-unstyled">
             <li class="list-group-item"><a href="user-profile.html"><i class="feather icon-user m-r-5"></i>Ver Perfil</a></li>
             <li class="list-group-item"><a href="#!"><i class="feather icon-settings m-r-5"></i>Definições</a></li>
-            <li class="list-group-item"><a href="auth-normal-sign-in.html"><i class="feather icon-log-out m-r-5"></i>Sair</a></li>
+           
+         
+            
+          
+          <form method="POST" action="{{ route('logout') }}" id="form_1">
+              @csrf
+              <input type="hidden" id="username" name="username" value="{{ Auth::user()->username }}">
+              <li class="list-group-item"><a onclick="document.getElementById('form_1').submit()" style="margin-left: 20px;"><i class="feather icon-log-out m-r-5"></i>Sair </a></li>
+          </form>
           </ul>
         </div>
       </div>

@@ -30,7 +30,7 @@
     
   </div>
   <div class="container">
-    <div class="row justify-content-center align-items-center" style="border:1px red solid">
+    <div class="row justify-content-center align-items-center">
       <div class="col-lg-12 text-center">
         <h1 class="heading" data-aos="fade-up">
           Procure um imóvel perto de si
@@ -616,18 +616,10 @@
   function success(pos){
       lat=pos.coords.latitude;
       long=pos.coords.longitude;
-  
-  }
-  
-  
-  function error(err){
-      console.log(err);
-  }
-  var wacthID=navigator.geolocation.watchPosition(success,error,{
-      enableHighAccuracy: true
-  });
-  
-  let map;
+
+
+
+      let map;
   
   async function initMap() {
       //@ts-ignore
@@ -635,12 +627,12 @@
   
       map = new Map(document.getElementById("map"), {
       center: { lat: lat, lng: long },
-  
       zoom: 14,
       });
+   
       function AddMarker(lat,long,icon,content,click){
           var lating={'lat':lat,'lng':long}
-          var long={'lat':-23.204780,'lng':-45.904020}
+       
           var marker= new google.maps.Marker({
               position: lating,
               map: map,
@@ -658,28 +650,42 @@
           });
       }
       var conteudo='<p style="color:black; font-size:13px; padding:10px; border-bottom:1px solid black">Você está aqui</p>'
-      var conteudo2='<p style="color:black; font-size:13px; padding:10px; border-bottom:1px solid black">Luanda, Viana</p>'
-     
+      
       AddMarker(lat,long,'',conteudo,true);
-              //convertendo objecto php em objecto JS
-              var casas = JSON.parse('{!! json_encode($casas) !!}');
+      
+      //convertendo objecto php em objecto JS
+      var casas = JSON.parse('{!! json_encode($casas) !!}');
       //Percorrendo do valores do objecto convertido
       
       casas.forEach( function(casa) {
        
         var conteudo2 = '<p style="color:black; font-size:13px; padding:10px; border-bottom:1px solid black">' + casa.provincia + ', ' + casa.municipio + ', ' + casa.rua + '</p>';
         //console.log('Nome: '+conteudo2);
-       AddMarker(casa.latitude,casa.longitude,'imagens/mapa/casa.png',conteudo2,true);
-     
-  });
+       AddMarker(casa.latitude,casa.longitude,'{{asset("imagens/mapa/casa.png")}}',conteudo2,true);
+    });
+   
      
   }
   
   
   initMap();
+
+ 
+      
+  }
+  
+  
+  
+  function error(err){
+      console.log(err);
+  }
+  var wacthID=navigator.geolocation.getCurrentPosition(success,error,{
+      enableHighAccuracy: true
+  });
+  
+  
   
   </script>
-
   
      <!-- JavaScript -->
 <script>

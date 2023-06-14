@@ -73,71 +73,66 @@
             </div>
     
     <header>
-        <h1>Relatório Geral</h1>
+        <h1>Relatório de Usuários</h1>
         <p><b>Data:</b> {{date('d/m/Y')}}</p>
         <hr>
     </header>
 
     <center>
+        <h3>Usuários</h3>
+        <table>
+            <thead>
        
-        <h3>Casas</h3>
-        <table>
-            <thead>
                 <tr>
-                    <th>Este ano</th>
-                    
-                    <th>Este mês</th>
-                    
-                    <th>Esta semana</th>
-                    
-                    <th>Hoje</th>
-                    
-                    <th>Total</th>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Telefone</th>
+                    <th>Tipo</th>
+                    <th>Registro no sistema</th>
                 </tr>
+               
             </thead>
             <tbody>
+                @forEach($users as $user)
                 <tr>
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
+                   
+                    <td>{{ $user->name }} {{ $user->lastname }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->telefone }}</td>
+                    <td>
+                        @switch( $user->vc_tipo_utilizador)
+                            @case(1)
+                            Administrador
+                            @break
+                            @case(2)
+                            Gerente
+                            @break
+                            @case(3)
+                            Motorista
+                            @break
+                           
+                            @case(5)
+                            Senhorio
+                            @break
+                            @case(6)
+                            Cliente
+                            @break
+                            @default
+                            Indefinido
+                        
+                        @endswitch
+                    </td>
+                    <td>{{ $user->created_at->format('Y/m/d') }}</td>
                 </tr>
+                @endforeach
             </tbody>
-           
-        </table>
-        <table>
-            <thead>
-                <tr>
-                    <th>Imóvel</th>
-                    <th>Descrição</th>
-                    <th>Localização</th>
-                    <th>Proprietário</th>
-                    <th>Preço</th>
-                    <th>Plano</th>
-                    <th>Registro no sistem</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
-                </tr>
-            </tbody>
-           
-        </table>
-        
-
-              </center>
+           @empty($user)
+           <tr>
+            Não há Registros...
+           </tr>
+           @endempty
+        </table>    
+        </center>
 
 </body>
 

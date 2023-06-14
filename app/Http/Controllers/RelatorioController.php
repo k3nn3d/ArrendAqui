@@ -16,7 +16,7 @@ use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-
+use DB;
 class RelatorioController extends Controller
 {
     //
@@ -45,17 +45,34 @@ class RelatorioController extends Controller
     }
 
     public function relatorio_user(Request $req){
+        //dd($req->inicio);
+        $validator = Validator::make($req->all(), [
+       'fim' => 'required|before_or_equal:'.now(),
+       'inicio' => 'required|before_or_equal:'.now(),
+    ], [
+        'inicio.required' => 'O campo data é obrigatório*.',
+        'inicio.before_or_equal' => 'O campo data deve ser anterior ou igual à data atual.',
+        'fim.required' => 'O campo data é obrigatório*.',
+        'fim.before_or_equal' => 'A data deve ser anterior ou igual à data atual.',
+  
+    ]);
 
-        
+    if ($validator->fails()) {
+       // dd($validator);
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
+        //dd($req->fim);   
         $startDate = Carbon::parse($req->inicio); // Data de início do intervalo
         $endDate = Carbon::parse($req->fim); // Data de término do intervalo
-
-        $users = DB::table('users')
-            ->whereBetween('created_at', [$startDate, $endDate])
+       // dd($startDate);
+        $users = User::query()
+            ->whereBetween('users.created_at', [$startDate, $endDate])
             ->get();
-
+        dd($users);
             
-            return view('');
+        $pdf= Pdf::loadview('admin.pdf.relatorio_users',compact('users'));
+        return $pdf->stream();    
+
 
     }
     public function relatorio_casas(Request $req){

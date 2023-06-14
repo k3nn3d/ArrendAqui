@@ -13,27 +13,62 @@
         </div>
        
         
-            <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-lg-12" data-aos="fade-up" data-aos-delay="200">
               <center>
-              <div style="display:flex;" class="mb-4"> 
-               
-              <button class="next1 btn">Reserva</button>  <button class="next1 btn" >Trajetória</button>  
-              
-                </div>
               </center>
                 <hr>
               
               
-                <form action="{{route('user.casa.store')}}" method="POST" enctype="multipart/form-data" style="box-shadow: 2px 2px 2px 2px  rgba(0, 0, 0, 0.055); padding:2rem;">
+                <form action="{{route('user.pedido.store')}}" method="POST" enctype="multipart/form-data" >
                   @csrf
                     <div class="row">
                       
-                    
-                    <div class="step" id="step-1">
+                      <div class="col-12" id="step-1">
+                        <center>
+                        <h1>Trajeto</h1>
+                        </center>
+                       
+                            <div id="map"></div>
+                          
+                        <br>
+                      </div>
+    
+                    <div class="col-2"></div>
+                    <div class="col-8" id="step-1">
                       <div class="row">
 
-                      <h1>Detalhes da Reserva</h1>
-                                                 
+                        <center>
+                            <h1>Detalhes da Reserva</h1>
+                        </center>
+                        <center>
+                          <h1 id="preco-h1">
+                            0kz
+                          </h1>
+                          <span>Preço</span>
+                        </center>
+                          
+                            <div class="col-12 mb-3">
+                              
+                              <input
+                              type=""
+                              class="form-control"
+                              name="preco"
+                              id="preco"
+                              value="{{ old('preco') }}"
+                              readonly
+                              required
+                              style="display: none" />
+                              <input
+                              type=""
+                              class="form-control"
+                              name="casa"
+                              id="casa"
+                              value="{{ $casa->id }}"
+                              readonly
+                              required
+                              style="display: none" />
+                          </div>
+                      <br>
                           <div class="col-6 mb-3">
                             <label for="">Data</label>
                             <input
@@ -45,6 +80,7 @@
                         
                             required
                             />
+                            <p id="data_p"></p>
                         </div>
                         <div class="col-6 mb-3">
                             <label for="">Hora</label>
@@ -68,29 +104,36 @@
                             placeholder="País, município, rua ou destrito"
                             required min="0"
                             />
+                            <br>
                            <button class="btn" type="button" onclick="pegar_minha_localizacao()" id="location"> Pegar minha Localização</button>
                           <p id="errorText" style="color: red;">
 
                           </p>
-                           <input type="text" name="lat"  id="lat">
-                           <input type="text" name="long"  id="long">
+                           <input type="text" name="latitude"  id="lat">
+                           <input type="text" name="longitude"  id="long">
                         </div> 
 
                     </div>
-                    <button type="button" class="prev btn btn-primary">Anterior</button>
-                    <button type="button" class="next btn btn-success">Próximo</button>
-                   
-                  </div>
-                  <div class="step" id="step-1">
-                    <h1>Trajetória</h1>
-                   
-                        <div id="map"></div>
-                      
-                    <button type="button" class="prev btn btn-primary">Anterior</button>
-                    <button type="submit" class="next btn btn-success">Fazer reserva</button>
-                   
-                  </div>
-
+                        <button type="submit" class="next btn btn-success">Reservar</button>
+                    </div>
+                    <script>
+                      const form = document.querySelector('form');
+                      const dataInput = document.querySelector('#data');
+                      let mensagem=document.getElementById('data_p');
+                    
+                      form.addEventListener('submit', function(event) {
+                        const selectedDate = new Date(dataInput.value);
+                        const currentDate = new Date();
+                    
+                        if (selectedDate < currentDate) {
+                          event.preventDefault();
+                          const currentDateString = currentDate.toLocaleDateString();
+                          mensagem.innerHTML = `A data selecionada não pode ser menor que a data atual (${currentDateString}).`;
+                          mensagem.style.color='red';
+                        }
+                      });
+                    </script>
+                 
                     
                    
                  
@@ -118,7 +161,7 @@
 
 
 
-
+{{--
 <!-- JavaScript -->
 <script>
   // selecione os elementos DOM
@@ -155,8 +198,8 @@
   });
 </script>
 
-
-
+--}}
+{{--
 <script>
   // Selecione os elementos necessários
 const steps = document.querySelectorAll('.step');
@@ -211,176 +254,224 @@ btn.addEventListener('click', prevStep);
 showStep(currentStep);
 
 </script>
-
-
-
-
-
-
-{{--OpenStreetmaps--}}
+--}}
+{{--OpenStreetmaps
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+END-OpenStreetmaps--}}
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDakSjifzNklAYqB0o4zbM2f66mafBoDk&libraries=places"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDakSjifzNklAYqB0o4zbM2f66mafBoDk&libraries=places"></script>
+
 <script>
-  var map = L.map('map').setView([0, 0], 13); // Coordenadas iniciais
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors'
-  }).addTo(map);
-
-  var lat1;
-  var long1;
-  var lat2 = -8.8630933; // Latitude fixa do ponto final
-  var long2 = 13.323073632735849; // Longitude fixa do ponto final
-
-  // Ícone de usuário
-  var userIcon = L.icon({
-    iconUrl: 'user-icon.png', // Substitua pelo caminho do ícone de usuário
-    iconSize: [32, 32]
-  });
-
-  // Ícone de casa
-  var homeIcon = L.icon({
-    iconUrl: 'home-icon.png', // Substitua pelo caminho do ícone de casa
-    iconSize: [32, 32]
-  });
-
-  // Ícone de carro
-  var carIcon = L.icon({
-    iconUrl: 'car-icon.png', // Substitua pelo caminho do ícone de carro
-    iconSize: [32, 32]
-  });
+function pegar_minha_localizacao() {
+  let lat;
+  let long;
+  let lati = document.getElementById('lat');
+  let longi = document.getElementById('long');
+  let partida = document.getElementById('partida');
+  var errorText = document.getElementById('errorText');
 
   function success(pos) {
-    lat1 = pos.coords.latitude;
-    long1 = pos.coords.longitude;
+    lat = pos.coords.latitude;
+    long = pos.coords.longitude;
+    lati.value = lat;
+    longi.value = long;
+    //var lat2 = -8.8630933; // Latitude fixa do ponto final
+      //var long2 = 13.323073632735849; // Longitude fixa do ponto final
 
-    var control = L.Routing.control({
-      waypoints: [
-        L.latLng(lat1, long1), // Coordenadas de origem (posição atual do usuário)
-        L.latLng(lat2, long2) // Coordenadas de destino (ponto final fixo)
-      ],
-      routeWhileDragging: true
-    }).addTo(map);
+      calculateAndDisplayRoute(lat,long, {{$casa->latitude}}, {{ $casa->longitude }});
+    var geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(lat, long);
+    var address = '';
 
-    var marker1 = L.marker([lat1, long1], { icon: userIcon }).addTo(map);
-    var marker2 = L.marker([lat2, long2], { icon: homeIcon }).addTo(map);
-
-    function updateMarkerPosition() {
-      marker1.setLatLng([lat1, long1]);
-      control.spliceWaypoints(0, 1, L.latLng(lat1, long1));
-      marker1.setIcon(carIcon); // Altera o ícone para o ícone de carro
-    }
-
-    setInterval(updateMarkerPosition, 1000); // Atualiza a posição do marcador a cada 1 segundo
+    geocoder.geocode({ 'latLng': latlng }, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        if (results[0]) {
+          address = results[0].formatted_address;
+          partida.value = address;
+          errorText.textContent = ""; // Limpa a mensagem de erro
+        } else {
+          console.log('Endereço não encontrado.');
+        }
+      } else {
+        console.log('Erro ao obter o endereço:', status);
+      }
+    });
   }
 
   function error(err) {
     console.log(err);
   }
 
-  navigator.geolocation.getCurrentPosition(success, error, {
+  var watchID = navigator.geolocation.getCurrentPosition(success, error, {
     enableHighAccuracy: true
   });
-</script>
+  //navigator.geolocation.clearWatch(watchID); // Para o acompanhamento anterior
+}
 
 
-<script>
-  function pegar_minha_localizacao(){ 
-   let lat;
-   let long;
-   let lati = document.getElementById('lat');
-   let longi = document.getElementById('long');
-   let partida = document.getElementById('partida');
-   var errorText = document.getElementById('errorText');
-   
-   function success(pos){
-       lat=pos.coords.latitude;
-       long=pos.coords.longitude;
-       lati.value=lat;
-       longi.value=long;  
-       //let  zoom= 12;
-     var url = "https://nominatim.openstreetmap.org/reverse?format=json&lat=" + lat + "&lon=" + long;//+ "&zoom=" + zoom;
-     fetch(url)
-       .then(response => response.json())
-       .then(data => {
-         var municipality = data.address.city || data.address.town || data.address.village || data.address.hamlet;
-         var street = data.address.road || data.address.pedestrian || data.address.pedestrian_area;
-         var province = data.address.state;
-         var address = "";
-         if (street) {
-           address += street + ", ";
-         }
-         if (municipality) {
-           address += municipality + ", ";
-         }
-         if (province) {
-           address += province + ", ";
-         }
-         address += data.address.country;
-         //console.log('Endereço:', address);
-         partida.value =  address;
-         errorText.textContent = ""; // Limpa a mensagem de erro
-       })
-       .catch(error => {
-         console.log('Erro ao obter o endereço:', error);
-       });
-   }
-   
-   
-   function error(err){
-       console.log(err);
-   }
-  
-   var wacthID = navigator.geolocation.getCurrentPosition(success,error,{
-       enableHighAccuracy: true
-   });
-     //navigator.geolocation.clearWatch(watchID); // Para o acompanhamento anterior
- }
-   
- </script>
 
-
-<script>
-  var typingTimer;
+//PEGAR LOCALIZAÇÃO AO ESCREVER
+var typingTimer;
 var doneTypingInterval = 500; // Intervalo em milissegundos após o usuário terminar de digitar
 let lati = document.getElementById('lat');
 let longi = document.getElementById('long');
 var addressInput = document.getElementById('partida');
 var errorText = document.getElementById('errorText');
 var searchButton = document.getElementById('location');
+
+// Função para inicializar o serviço de Geocodificação do Google Maps
+function initializeGeocoder() {
+  geocoder = new google.maps.Geocoder();
+}
+
+// Chamada da função de inicialização do Geocodificador
+google.maps.event.addDomListener(window, 'load', initializeGeocoder);
+
 addressInput.addEventListener('input', function() {
   clearTimeout(typingTimer);
   typingTimer = setTimeout(getCoordinates, doneTypingInterval);
 });
+
 function getCoordinates() {
   var address = addressInput.value;
-  var url = "https://nominatim.openstreetmap.org/search?format=json&q=" + encodeURIComponent(address);
-  fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      if (data.length > 0) {
-        var latitude = data[0].lat;
-        var longitude = data[0].lon;
-        //console.log('Latitude:', latitude);
-        //console.log('Longitude:', longitude);
-        lati.value = latitude;
-        longi.value= longitude;
-        errorText.textContent = ""; // Limpa a mensagem de erro
-      } else {
-        console.log('Endereço inválido. Por favor, insira um endereço válido.');
-        lati.value = '';
-        longi.value= '';
-        errorText.textContent = "Por favor, insira um endereço válido.";
-      }
-    })
-    .catch(error => {
-      console.log('Erro ao obter as coordenadas:', error);
-      lati.value = '';
-      longi.value= '';
-      errorText.textContent = "Erro ao obter as coordenadas.";
-    });
-}
-</script>
 
+  // Criação de um objeto GeocoderRequest
+  var geocoderRequest = {
+    address: address
+  };
+
+  // Chamada da função geocode do Geocoder do Google Maps
+  geocoder.geocode(geocoderRequest, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
+      var latitude = results[0].geometry.location.lat();
+      var longitude = results[0].geometry.location.lng();
+      lati.value = latitude;
+      longi.value = longitude;
+      var lat2 = -8.8630933; // Latitude fixa do ponto final
+      var long2 = 13.323073632735849; // Longitude fixa do ponto final
+
+      calculateAndDisplayRoute(latitude,longitude, {{ $casa->latitude }}, {{ $casa->longitude }});
+      errorText.textContent = ""; // Limpa a mensagem de erro
+    } else {
+      console.log('Endereço inválido. Por favor, insira um endereço válido.');
+      lati.value = '';
+      longi.value = '';
+      errorText.textContent = "Por favor, insira um endereço válido.";
+    }
+  });
+}
+
+
+//TRAÇAR ROTAS
+  var map;
+  var directionsService;
+  var directionsDisplay;
+  var originMarker;
+  var destinationMarker;
+  var carMarker;
+  let preco =document.getElementById('preco');
+  let preco_h1 =document.getElementById('preco-h1');
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 0, lng: 0},
+      zoom: 14
+    });
+
+    directionsService = new google.maps.DirectionsService();
+    directionsDisplay = new google.maps.DirectionsRenderer();
+    directionsDisplay.setMap(map);
+
+    var userIcon = {
+      url: '{{asset("imagens/mapa/cars.png")}}', // Substitua pelo caminho para o ícone de usuário
+      scaledSize: new google.maps.Size(40, 40)
+    };
+
+    var homeIcon = {
+      url: '{{asset("imagens/mapa/casa.png")}}', // Substitua pelo caminho para o ícone de casa
+      scaledSize: new google.maps.Size(40, 40)
+    };
+
+    var carIcon = {
+      url: '{{asset("imagens/mapa/car.png")}}', // Substitua pelo caminho para o ícone de carro
+      scaledSize: new google.maps.Size(40, 40)
+    };
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        var lat1 = position.coords.latitude;
+        var long1 = position.coords.longitude;
+
+        originMarker = new google.maps.Marker({
+          position: {lat: lat1, lng: long1},
+          map: map,
+          icon: userIcon
+        });
+
+      
+        destinationMarker = new google.maps.Marker({
+          position: {lat: lat2, lng: long2},
+          map: map,
+          icon: homeIcon
+        });
+
+        
+
+        // Adiciona o marcador de carro inicialmente escondido
+        carMarker = new google.maps.Marker({
+          position: {lat: lat1, lng: long1},
+          map: map,
+          icon: carIcon,
+          visible: false
+        });
+
+        setInterval(function () {
+          updateMarkerPosition(lat1, long1);
+        }, 1000); // Atualiza a posição do marcador a cada 1 segundo
+      }, function (error) {
+        console.log(error);
+      }, {enableHighAccuracy: true});
+    } else {
+      console.log('Geolocation is not supported by this browser.');
+    }
+  }
+
+  function calculateAndDisplayRoute(lat1, long1, lat2, long2) {
+    var request = {
+      origin: new google.maps.LatLng(lat1, long1),
+      destination: new google.maps.LatLng(lat2, long2),
+      travelMode: google.maps.TravelMode.DRIVING
+    };
+
+    directionsService.route(request, function (result, status) {
+      if (status === google.maps.DirectionsStatus.OK) {
+        directionsDisplay.setDirections(result);
+        var route = result.routes[0];
+        var distance = 0;
+
+        for (var i = 0; i < route.legs.length; i++) {
+          distance += route.legs[i].distance.value;
+          preco.value= distance * 30;
+          preco_h1.innerHTML= distance * 30+'kz';
+          preco_h1.style.color= 'green'; 
+
+        }
+
+        console.log('Distance:', distance + ' meters');
+      } else {
+        console.log('Directions request failed. Status:', status);
+      }
+    });
+  }
+
+  function updateMarkerPosition(lat1, long1) {
+    originMarker.setPosition(new google.maps.LatLng(lat1, long1));
+    carMarker.setPosition(new google.maps.LatLng(lat1, long1));
+    carMarker.setVisible(true);
+  }
+
+  initMap();
+</script>
 @endsection
 

@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Models\Log;
+use Illuminate\Support\Facades\Auth;
 
 class controleMiddleware
 {
@@ -16,6 +18,33 @@ class controleMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        if(Auth::check()){
+        
+            Log::craeate([
+
+                'mensagem',
+                'erro',
+                'navegador',
+                'localizacao',
+                'rota',
+                'ip',
+            ]);
         return $next($request);
+    }
+        
+        else{
+
+            Log::craeate([
+
+                'mensagem',
+                'erro',
+                'navegador',
+                'localizacao',
+                'rota',
+                'ip',
+            ]);
+        return $next($request);
+    }
+
     }
 }

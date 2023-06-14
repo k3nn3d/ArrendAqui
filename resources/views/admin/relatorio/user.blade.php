@@ -8,7 +8,7 @@
               <div class="row align-items-center">
                   <div class="col-md-12">
                       <div class="page-header-title">
-                          <h5 class="m-b-10">Relatório  Usuários</h5>
+                          <h5 class="m-b-10">Relatório De Usuários</h5>
                       </div>
                       <ul class="breadcrumb">
                           <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
@@ -30,7 +30,7 @@
                     <div class="col-6" style="display: flex;">
                         <div class="col-6" style="">
                             <label for="" class="">De:</label>  
-                            <input type="date" name="inico" class="form-control" required> 
+                            <input type="date" name="inicio" class="form-control" required> 
                         </div>
                         <div class="col-6">
                             <label for="" class="">Até:</label>

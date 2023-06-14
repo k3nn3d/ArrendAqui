@@ -192,34 +192,36 @@ public function store(Request $req){
 
         // URL da API para obter a latitude e longitude
         $endereco = "$req->bairro,$municipio_name,$provincia_name,Angola";
-        $url = "https://nominatim.openstreetmap.org/search?format=json&q=" . urlencode($endereco);
 
-        // Faz a solicitação HTTP para a API usando a biblioteca Http do Laravel
-       if(Http::withOptions(['verify' => 'certificados_ssl/cacert.pem'])->get($url))
-       { 
-        $response = Http::withOptions([
-            'verify' => 'certificados_ssl/cacert.pem' // caminho para o arquivo de certificado SSL
-        ])->get($url);
+// Criação do cliente da API do Google Maps
+$client = new \GuzzleHttp\Client();
 
-        // Extrai a latitude e longitude do conteúdo da resposta JSON
-        $data = json_decode($response->body());
-        if (!empty($data)) {
-            $latitude = $data[0]->lat;
-            $longitude = $data[0]->lon;
-        } else {
-            // Tratar caso não tenha nenhum resultado retornado pela API
-            $userIP = $_SERVER['REMOTE_ADDR'];
-            $location = Location::get('80.88.9.0');
-            $latitude = $location->latitude;
-            $longitude = $location->longitude;
-        }
-    }else{
-         // Tratar caso não tenha nenhum resultado retornado pela API
-         $userIP = $_SERVER['REMOTE_ADDR'];
-         $location = Location::get('80.88.9.0');
-         $latitude = $location->latitude;
-         $longitude = $location->longitude;
+// Faz a solicitação HTTP para a API do Google Maps Geocoding
+$response = $client->get('https://maps.googleapis.com/maps/api/geocode/json', [
+    'query' => [
+        'address' => $endereco,
+        'key' => 'AIzaSyCDakSjifzNklAYqB0o4zbM2f66mafBoDk' // Substitua pela sua chave da API do Google Maps
+    ],
+    'verify' => 'certificados_ssl/cacert.pem' // Caminho para o arquivo de certificado SSL, se necessário
+]);
+
+// Verifica se a solicitação foi bem-sucedida e obtém o conteúdo da resposta
+if ($response->getStatusCode() == 200) {
+    $content = json_decode($response->getBody(), true);
+
+    // Extrai a latitude e a longitude do conteúdo da resposta
+    if (!empty($content['results'])) {
+        $latitude = $content['results'][0]['geometry']['location']['lat'];
+        $longitude = $content['results'][0]['geometry']['location']['lng'];
+    } else {
+        // Tratar caso não tenha nenhum resultado retornado pela API
+        $userIP = $_SERVER['REMOTE_ADDR'];
+        $location = Location::get('80.88.9.0');
+        $latitude = $location->latitude;
+        $longitude = $location->longitude;
     }
+}
+
 
         $id_user=Auth::user()->id; 
 

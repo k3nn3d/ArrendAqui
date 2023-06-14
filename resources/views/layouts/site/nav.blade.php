@@ -75,8 +75,13 @@
                 @break
                 @endswitch
               <li >
-                <a  href="{{ route('user.aluguel') }}"><i class="ti-home"></i>Reservas</a>
+                <a  @if(Auth::user()->vc_tipo_utilizador==3) href="{{route('user.reserva')}}" @else href="{{ route('user.aluguel') }}" @endif><i class="ti-home"></i>@if(Auth::user()->vc_tipo_utilizador==3)Reservas @else Reservas de imóveis @endif</a>
               </li>
+              @if(Auth::user()->vc_tipo_utilizador == 6)
+                <li >
+                  <a  href="{{ route('user.pedido') }}"><i class="ti-home"></i>Reservas de carros</a>
+                </li>
+              @endif
               <li>
                 <a  href="{{ route('user.pagemento.index') }}"><i class="ti-home"></i>Pagamentos</a>
               </li>
