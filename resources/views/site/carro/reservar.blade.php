@@ -215,127 +215,6 @@ showStep(currentStep);
 
 
 
-<script>
-const inputFile = document.getElementById('vc_path');
-const imagePreview = document.getElementById('image-preview');
-
-inputFile.addEventListener('change', () => {
-  const file = inputFile.files[0];
-  const url = URL.createObjectURL(file);
-
-  // código para exibir a imagem
-  imagePreview.src = url;
-});
-
-URL.revokeObjectURL(url);
-</script>
-
-
-<script>
-  const planos = document.querySelectorAll('.plano');
-  const valor =document.getElementById('v')
-  const pagamentos = document.querySelectorAll('.pagamento');
-  const frees = document.querySelectorAll('.free'); 
-  const escolhas = document.querySelectorAll('.escolha'); 
-  const botao = document.getElementById('botao')
-  const comprovativo = document.getElementById('c')
-
-  
-    planos.forEach(plano=>{
-      if(plano.value == 'free'){
-        plano.addEventListener('click',()=>{
-          pagamentos.forEach(pagamento=>{
-            pagamento.style.display='none';
-
-          });
-          frees.forEach(free=>{
-            free.style.display='block';
-
-          });
-          escolhas.forEach(escolha=>{
-            escolha.style.display='none';
-
-          });
-          botao.disabled= false;
-          comprovativo.required=false;
-        });
- 
-    }
-    if(plano.value == '2'){
-      plano.addEventListener('click',()=>{
-        pagamentos.forEach(pagamento=>{
-            pagamento.style.display='block';
-
-          });
-          frees.forEach(free=>{
-            free.style.display='none';
-
-          });
-          escolhas.forEach(escolha=>{
-            escolha.style.display='none';
-
-          });
-        botao.disabled= false;
-        comprovativo.required=true;
-        valor.value='1.000 kzs'
-               
-    });
-    }
-    if(plano.value == '3'){
-      plano.addEventListener('click',()=>{
-        pagamentos.forEach(pagamento=>{
-            pagamento.style.display='block';
-
-          });
-          frees.forEach(free=>{
-            free.style.display='none';
-
-          });
-          escolhas.forEach(escolha=>{
-            escolha.style.display='none';
-
-          });
-        botao.disabled= false;  
-        comprovativo.required=true;
-        valor.value='1.800 kzs'
-    })
-  }
-    });
-    
-
-
-</script>
-
-
-
-<script>
-  let counter = 1;
-  function addDuplicateElement() {
-   
-    // Obtém o elemento pai
-    const parentElement = document.getElementById('vc_path').parentNode;
-  
-    // Cria uma cópia do elemento pai e seus filhos
-    const duplicateElement = parentElement.cloneNode(true);
-     // Gera um novo nome único para o elemento duplicado
-     const newName = `vc_path[${counter}]`;
-//alert(newName);
-     counter += 1;
-
-// Atualiza o atributo "name" do elemento duplicado
-duplicateElement.querySelector('input').setAttribute('name', newName);
-
-// Incrementa o contador para gerar um novo nome único para a próxima duplicação
-counter++;
-    // Adiciona uma classe ao novo elemento para exibi-lo horizontalmente
-    duplicateElement.classList.add('duplicate-element');
-  
-    // Adiciona a cópia como um novo elemento no DOM
-    parentElement.parentNode.insertBefore(duplicateElement, parentElement.nextSibling);
-  }
-  </script>
-
-
 
 
 {{--OpenStreetmaps--}}
@@ -403,5 +282,105 @@ counter++;
     enableHighAccuracy: true
   });
 </script>
+
+
+<script>
+  function pegar_minha_localizacao(){ 
+   let lat;
+   let long;
+   let lati = document.getElementById('lat');
+   let longi = document.getElementById('long');
+   let partida = document.getElementById('partida');
+   var errorText = document.getElementById('errorText');
+   
+   function success(pos){
+       lat=pos.coords.latitude;
+       long=pos.coords.longitude;
+       lati.value=lat;
+       longi.value=long;  
+       //let  zoom= 12;
+     var url = "https://nominatim.openstreetmap.org/reverse?format=json&lat=" + lat + "&lon=" + long;//+ "&zoom=" + zoom;
+     fetch(url)
+       .then(response => response.json())
+       .then(data => {
+         var municipality = data.address.city || data.address.town || data.address.village || data.address.hamlet;
+         var street = data.address.road || data.address.pedestrian || data.address.pedestrian_area;
+         var province = data.address.state;
+         var address = "";
+         if (street) {
+           address += street + ", ";
+         }
+         if (municipality) {
+           address += municipality + ", ";
+         }
+         if (province) {
+           address += province + ", ";
+         }
+         address += data.address.country;
+         //console.log('Endereço:', address);
+         partida.value =  address;
+         errorText.textContent = ""; // Limpa a mensagem de erro
+       })
+       .catch(error => {
+         console.log('Erro ao obter o endereço:', error);
+       });
+   }
+   
+   
+   function error(err){
+       console.log(err);
+   }
+  
+   var wacthID = navigator.geolocation.getCurrentPosition(success,error,{
+       enableHighAccuracy: true
+   });
+     //navigator.geolocation.clearWatch(watchID); // Para o acompanhamento anterior
+ }
+   
+ </script>
+
+
+<script>
+  var typingTimer;
+var doneTypingInterval = 500; // Intervalo em milissegundos após o usuário terminar de digitar
+let lati = document.getElementById('lat');
+let longi = document.getElementById('long');
+var addressInput = document.getElementById('partida');
+var errorText = document.getElementById('errorText');
+var searchButton = document.getElementById('location');
+addressInput.addEventListener('input', function() {
+  clearTimeout(typingTimer);
+  typingTimer = setTimeout(getCoordinates, doneTypingInterval);
+});
+function getCoordinates() {
+  var address = addressInput.value;
+  var url = "https://nominatim.openstreetmap.org/search?format=json&q=" + encodeURIComponent(address);
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      if (data.length > 0) {
+        var latitude = data[0].lat;
+        var longitude = data[0].lon;
+        //console.log('Latitude:', latitude);
+        //console.log('Longitude:', longitude);
+        lati.value = latitude;
+        longi.value= longitude;
+        errorText.textContent = ""; // Limpa a mensagem de erro
+      } else {
+        console.log('Endereço inválido. Por favor, insira um endereço válido.');
+        lati.value = '';
+        longi.value= '';
+        errorText.textContent = "Por favor, insira um endereço válido.";
+      }
+    })
+    .catch(error => {
+      console.log('Erro ao obter as coordenadas:', error);
+      lati.value = '';
+      longi.value= '';
+      errorText.textContent = "Erro ao obter as coordenadas.";
+    });
+}
+</script>
+
 @endsection
 
