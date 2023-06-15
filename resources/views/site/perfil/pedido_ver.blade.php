@@ -139,11 +139,12 @@
                            
                         </div>
                         </div>
-                        @if(Auth::user()->vc_tipo_utilizador==6)
-                        <a href="{{ route('user.pagemento.pedido',$pedido->id) }}" class="btn btn-success">Fazer pagamento</a>
-                      @endif
+                       
 
                         @if($pedido->estado == 'Reservado')
+                        @if(Auth::user()->vc_tipo_utilizador==6)
+                        <a href="{{ route('user.pagemento.pedido',$pedido->id) }}" class="btn btn-success">Fazer pagamento</a>
+                        @endif
                          
                         <a  class="btn btn-danger">Cancelar</a>
                         @endif
