@@ -34,9 +34,6 @@ class AuthenticatedSessionController extends Controller
     {
        
         
-        $location = Location::get('80.88.9.0');
-        $latitude = $location->latitude;
-        $longitude = $location->longitude;
         $request->authenticate();
 
         $request->session()->regenerate();
@@ -44,7 +41,7 @@ class AuthenticatedSessionController extends Controller
             'mensagem'=> "O usuário $request->username fez login",
             'erro'=>'N/A',
             'navegador'=>$request->userAgent(),
-            'localizacao'=>"Latitude: $latitude | Longitude: $longitude",
+            'localizacao'=>"Latitude:  -8.849089616829454 | Longitude: 13.234773438975582,",
             'rota'=>$request->path(),
             'ip'=>$request->ip(),
 
@@ -77,14 +74,12 @@ class AuthenticatedSessionController extends Controller
        
 
       
-        $location = Location::get('80.88.9.0');
-        $latitude = $location->latitude;
-        $longitude = $location->longitude;
+       
         log::create([
             'mensagem'=> "O usuário $request->username fez logout",
             'erro'=>'N/A',
             'navegador'=>$request->userAgent(),
-            'localizacao'=>"Latitude: $latitude | Longitude: $longitude",
+            'localizacao'=>"Latitude:  -8.849089616829454 | Longitude: 13.234773438975582,",
             'rota'=>$request->path(),
             'ip'=>$request->ip(),
         ]);

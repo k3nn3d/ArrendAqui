@@ -11,7 +11,10 @@ class Pagamento extends Model
     protected $fillable =[
         'id_user',
         'comprovativo',
-        'valor',
-
+        'valor', 
+        'titular',
+        'iban',
+        'estado',
+        'id_motorista',
     ];
 }

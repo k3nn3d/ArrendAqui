@@ -245,9 +245,6 @@ class RelatorioController extends Controller
       ->whereDate('created_at', '>=', $startDate)
       ->whereDate('created_at', '<=', $endDate)->get();
       
-     
-
-   
       $pdf= Pdf::loadview('admin.pdf.relatorio_logs',compact('logs'));
       return $pdf->stream('Relatório de Logs');    
 

@@ -21,6 +21,7 @@ class CreatePagamentosTable extends Migration
             $table->string('iban');
             $table->string('estado')->nullable();
             $table->unsignedBigInteger('id_user')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE')->nullable();
+            $table->unsignedBigInteger('id_motorista')->references('id')->on('users')->onDelete('CASCADE')->onUpdate('CASCADE')->nullable();
             $table->timestamps();
         });
     }

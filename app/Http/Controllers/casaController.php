@@ -16,6 +16,7 @@ use App\Models\User;
 use App\Models\GaleriaCasa;
 use App\Models\aluguel;
 use GuzzleHttp\Client;
+use App\Models\Pagamento;
 use GuzzleHttp\Exception\RequestException;
 use Stevebauman\Location\Facades\Location;
 use Illuminate\Support\Facades\Storage;
@@ -350,6 +351,31 @@ if ($response->getStatusCode() == 200) {
                 'longitude'=>$latitude
             ]);
 
+
+            if($casas->plano !='free'){
+
+                $pagamento = Pagamento::create([
+                    'id_user'=>Auth::user()->id,
+                    'titular'=>$req->titular,
+                    'valor'=>$req->valor,
+                ]);
+
+                if($req->file('comprovativo')){
+                $req_imagem = $req->file('comprovativo');
+                $extension=$req_imagem->extension();
+                $imagem_name=md5($req_imagem->getClientOriginalName() . strtotime('now')) . "." . $extension;
+                $destino=$req_imagem->move(public_path("imagens/casas"), $imagem_name);
+                $dir = "imagens/casas";
+                $caminho=$dir. "/". $imagem_name; 
+                $pagamento->update([
+                    'comprovativo'=>$caminho,
+                ]);
+            }
+
+               
+               
+        }
+
             if($req->file('vc_path')){
             $imagens = $req->file('vc_path');
             forEach($imagens as $key => $imagem){
@@ -420,13 +446,13 @@ if ($response->getStatusCode() == 200) {
           
           return redirect()->route('casas')->with('cadastrada', 1);
 
-
+        
 }catch (\Throwable $th) {
-    dd($th);
+    
     
     log::create([
         'mensagem'=>'Erro ao cadastrar casa',
-        
+        'erro'=>$th,
 
     ]);
     

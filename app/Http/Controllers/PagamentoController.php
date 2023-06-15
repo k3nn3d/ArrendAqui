@@ -8,6 +8,7 @@ use App\Models\motorista;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Pagamento;
+use App\Models\Pedido;
 
 
 
@@ -69,5 +70,41 @@ class PagamentoController extends Controller
     ]);
 
 
+}
+
+
+
+public function pagar_pedido(Pedido $pedido){
+
+    return view('site.pagamento.pedido',compact('pedido'));
+}
+public function pagar_pedido_p(Pedido $pedido){
+
+    $pagamento = Pagamento::create([
+        'id_user'=>Auth::user()->id,
+        'titular'=>$req->titular,
+        'valor'=>$req->valor,
+    ]);
+    $pontos= afiliado::orderBy('id','desc')->first()->valor;
+    $motorista = motorista::orderBy('id','desc')->first()->valor; 
+    $percent=$req->valor/$motorista;
+    $novos_pontos=($req->valor - $percent)/$pontos;
+    $users=User::where('id',$pedido->id_motorista)
+    ->update([
+        'pontos'=>$novos_pontos,
+    ]);
+
+    if($req->file('comprovativo')){
+    $req_imagem = $req->file('comprovativo');
+    $extension=$req_imagem->extension();
+    $imagem_name=md5($req_imagem->getClientOriginalName() . strtotime('now')) . "." . $extension;
+    $destino=$req_imagem->move(public_path("imagens/casas"), $imagem_name);
+    $dir = "imagens/casas";
+    $caminho=$dir. "/". $imagem_name; 
+    $pagamento->update([
+        'comprovativo'=>$caminho,
+    ]);
+}
+    return redirect()->route('user.pedido')->with('pago',1);
 }
 }

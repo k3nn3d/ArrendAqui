@@ -371,7 +371,7 @@ Detalhes
                           <label for="">IBAN</label>
                           <input
                           type="text"
-                          name="i"
+                          name="iban"
                           id="i"
                           class="form-control"
                           value="A060002229449848322909"
@@ -383,7 +383,7 @@ Detalhes
                         <label for="">Titular</label>
                         <input
                         type="text"
-                        name="t"
+                        name="titular"
                         id="t"
                         class="form-control"
                         value="Administrador do Sistema"
@@ -395,7 +395,7 @@ Detalhes
                       <label for="">Valor a transferir</label>
                       <input
                       type="text"
-                      name="v"
+                      name="valor"
                       id="v"
                       class="form-control"
                       value=""

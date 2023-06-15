@@ -102,7 +102,7 @@ style="background-image: url('{{asset('tamplate/images/hero_bg_1.jpg')}}')"
                             @else
                             @if($pedido->estado != 'Recusado')
                             <a
-                            href="{{route('user.aluguel.update',$pedido->id)}}"
+                            href="{{route('user.pedido.ver',$pedido->id)}}"
                             class="btn btn-primary py-2 px-3"
                             >Ver</a
                           >
@@ -178,6 +178,17 @@ style="background-image: url('{{asset('tamplate/images/hero_bg_1.jpg')}}')"
   Swal.fire(
   'SUCESSO',
   'Reserva recusada',
+  'success'
+)
+</script>
+@endif
+@if(session('pago'))
+
+<script type="text/javascript">
+  
+  Swal.fire(
+  'SUCESSO',
+  'Seu pagamento foi registrado ',
   'success'
 )
 </script>

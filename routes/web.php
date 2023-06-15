@@ -111,7 +111,8 @@ Route::get('/pagemento/edit{id}', [App\Http\Controllers\PagamentoController::cla
 Route::post('/pagemento/store', [App\Http\Controllers\PagamentoController::class, 'store'])->name('user.pagemento.store1')->middleware('controle')->middleware('redirect_login');
 Route::post('/pagemento/update/{id}', [App\Http\Controllers\PagamentoController::class, 'update'])->name('user.pagemento.update')->middleware('controle')->middleware('redirect_login');
 Route::get('/pagemento/delete/{id}', [App\Http\Controllers\PagamentoController::class, 'delete'])->name('user.pagemento.delete')->middleware('controle')->middleware('redirect_login');
-
+Route::get('/pagemento/peddo/{pedido:id}', [App\Http\Controllers\PagamentoController::class, 'pagar_pedido'])->name('user.pagemento.pedido')->middleware('controle')->middleware('redirect_login');
+Route::get('/pagar/pedido/{pedido:id}', [App\Http\Controllers\PagamentoController::class, 'pagar_pedido_p'])->name('user.pagar.pedido')->middleware('controle')->middleware('redirect_login');
 //== FIM USER AREA==
 
 

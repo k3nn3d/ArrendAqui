@@ -16,7 +16,7 @@ class afiliadoSeeder extends Seeder
     {
         //
         afiliado::create([
-            'valor'=>10,
+            'valor'=>30,
         ]);
     }
 }

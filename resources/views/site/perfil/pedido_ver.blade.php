@@ -111,7 +111,7 @@
                             />
                         </div> 
                     </div>
-                    <div class="row">
+                    <div class="row" style="display: none;">
                         <div class="col-6 mb-3">
                             <label for="">Local de Partida</label>
                             <input
@@ -139,9 +139,12 @@
                            
                         </div>
                         </div>
+                        @if(Auth::user()->vc_tipo_utilizador==6)
+                        <a href="{{ route('user.pagemento.pedido',$pedido->id) }}" class="btn btn-success">Fazer pagamento</a>
+                      @endif
 
                         @if($pedido->estado == 'Reservado')
-                        <a  class="btn btn-success">Mensagem</a>
+                         
                         <a  class="btn btn-danger">Cancelar</a>
                         @endif
 
@@ -161,6 +164,7 @@
 
                         
                     </div>
+                    
                        
                     </div>
                     
@@ -298,18 +302,31 @@ END-OpenStreetmaps--}}
   var map;
 
   function initMap() {
+    function success(pos) {
+    lat = pos.coords.latitude;
+    long = pos.coords.longitude;
+    var origin = { lat: lat , lng: long };
+    //var lat2 = -8.8630933; // Latitude fixa do ponto final
+      //var long2 = 13.323073632735849; // Longitude fixa do ponto final
+
+
+  function error(err) {
+    console.log(err);
+  }
+
+  var watchID = navigator.geolocation.getCurrentPosition(success, error, {
+    enableHighAccuracy: true
+  });
+  
     // Configurar coordenadas de origem e pontos intermediários
-    if(Auth::user()->vc_tipo_utilizador== 3){
-    var origin = { lat: , lng: -74.005974 };
+
+    
     var waypoint1 = { lat: {{ $pedido->latitude }}, lng: {{ $pedido->longitude }} };
     var destination = { lat: {{ $pedido->casa_latitude }}, lng: {{ $pedido->casa_longitude }} };
-  }else{
+  
 
 
-    var origin = { lat: {{ $pedido->latitude }}, lng: {{ $pedido->longitude }}  }; 
-    var destination = { lat: {{ $pedido->casa_latitude }}, lng: {{ $pedido->casa_longitude }} };
- 
-  }
+   
     // Inicializar o mapa
     map = new google.maps.Map(document.getElementById('map'), {
       zoom: 7,
@@ -321,7 +338,7 @@ END-OpenStreetmaps--}}
     var directionsRenderer = new google.maps.DirectionsRenderer({
       map: map
     });
-   if(Auth::user()->vc_tipo_utilizador ==3){
+
     var request = {
       origin: origin,
       destination: destination,
@@ -331,7 +348,7 @@ END-OpenStreetmaps--}}
       ],
       travelMode: 'DRIVING'
     };
-   }
+   
     directionsService.route(request, function(result, status) {
       if (status == 'OK') {
         directionsRenderer.setDirections(result);
