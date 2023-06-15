@@ -78,7 +78,7 @@ public function pagar_pedido(Pedido $pedido){
 
     return view('site.pagamento.pedido',compact('pedido'));
 }
-public function pagar_pedido_p(Pedido $pedido){
+public function pagar_pedido_p(Request $req, Pedido $pedido){
 
     $pagamento = Pagamento::create([
         'id_user'=>Auth::user()->id,

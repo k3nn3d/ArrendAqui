@@ -93,12 +93,13 @@ style="background-image: url('{{asset('tamplate/images/hero_bg_1.jpg')}}')"
   required
   
   />
+  <button class="btn btn-success">
+    Enviar
+</button>
 </form>
 </div>
 
-<button class="btn btn-success">
-    Enviar
-</button>
+
 
 
 
