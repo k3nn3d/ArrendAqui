@@ -73,41 +73,61 @@
             </div>
     
     <header>
-        <h1>Relatório Geral</h1>
+        <h1>Relatório de Logs</h1>
         <p><b>Data:</b> {{date('d/m/Y')}}</p>
         <hr>
     </header>
 
     <center>
-        <h3>Usuários</h3>
-            <table>
+        <h3>Logs</h3>
+        <table class="table table-striped">
             <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Atividade</th>
-                    <th>Erro</th>
-                    <th>Rota</th>
-                    <th>Navegador</th>
-                    <th>ip</th>
-                    <th>Localização</th>
-
-                </tr>
+              <tr>
+                <th>Atividade </th>
+                <th>Rota</th>
+                <th>Data  </th>
+                <th>Navegador </th>
+                <th>Erro</th>
+                <th>ip</th>
+                <th>Localização</th>
+              
+              </tr>
             </thead>
             <tbody>
-                <tr>
-                   
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
-                    <td>f</td>
-                </tr>
-            </tbody>
+          
+                  
+              @foreach ($logs as $log)
+                  
            
-        </table>
+              <tr>
+                <td> {{ $log->mensagem }}</td>
+                <td> {{ $log->rota }}</td>
+                <td>  {{ $log->created_at->format('d/m/y h:i') }}</td>
+                <td> {{ $log->navegador}}</td>
+                <td> {{ $log->erro }}</td>
+                <td> {{ $log->ip }}</td>
+                <td> {{ $log->localização }}</td>
+              </tr> 
+              @endforeach
+             
+              
 
+             @empty($log)
+                 
+            
+              
+              <tr>
+                <td colspan="6" style="text-align: center"> Não há logs disponíveis</td>
+              </tr>
+              @endempty
+                  
+            
+             
+              
+                  
+              
+            </tbody>
+          </table>
 
     
         </center>

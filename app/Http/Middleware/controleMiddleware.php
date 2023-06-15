@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use App\Models\Log;
 use Illuminate\Support\Facades\Auth;
-
+use Stevebauman\Location\Facades\Location;
 class controleMiddleware
 {
     /**
@@ -18,30 +18,37 @@ class controleMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        $userIP = $_SERVER['REMOTE_ADDR'];
+        $location = Location::get('80.88.9.0');
+        $latitude = $location->latitude;
+        $longitude = $location->longitude;
+       
         if(Auth::check()){
+            $username=Auth::user()->username;
         
-            Log::craeate([
+            Log::create([
 
-                'mensagem',
-                'erro',
-                'navegador',
-                'localizacao',
-                'rota',
-                'ip',
+                'mensagem'=>"O usuário $username acessou uma rota ",
+                'erro'=>'N/A',
+                'navegador'=>$request->userAgent(),
+                'localizacao'=>"Latitude: $latitude | Longitude: $longitude",
+                'rota'=>$request->path(),
+                'ip'=>$request->ip(),
             ]);
         return $next($request);
     }
         
         else{
 
-            Log::craeate([
+           
+            Log::create([
 
-                'mensagem',
-                'erro',
-                'navegador',
-                'localizacao',
-                'rota',
-                'ip',
+                'mensagem'=>"Um vistiante acessou uma rota ",
+                'erro'=>'N/A',
+                'navegador'=>$request->userAgent(),
+                'localizacao'=>"Latitude: $latitude | Longitude: $longitude",
+                'rota'=>$request->path(),
+                'ip'=>$request->ip(),
             ]);
         return $next($request);
     }

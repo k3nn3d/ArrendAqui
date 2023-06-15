@@ -13,6 +13,7 @@ use App\Models\provincia;
 use App\Models\municipio;
 use App\Models\Comentario;
 use App\Models\User;
+use App\Models\log;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -61,32 +62,198 @@ class RelatorioController extends Controller
        // dd($validator);
         return redirect()->back()->withErrors($validator)->withInput();
     }
-        //dd($req->fim);   
-        $startDate = Carbon::parse($req->inicio); // Data de início do intervalo
-        $endDate = Carbon::parse($req->fim); // Data de término do intervalo
-       // dd($startDate);
-        $users = User::query()
-            ->whereBetween('users.created_at', [$startDate, $endDate])
-            ->get();
-        dd($users);
-            
+       $startDate = $req->inicio; // Data de início do intervalo
+       $endDate = $req->fim; // Data de término do intervalo
+
+       $users = User::query()
+        ->whereDate('created_at', '>=', $startDate)
+        ->whereDate('created_at', '<=', $endDate)
+        ->get();
+
+
+     
         $pdf= Pdf::loadview('admin.pdf.relatorio_users',compact('users'));
-        return $pdf->stream();    
+        return $pdf->stream('Relatório de Usuários');    
 
 
     }
     public function relatorio_casas(Request $req){
+
+          //dd($req->inicio);
+        $validator = Validator::make($req->all(), [
+       'fim' => 'required|before_or_equal:'.now(),
+       'inicio' => 'required|before_or_equal:'.now(),
+    ], [
+        'inicio.required' => 'O campo data é obrigatório*.',
+        'inicio.before_or_equal' => 'O campo data deve ser anterior ou igual à data atual.',
+        'fim.required' => 'O campo data é obrigatório*.',
+        'fim.before_or_equal' => 'A data deve ser anterior ou igual à data atual.',
+  
+    ]);
+
+    if ($validator->fails()) {
+       // dd($validator);
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
+       $startDate = $req->inicio; // Data de início do intervalo
+       $endDate = $req->fim; // Data de término do intervalo
+
+       $imoveis = Casa::query()
+        ->whereDate('casas.created_at', '>=', $startDate)
+        ->whereDate('casas.created_at', '<=', $endDate);
+        
+        $imoveis= $imoveis->join('provincias','provincias.id','casas.id_provincia')
+        ->join('municipios','municipios.id','casas.id_municipio')
+        ->join('users','users.id','casas.id_user')
+        ->select('casas.*','provincias.name as provincia', 'municipios.name as municipio','users.name as username','users.lastname as userlastname')
+        ->get();
+
+     
+        $pdf= Pdf::loadview('admin.pdf.relatorio_casas',compact('imoveis'));
+        return $pdf->stream('Relatório de Casas');    
+
+
         
     }
     public function relatorio_carros(Request $req){
+
+          //dd($req->inicio);
+        $validator = Validator::make($req->all(), [
+       'fim' => 'required|before_or_equal:'.now(),
+       'inicio' => 'required|before_or_equal:'.now(),
+    ], [
+        'inicio.required' => 'O campo data é obrigatório*.',
+        'inicio.before_or_equal' => 'O campo data deve ser anterior ou igual à data atual.',
+        'fim.required' => 'O campo data é obrigatório*.',
+        'fim.before_or_equal' => 'A data deve ser anterior ou igual à data atual.',
+  
+    ]);
+
+    if ($validator->fails()) {
+       // dd($validator);
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
+       $startDate = $req->inicio; // Data de início do intervalo
+       $endDate = $req->fim; // Data de término do intervalo
+
+       $users = Carro::query()
+        ->whereDate('created_at', '>=', $startDate)
+        ->whereDate('created_at', '<=', $endDate)
+        ->get();
+
+
+     
+        $pdf= Pdf::loadview('admin.pdf.relatorio_carros',compact('users'));
+        return $pdf->stream('Relatório de Carros');    
+
+
         
     }
     public function relatorio_reservas(Request $req){
+
+
+          //dd($req->inicio);
+        $validator = Validator::make($req->all(), [
+       'fim' => 'required|before_or_equal:'.now(),
+       'inicio' => 'required|before_or_equal:'.now(),
+    ], [
+        'inicio.required' => 'O campo data é obrigatório*.',
+        'inicio.before_or_equal' => 'O campo data deve ser anterior ou igual à data atual.',
+        'fim.required' => 'O campo data é obrigatório*.',
+        'fim.before_or_equal' => 'A data deve ser anterior ou igual à data atual.',
+  
+    ]);
+
+    if ($validator->fails()) {
+       // dd($validator);
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
+       $startDate = $req->inicio; // Data de início do intervalo
+       $endDate = $req->fim; // Data de término do intervalo
+
+       $users = aluguel::query()
+        ->whereDate('created_at', '>=', $startDate)
+        ->whereDate('created_at', '<=', $endDate)
+        ->get();
+
+
+     
+        $pdf= Pdf::loadview('admin.pdf.relatorio_arrendamentos',compact('users'));
+        return $pdf->stream('Relatório de Usuários');    
+
+
         
     }
     public function relatorio_casas_mais(Request $req){
+          //dd($req->inicio);
+        $validator = Validator::make($req->all(), [
+       'fim' => 'required|before_or_equal:'.now(),
+       'inicio' => 'required|before_or_equal:'.now(),
+    ], [
+        'inicio.required' => 'O campo data é obrigatório*.',
+        'inicio.before_or_equal' => 'O campo data deve ser anterior ou igual à data atual.',
+        'fim.required' => 'O campo data é obrigatório*.',
+        'fim.before_or_equal' => 'A data deve ser anterior ou igual à data atual.',
+  
+    ]);
+
+    if ($validator->fails()) {
+       // dd($validator);
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
+       $startDate = $req->inicio; // Data de início do intervalo
+       $endDate = $req->fim; // Data de término do intervalo
+
+       $imoveis_mais= Casa::query()
+        ->whereDate('created_at', '>=', $startDate)
+        ->whereDate('created_at', '<=', $endDate);
+        $imoveis_mais = $imoveis_mais->where('aluguels.estado','Reservado')->join('aluguels','aluguels.id_casa','casas.id')
+        ->join('categorias','categorias.id','casas.id_categoria')
+        ->select('casas.*','categorias.name as cat_name', [DB::raw('COUNT(aluguels.id) as total')])
+        ->groupBy('casas.id')
+        ->orderBy('total');
+       
+
+     
+        $pdf= Pdf::loadview('admin.pdf.relatorio_casas_mais',compact('imoveis_mais'));
+        return $pdf->stream('Relatório de Usuários');    
+
+
         
     }
+    public function relatorio_logs(Request $req){
+        //dd($req->inicio);
+      $validator = Validator::make($req->all(), [
+     'fim' => 'required|before_or_equal:'.now(),
+     'inicio' => 'required|before_or_equal:'.now(),
+  ], [
+      'inicio.required' => 'O campo data é obrigatório*.',
+      'inicio.before_or_equal' => 'O campo data deve ser anterior ou igual à data atual.',
+      'fim.required' => 'O campo data é obrigatório*.',
+      'fim.before_or_equal' => 'A data deve ser anterior ou igual à data atual.',
+
+  ]);
+
+  if ($validator->fails()) {
+     // dd($validator);
+      return redirect()->back()->withErrors($validator)->withInput();
+  }
+     $startDate = $req->inicio; // Data de início do intervalo
+     $endDate = $req->fim; // Data de término do intervalo
+
+     $logs = log::query()
+      ->whereDate('created_at', '>=', $startDate)
+      ->whereDate('created_at', '<=', $endDate)->get();
+      
+     
+
+   
+      $pdf= Pdf::loadview('admin.pdf.relatorio_logs',compact('logs'));
+      return $pdf->stream('Relatório de Logs');    
+
+
+      
+  }
     public function relatorio_reservas_carros(Request $req){
         
     }
@@ -116,6 +283,10 @@ class RelatorioController extends Controller
     }
     public function _reservas_carros(){
         return view('admin.relatorio.reservas_carros');
+        
+    }
+    public function _logs(){
+        return view('admin.relatorio.logs');
         
     }
 }

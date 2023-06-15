@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\log;
 use App\Models\User;
+use Stevebauman\Location\Facades\Location;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -32,11 +33,21 @@ class AuthenticatedSessionController extends Controller
 
     {
        
+        
+        $location = Location::get('80.88.9.0');
+        $latitude = $location->latitude;
+        $longitude = $location->longitude;
         $request->authenticate();
 
         $request->session()->regenerate();
         log::create([
-            'mensagem'=> "O usuário $request->username fez login"
+            'mensagem'=> "O usuário $request->username fez login",
+            'erro'=>'N/A',
+            'navegador'=>$request->userAgent(),
+            'localizacao'=>"Latitude: $latitude | Longitude: $longitude",
+            'rota'=>$request->path(),
+            'ip'=>$request->ip(),
+
 
         ]);
         $user=User::where('username',$request->username)->update([
@@ -65,9 +76,17 @@ class AuthenticatedSessionController extends Controller
     {
        
 
+      
+        $location = Location::get('80.88.9.0');
+        $latitude = $location->latitude;
+        $longitude = $location->longitude;
         log::create([
-            'mensagem'=> "O usuário $request->username fez logout"
-
+            'mensagem'=> "O usuário $request->username fez logout",
+            'erro'=>'N/A',
+            'navegador'=>$request->userAgent(),
+            'localizacao'=>"Latitude: $latitude | Longitude: $longitude",
+            'rota'=>$request->path(),
+            'ip'=>$request->ip(),
         ]);
         Auth::guard('web')->logout();
 

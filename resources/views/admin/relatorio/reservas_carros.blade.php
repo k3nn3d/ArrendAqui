@@ -25,12 +25,12 @@
           <div class="col-md-12 col-xl-12">
             <div class="card">
               <div class="card-body">
-                <form action="{{ route('reservas.carros.pdf') }}" method="GET">
+                <form action="{{ route('reservas.carros.pdf') }}" method="GET" target="_blanck">
                 <div class="row">
                     <div class="col-6" style="display: flex;">
                         <div class="col-6" style="">
                             <label for="" class="">De:</label>  
-                            <input type="date" name="inico" class="form-control" required> 
+                            <input type="date" name="inicio" class="form-control" required> 
                         </div>
                         <div class="col-6">
                             <label for="" class="">Até:</label>

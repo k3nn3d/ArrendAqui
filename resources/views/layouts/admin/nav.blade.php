@@ -128,6 +128,7 @@
           <ul class="pcoded-submenu">
               <li><a href="{{ route('user.relatorio') }}">Usuários</a></li>
               <li><a href="{{ route('casas.relatorio') }}">Imóveis</a></li>
+              <li><a href="{{ route('logs.relatorio') }}">Logs</a></li>
               <li><a href="{{ route('casas.mais.relatorio') }}">Imóveis mais reservadas</a></li>
               <li><a href="{{ route('carros.relatorio') }}">Carros</a></li>
               <li><a href="{{ route('reservas.relatorio') }}">Reservas de Imóveis</a></li>

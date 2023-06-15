@@ -73,7 +73,7 @@
             </div>
     
     <header>
-        <h1>Relatório de Imóveis</h1>
+        <h1>Relatório de Imóveis mais arrendados</h1>
         <p><b>Data:</b> {{date('d/m/Y')}}</p>
         <hr>
     </header>
@@ -91,11 +91,11 @@
                     <th>Proprietário</th>
                     <th>Preço</th>
                     <th>Plano</th>
-                    <th>Registro no sistem</th>
+                    <th>Registro no sistema</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($imoveis as $imovel)
+                @foreach ($imoveis_mais as $imovel)
                     
                 
                 <tr>
@@ -104,7 +104,7 @@
                     <td>{{ $imovel->provincia}}, {{ $imovel->municipio}}, {{ $imovel->bairro}}</td>
                     <td>{{ $imovel->username}} {{ $imovel->userlastname}}</td>
                     <td>{{ $imovel->preco}}</td>
-                    <td>{{ $imovel->plano}}</td>
+                    <td>{{ $imovel->cat_name}}</td>
                     <td>{{ $imovel->created_at}}</td>
                 </tr>
                 @endforeach

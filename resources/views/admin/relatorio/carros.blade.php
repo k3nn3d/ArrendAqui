@@ -25,7 +25,7 @@
           <div class="col-md-12 col-xl-12">
             <div class="card">
               <div class="card-body">
-                <form action="{{ route('carros.pdf') }}" method="GET">
+                <form action="{{ route('carros.pdf') }}" method="GET" target="_blanck">
                 <div class="row">
                     <div class="col-6" style="display: flex;">
                         <div class="col-6" style="">

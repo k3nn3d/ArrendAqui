@@ -32,8 +32,14 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>Mensagem </th>
+                <th>Atividade </th>
+                <th>Rota</th>
                 <th>Data  </th>
+                <th>Navegador </th>
+                <th>Erro</th>
+                <th>ip</th>
+                <th>Localização</th>
+              
               </tr>
             </thead>
             <tbody>
@@ -44,7 +50,12 @@
            
               <tr>
                 <td> {{ $log->mensagem }}</td>
+                <td> {{ $log->rota }}</td>
                 <td>  {{ $log->created_at->format('d/m/y h:i') }}</td>
+                <td> {{ $log->navegador}}</td>
+                <td> {{ $log->erro }}</td>
+                <td> {{ $log->ip }}</td>
+                <td> {{ $log->localização }}</td>
               </tr> 
               @endforeach
              

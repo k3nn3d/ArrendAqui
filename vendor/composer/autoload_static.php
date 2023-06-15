@@ -34,6 +34,7 @@ class ComposerStaticInit55a5b40a52bf222534cf9271e8c5196b
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
+        '1e298922c3e2134d42dcdb03e6d5f55a' => __DIR__ . '/..' . '/torann/geoip/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -53,6 +54,7 @@ class ComposerStaticInit55a5b40a52bf222534cf9271e8c5196b
         'T' => 
         array (
             'Twilio\\' => 7,
+            'Torann\\GeoIP\\' => 13,
             'TijsVerkoyen\\CssToInlineStyles\\' => 31,
             'Tests\\' => 6,
         ),
@@ -214,6 +216,10 @@ class ComposerStaticInit55a5b40a52bf222534cf9271e8c5196b
         'Twilio\\' => 
         array (
             0 => __DIR__ . '/..' . '/twilio/sdk/src/Twilio',
+        ),
+        'Torann\\GeoIP\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/torann/geoip/src',
         ),
         'TijsVerkoyen\\CssToInlineStyles\\' => 
         array (
@@ -632,6 +638,7 @@ class ComposerStaticInit55a5b40a52bf222534cf9271e8c5196b
         'App\\Http\\Controllers\\contatoController' => __DIR__ . '/../..' . '/app/Http/Controllers/contatoController.php',
         'App\\Http\\Controllers\\logsController' => __DIR__ . '/../..' . '/app/Http/Controllers/logsController.php',
         'App\\Http\\Controllers\\painelController' => __DIR__ . '/../..' . '/app/Http/Controllers/painelController.php',
+        'App\\Http\\Controllers\\pedidoController' => __DIR__ . '/../..' . '/app/Http/Controllers/pedidoController.php',
         'App\\Http\\Controllers\\perfilController' => __DIR__ . '/../..' . '/app/Http/Controllers/perfilController.php',
         'App\\Http\\Controllers\\servicoController' => __DIR__ . '/../..' . '/app/Http/Controllers/servicoController.php',
         'App\\Http\\Controllers\\sobreController' => __DIR__ . '/../..' . '/app/Http/Controllers/sobreController.php',
@@ -652,6 +659,7 @@ class ComposerStaticInit55a5b40a52bf222534cf9271e8c5196b
         'App\\Http\\Middleware\\acesso_conviteMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/acesso_conviteMiddleware.php',
         'App\\Http\\Middleware\\banido_acesso2Middleware' => __DIR__ . '/../..' . '/app/Http/Middleware/banido_acesso2Middleware.php',
         'App\\Http\\Middleware\\banido_acessoMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/banido_acessoMiddleware.php',
+        'App\\Http\\Middleware\\controleMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/controleMiddleware.php',
         'App\\Http\\Middleware\\expulsomiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/expulsomiddleware.php',
         'App\\Http\\Middleware\\logsMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/logsMiddleware.php',
         'App\\Http\\Middleware\\redirectloginMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/redirectloginMiddleware.php',
@@ -6208,6 +6216,22 @@ class ComposerStaticInit55a5b40a52bf222534cf9271e8c5196b
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Property\\Property' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Property/Property.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Processor.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
+        'Torann\\GeoIP\\Cache' => __DIR__ . '/..' . '/torann/geoip/src/Cache.php',
+        'Torann\\GeoIP\\Console\\Clear' => __DIR__ . '/..' . '/torann/geoip/src/Console/Clear.php',
+        'Torann\\GeoIP\\Console\\Update' => __DIR__ . '/..' . '/torann/geoip/src/Console/Update.php',
+        'Torann\\GeoIP\\Contracts\\ServiceInterface' => __DIR__ . '/..' . '/torann/geoip/src/Contracts/ServiceInterface.php',
+        'Torann\\GeoIP\\Facades\\GeoIP' => __DIR__ . '/..' . '/torann/geoip/src/Facades/GeoIP.php',
+        'Torann\\GeoIP\\GeoIP' => __DIR__ . '/..' . '/torann/geoip/src/GeoIP.php',
+        'Torann\\GeoIP\\GeoIPServiceProvider' => __DIR__ . '/..' . '/torann/geoip/src/GeoIPServiceProvider.php',
+        'Torann\\GeoIP\\Location' => __DIR__ . '/..' . '/torann/geoip/src/Location.php',
+        'Torann\\GeoIP\\Services\\AbstractService' => __DIR__ . '/..' . '/torann/geoip/src/Services/AbstractService.php',
+        'Torann\\GeoIP\\Services\\IPApi' => __DIR__ . '/..' . '/torann/geoip/src/Services/IPApi.php',
+        'Torann\\GeoIP\\Services\\IPData' => __DIR__ . '/..' . '/torann/geoip/src/Services/IPData.php',
+        'Torann\\GeoIP\\Services\\IPFinder' => __DIR__ . '/..' . '/torann/geoip/src/Services/IPFinder.php',
+        'Torann\\GeoIP\\Services\\IPGeoLocation' => __DIR__ . '/..' . '/torann/geoip/src/Services/IPGeoLocation.php',
+        'Torann\\GeoIP\\Services\\MaxMindDatabase' => __DIR__ . '/..' . '/torann/geoip/src/Services/MaxMindDatabase.php',
+        'Torann\\GeoIP\\Services\\MaxMindWebService' => __DIR__ . '/..' . '/torann/geoip/src/Services/MaxMindWebService.php',
+        'Torann\\GeoIP\\Support\\HttpClient' => __DIR__ . '/..' . '/torann/geoip/src/Support/HttpClient.php',
         'Twilio\\Base\\BaseClient' => __DIR__ . '/..' . '/twilio/sdk/src/Twilio/Base/BaseClient.php',
         'Twilio\\Base\\PhoneNumberCapabilities' => __DIR__ . '/..' . '/twilio/sdk/src/Twilio/Base/PhoneNumberCapabilities.php',
         'Twilio\\Deserialize' => __DIR__ . '/..' . '/twilio/sdk/src/Twilio/Deserialize.php',
